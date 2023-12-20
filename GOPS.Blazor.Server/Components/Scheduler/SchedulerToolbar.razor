@@ -24,7 +24,7 @@
 		<CustomButton Elevation="false"
 					  Rounded="false"
 					  OnClick=@(() => OffsetDate(0))
-					  Class="hidden md:flex h-full items-center justify-center text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70 focus:relative">
+					  Class="hidden md:flex h-full !py-3 items-center justify-center text-xs font-semibold text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70 focus:relative">
 			Today
 		</CustomButton>
 
@@ -83,7 +83,8 @@
 				</span>
 			</MudMenuItem>
 			<Divider Class="md:hidden w-[95%] my-1" />
-			<MudMenuItem Class="md:hidden px-4 py-3 rounded-2xl hover:bg-hover hover:dark:bg-container-dark">
+			<MudMenuItem Class="md:hidden px-4 py-3 rounded-2xl hover:bg-hover hover:dark:bg-container-dark"
+						 OnClick=@(() => OffsetDate(0))>
 				<span class="text-sm text-foreground dark:text-foreground-dark">
 					Go to today
 				</span>
@@ -203,7 +204,7 @@
 				<CustomSwitch @bind-Checked="@Scheduler!.FixedHeader"
 							  Label="Header"
 							  Class="mb-2 justify-between" />
-				<CustomSwitch @bind-Checked="@fixedMember"
+				<CustomSwitch @bind-Checked="@Scheduler!.FixedMember"
 							  Label="Member"
 							  Class="mb-2 justify-between" />
 				<Divider Class="w-[95%] my-1" />
@@ -300,7 +301,7 @@
 				<CustomSwitch @bind-Checked="@Scheduler!.FixedHeader"
 							  Label="Header"
 							  Class="mb-2 justify-between" />
-				<CustomSwitch @bind-Checked="@fixedMember"
+				<CustomSwitch @bind-Checked="@Scheduler!.FixedMember"
 							  Label="Member"
 							  Class="mb-2 justify-between" />
 				<Divider Class="w-[95%] my-1" />

@@ -14,6 +14,7 @@ public partial class Scheduler
 	int columnCount;
 	bool groupsExpanded;
 	bool fixedHeader;
+	bool fixedMember;
 	bool showPeopleSchedule;
 	bool showNotes;
 	SchedulerGroup<Group>? schedulerGroup;
@@ -24,8 +25,9 @@ public partial class Scheduler
 		.AddClass($"grid-template-columns: 8rem repeat({columnCount},minmax(4rem, 1fr)) 2rem;", CurrentView is ViewType.MonthView)
 		.Build();
 
-	string FixedHeaderStyle => new CssBuilder()
+	string FixedStyle => new CssBuilder()
 		.AddClass("position: sticky!important;top: 0;", FixedHeader)
+		.AddClass("position: sticky!important;left: 0;", FixedMember)
 		.Build();
 
 	protected override void OnInitialized()
@@ -104,6 +106,17 @@ public partial class Scheduler
 			StateHasChanged();
 		}
 	}
+
+	public bool FixedMember
+	{
+		get { return fixedMember; }
+		set 
+		{ 
+			fixedMember = value;
+			StateHasChanged();
+		}
+	}
+
 
 
 	public void SetView(ViewType view)

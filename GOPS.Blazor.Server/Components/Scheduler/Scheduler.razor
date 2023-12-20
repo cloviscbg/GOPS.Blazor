@@ -4,7 +4,7 @@
 
 	<div class="flex flex-col overflow-auto h-[calc(100vh-19rem)] md:h-[calc(100vh-17.5rem)] schedulerScrollbar">
 		<div class="flex z-60 min-w-fit pb-1 rounded-b-2xl bg-surface dark:bg-surface-dark"
-			 style="@FixedHeaderStyle">
+			 style="@FixedStyle">
 			<div class="grid w-full gap-y-1"
 				 style="@GridTemplateStyle">
 				<SchedulerHeader />
@@ -25,7 +25,9 @@
 			</TitleContent>
 
 			<ShiftContent Context="group">
-				<SchedulerShifts Peoples="group.Peoples" />
+				<SchedulerShifts Peoples="group.Peoples"
+								 FixedStyle="@FixedStyle"
+								 GridTemplateStyle="@GridTemplateStyle" />
 			</ShiftContent>
 		</SchedulerGroup>
 	</div>
@@ -36,5 +38,4 @@
 </CascadingValue>
 
 @namespace GOPS.Blazor.Server.Components
-
-					@using GOPS.Blazor.Server.Components.Internal
+@using GOPS.Blazor.Server.Components.Internal
