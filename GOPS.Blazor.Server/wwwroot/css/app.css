@@ -1221,11 +1221,6 @@ video {
   padding-right: 0.5rem !important;
 }
 
-.\!py-3 {
-  padding-top: 0.75rem !important;
-  padding-bottom: 0.75rem !important;
-}
-
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1768,10 +1763,6 @@ body {
 
   .md\:\!ml-0 {
     margin-left: 0px !important;
-  }
-
-  .md\:block {
-    display: block;
   }
 
   .md\:flex {

@@ -1,0 +1,60 @@
+﻿<div class="flex flex-col pt-3 gap-y-6 bg-surface dark:bg-surface-dark">
+	@foreach (var people in Peoples ?? [])
+	{
+		<div class="flex flex-row min-h-24 shadow-lg ring-1 ring-inset dark:ring-0 ring-border rounded-2xl bg-surface dark:bg-container-dark">
+			<div class="grid w-full"
+				 style="@Scheduler?.GetGridTemplateStyle()">
+				<div class="flex py-4 pl-4 md:!pl-3 pr-3 w-full h-full items-center rounded-r-2xl border-r border-border dark:border-border-dark">
+					<User Title="@($"{people.FirstName} {people.LastName}")"
+						  Description="0 Hrs"
+						  Image="@people.ImageProfile"
+						  Class="overflow-hidden"
+						  AvatarClass="hidden md:flex !h-12 !w-12 bg-container dark:bg-surface-dark"
+						  ImageClass="inline-block h-9 w-9"
+						  FallBackClass="text-base font-black leading-none text-primary-400 dark:text-primary-400"
+						  TitleClass="text-ellipsis whitespace-break-spaces overflow-hidden font-black text-xs text-foreground dark:text-foreground-dark"
+						  DescriptionClass="text-xs font-medium text-foreground- dark:text-foreground-dark" />
+				</div>
+
+				@if (Scheduler?.CurrentView is ViewType.WeekView || Scheduler?.CurrentView is ViewType.MonthView)
+				{
+					@foreach (var dayCell in Scheduler?.DayCells ?? new())
+					{
+						var shifts = Scheduler?.GetShift(dayCell.Date.Day, people.Id).ToList();
+
+						if (shifts?.Count <= 0)
+						{
+							<div class="mud-ripple flex p-1 items-start rounded-r-2xl border-r border-divider dark:border-border-dark hover:bg-hover hover:dark:bg-hover-dark hover:cursor-pointer">
+							</div>
+						}
+						else
+						{
+							foreach (var shift in shifts ?? [])
+							{
+								<div class=" group flex p-[6px] items-start rounded-r-2xl border-r border-divider dark:border-border-dark hover:cursor-pointer">
+									<div class=@($"{shift.Color} mud-ripple flex flex-col w-full h-full px-1 py-2 rounded-2xl border-l-4 dark:!border-l-8 dark:border-r dark:border-y text-xs font-normal italic text-foreground dark:text-foreground-accentdark dark:bg-surface-dark group-hover:opacity-80 ")>
+										<span>
+											@shift.StartDate.ToString(@"HH:mm") @shift.EndDate.ToString(@"HH:mm")
+										</span>
+									</div>
+								</div>
+							}
+						}
+					}
+				}
+				<div class="rounded-r-2xl"></div>
+			</div>
+		</div>
+	}
+</div>
+
+@namespace GOPS.Blazor.Server.Components.Internal
+
+@code {
+
+	[CascadingParameter]
+	Scheduler? Scheduler { get; set; }
+
+	[Parameter]
+	public List<People>? Peoples { get; set; }
+}

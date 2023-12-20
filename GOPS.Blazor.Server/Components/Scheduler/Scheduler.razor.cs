@@ -194,4 +194,6 @@ public partial class Scheduler
 
 		return shifts ?? Enumerable.Empty<Shift>();
 	}
+
+	public string GetGridTemplateStyle() => GridTemplateStyle;
 }
