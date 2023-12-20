@@ -1,0 +1,59 @@
+﻿<MudElement HtmlTag="button"
+			typeof="button"
+			@onclick="Click"
+			class="@className"
+			style="@Style">
+	@if (Toggle)
+	{
+		@ToggleOnContent
+	}
+	else
+	{
+		@ToggleOffContent
+	}
+</MudElement>
+
+@namespace GOPS.Blazor.Server.Components
+
+@code {
+	protected string className => new CssBuilder("py-3 px-4 cursor-pointer")
+		.AddClass("mud-ripple", !Disabled)
+		.AddClass("rounded-2xl", Rounded)
+		.AddClass("shadow-lg", Elevation)
+		.AddClass("pointer-events-none !cursor-default !text-disabled dark:!text-disabled-dark", Disabled)
+		.AddClass(Class)
+		.Build();
+
+	[Parameter]
+	public RenderFragment? ToggleOnContent { get; set; }
+
+	[Parameter]
+	public RenderFragment? ToggleOffContent { get; set; }
+
+	[Parameter]
+	public bool Toggle { get; set; } = true;
+
+	[Parameter]
+	public bool Rounded { get; set; }
+
+	[Parameter]
+	public bool Disabled { get; set; }
+
+	[Parameter]
+	public bool Elevation { get; set; }
+
+	[Parameter]
+	public string Class { get; set; } = "";
+
+	[Parameter]
+	public string? Style { get; set; }
+
+	[Parameter]
+	public EventCallback<bool> ToggleChanged { get; set; }
+
+	private void Click()
+	{
+		Toggle = !Toggle;
+		ToggleChanged.InvokeAsync(Toggle);
+	}
+}

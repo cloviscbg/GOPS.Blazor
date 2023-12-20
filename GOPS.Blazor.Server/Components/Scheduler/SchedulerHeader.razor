@@ -1,0 +1,133 @@
+﻿@switch (Scheduler?.CurrentView)
+{
+	case ViewType.DayView:
+		{
+			<div class="select-none rounded-l-2xl bg-container dark:bg-container-dark">
+				<div class="flex h-[4rem] py-3 pl-4 w-full items-end rounded-r-md border-r border-border dark:border-border-dark">
+					<span class="text-xs font-light select-none text-foreground dark:text-foreground-dark ">
+						Day: 0 Hrs
+					</span>
+				</div>
+			</div>
+			@foreach (var minutes in new TimeSpan().CreateMinutesInterval(Scheduler!.DefaultMinutesInterval) ?? new())
+			{
+				@if (minutes.Key.Minutes != Scheduler?.DefaultMinutesInterval)
+				{
+					<div class="select-none bg-container dark:bg-container-dark">
+						<div class="flex flex-col justify-end self-end h-full pl-[0.1rem] select-none">
+							<span class="mb-2 text-sm font-bold text-foreground dark:text-foreground-dark">
+								@minutes.Key.Hours
+							</span>
+							<div class="h-[0.4rem] w-full flex border-r-2 border-divider dark:border-divider-dark "></div>
+						</div>
+					</div>
+				}
+				else
+				{
+					<div class="flex w-full items-end select-none bg-container dark:bg-container-dark">
+						<div class="flex h-[20%] w-full items-end select-none border-r-2 border-divider dark:border-divider-dark"></div>
+					</div>
+				}
+
+			}
+			<div class="rounded-r-2xl bg-container dark:bg-container-dark"></div>
+			break;
+		}
+
+	case ViewType.WeekView:
+		{
+			<div class="select-none rounded-l-2xl bg-container dark:bg-container-dark">
+				<div class="flex py-3 pl-4 w-full h-full items-end rounded-r-2xl border-r border-border dark:border-border-dark">
+					<span class="text-xs font-light select-none text-foreground dark:text-foreground-dark ">
+						Week: 0 Hrs
+					</span>
+				</div>
+			</div>
+			@foreach (var cell in Scheduler?.DayCells ?? new())
+			{
+				var headerStyle = GetHeaderStyle(cell.Date.Date);
+				<div class="select-none bg-container dark:bg-container-dark">
+					<div class="flex flex-row w-full h-full justify-between p-3 rounded-r-2xl border-r border-border dark:border-border-dark">
+						<div class="grid grid-rows-2 gap-0">
+							<span class=@($"text-xl font-black {headerStyle.Item1}")>
+								@cell.Date.Date.Day
+							</span>
+							<span class=@($"self-end text-xs font-black {headerStyle.Item1}")>
+								@cell.Date.Date.ToShortDayString(3)
+							</span>
+						</div>
+						<div class="h-full grid grid-rows-2 gap-0">
+							<div class="flex self-center">
+								<svg class="h-4 w-4" viewBox="0 0 25 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round">
+									<path d="M5.87184 19.5447C4.64406 19.5447 3.90213 18.6623 3.84961 17.4331C3.84961 14.9312 6.29424 14.0682 9.97759 14.0391C13.6675 14.0779 16.1187 14.9409 16.1056 17.4331C16.0465 18.6623 15.3089 19.5447 14.0833 19.5447H5.87184Z" />
+									<path d="M18.6429 18.8155H20.2088C21.2028 18.8155 21.801 18.0998 21.8489 17.1029C21.8582 15.3462 20.3577 14.5876 18 14.3984" />
+									<path d="M9.95838 10.9011C11.7379 10.9011 13.1804 9.45857 13.1804 7.67908C13.1804 5.89959 11.7379 4.45703 9.95838 4.45703C8.17889 4.45703 6.73633 5.89959 6.73633 7.67908C6.73633 9.45857 8.17889 10.9011 9.95838 10.9011Z" />
+									<path d="M17.9854 10.7598C19.1444 10.7598 20.084 9.82018 20.084 8.66113C20.084 7.50209 19.1444 6.5625 17.9854 6.5625C16.8263 6.5625 15.8867 7.50209 15.8867 8.66113C15.8867 9.82018 16.8263 10.7598 17.9854 10.7598Z" />
+								</svg>
+								<span class=@($"ml-1 text-xs font-light {headerStyle.Item2}")>
+									0
+								</span>
+							</div>
+							<span class=@($"self-end text-xs font-light {headerStyle.Item2}")>
+								0 Hrs
+							</span>
+						</div>
+					</div>
+				</div>
+			}
+			<div class="rounded-r-2xl bg-container dark:bg-container-dark"></div>
+			break;
+		}
+	case ViewType.MonthView:
+		{
+			<div class="select-none rounded-l-2xl bg-container dark:bg-container-dark">
+				<div class="flex py-3 pl-4 w-full h-full items-end rounded-r-2xl border-r border-border dark:border-border-dark">
+					<span class="text-xs font-light select-none text-foreground dark:text-foreground-dark ">
+						Month: 0 Hrs
+					</span>
+				</div>
+			</div>
+			@foreach (var cell in Scheduler?.DayCells ?? new())
+			{
+				var headerStyle = GetHeaderStyle(cell.Date.Date);
+				<div class="select-none bg-container dark:bg-container-dark">
+					<div class="flex flex-col w-full h-full items-center px-1 py-4 gap-y-1 rounded-r-2xl border-r border-border dark:border-border-dark">
+						<span class=@($"text-base font-bold {headerStyle.Item1}")>
+							@cell.Date.Day
+						</span>
+						<span class=@($"text-sm font-bold {headerStyle.Item1}")>
+							@cell.Date.ToShortDayString(3)
+						</span>
+						<span class=@($"text-xs font-normal {headerStyle.Item2}")>
+							0
+						</span>
+					</div>
+				</div>
+			}
+			<div class="rounded-r-2xl bg-container dark:bg-container-dark"></div>
+			break;
+		}
+	default:
+		{
+			break;
+		}
+}
+
+
+@namespace GOPS.Blazor.Server.Components.Internal
+
+@code {
+
+	[CascadingParameter]
+	private Scheduler? Scheduler { get; set; }
+
+	(string, string) GetHeaderStyle(DateTime date)
+	{
+		return date switch
+		{
+			DateTime _ when date.IsToday() => ("text-secondary saturate-[2]", "text-foreground dark:text-foreground-dark"),
+			DateTime _ when date.IsPast() => ("text-disabled dark:text-disabled-dark", "text-disabled dark:text-disabled-dark"),
+			_ => ("text-foreground dark:text-foreground-dark", "text-foreground dark:text-foreground-dark")
+		};
+	}
+}

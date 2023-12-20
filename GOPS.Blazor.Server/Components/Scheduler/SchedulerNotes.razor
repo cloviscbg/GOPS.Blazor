@@ -1,0 +1,287 @@
+﻿@if (Scheduler!.ShowNotes)
+{
+	<div class="select-none rounded-l-2xl bg-container dark:bg-container-dark">
+		<div class="flex py-3 pl-4 w-full h-full items-end rounded-r-2xl border-r border-border dark:border-border-dark">
+			<span class="text-xs font-light select-none text-foreground dark:text-foreground-dark ">
+				Notes
+			</span>
+		</div>
+	</div>
+
+	@switch (Scheduler!.CurrentView)
+	{
+		case ViewType.DayView:
+			{
+				<div class="col-start-2 col-span-full h-[4rem] rounded-r-2xl bg-container dark:bg-container-dark">
+					<div class="flex flex-row w-full h-full justify-between rounded-r-2xl">
+						@{
+							var currentDate = Scheduler!.CurrentDate;
+							var note = Scheduler?.Notes?.SingleOrDefault(x => x.Date.IsDateEqual(currentDate));
+
+							<CustomButton @ref="buttons[currentDate.Date.Day]"
+										  OnClick="@(() => OpenPopup(currentDate.Date.Day))"
+										  Rounded="true"
+										  Class="h-full w-full group hover:bg-hover hover:dark:bg-hover-dark">
+								<div class="w-full h-full flex ml-4 pb-1 items-start justify-start text-xs text-foreground dark:text-foreground-dark @(note is null || string.IsNullOrEmpty(note.Text) ? "" : "before:content-['*'] before:absolute before:top-[0.4rem] before:left-[0.5rem] before:font-semibold before:text-[0.9rem]")">
+									<MudTextFieldExtended Class="!mt-0 [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_textarea]:!m-0 [&_textarea]:!p-0 [&_textarea]:!text-xs [&_textarea]:!italic [&_textarea]:!font-medium [&_.mud-input-outlined-border]:!border-transparent"
+														  id="test"
+														  Variant="Variant.Outlined"
+														  AutoFocus="false"
+														  FullWidth="true"
+														  AutoSize="false"
+														  ReadOnly="true"
+														  Placeholder="Add new note..."
+														  Lines="3"
+														  T="string"
+														  Value="@note?.Text" />
+								</div>
+								<MudPopover @ref="popovers[currentDate.Date.Day]"
+											Open="@(PopupOpenState(currentDate.Date.Day) ? true : false)"
+											Elevation="0"
+											RelativeWidth="true"
+											AnchorOrigin="Origin.CenterLeft"
+											TransformOrigin="Origin.CenterLeft"
+											Class="max-sm:!hidden w-[16rem] md:w-[36rem] !drop-shadow rounded-2xl">
+									<MudTextFieldExtended Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl"
+														  Variant="Variant.Outlined"
+														  Placeholder="Add note..."
+														  AutoFocus="true"
+														  Clearable="true"
+														  AutoSize="false"
+														  Lines="3"
+														  T="string"
+														  DebounceInterval="600"
+														  Value="@note?.Text"
+														  OnBlur="@(() => ClosePopup(currentDate!.Date.Day))"
+														  ValueChanged="@((args) => HandleOnNoteChange(args, note, currentDate.Date))"
+														  OnClearButtonClick="@(() => HandleOnNoteChange("", note, currentDate.Date))" />
+								</MudPopover>
+								<MudPopover @ref="popovers[currentDate.Date.Day]"
+											Open="@(PopupOpenState(currentDate.Date.Day) ? true : false)"
+											Elevation="0"
+											RelativeWidth="false"
+											AnchorOrigin="Origin.CenterLeft"
+											TransformOrigin="Origin.CenterLeft"
+											Class="md:!hidden w-[16rem] md:w-[36rem] !drop-shadow rounded-2xl">
+									<MudTextFieldExtended Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl"
+														  Variant="Variant.Outlined"
+														  Placeholder="Add note..."
+														  AutoFocus="true"
+														  Clearable="true"
+														  AutoSize="false"
+														  Lines="3"
+														  T="string"
+														  DebounceInterval="600"
+														  Value="@note?.Text"
+														  OnBlur="@(() => ClosePopup(note!.Date.Day))"
+														  ValueChanged="@((args) => HandleOnNoteChange(args, note, currentDate.Date))"
+														  OnClearButtonClick="@(() => HandleOnNoteChange("", note, currentDate.Date))" />
+								</MudPopover>
+							</CustomButton>
+						}
+					</div>
+				</div>
+				break;
+			}
+		case ViewType.WeekView:
+			{
+				@foreach (var dayCell in Scheduler?.DayCells ?? new())
+				{
+					var existentNote = Scheduler?.Notes?.SingleOrDefault(x => x.Date.IsDateEqual(dayCell.Date));
+					<div class="h-[4rem] bg-container dark:bg-container-dark">
+						<div class="flex flex-row w-full h-full justify-between rounded-r-2xl border-r border-border dark:border-border-dark">
+							@{
+								<CustomButton @ref="buttons[dayCell.Date.Day]"
+											  OnClick="@(() => OpenPopup(dayCell.Date.Day))"
+											  Rounded="true"
+											  Class="@(PopupOpenState(dayCell.Date.Day) ? "h-full w-full group hover:bg-hover hover:dark:bg-hover-dark !bg-hover dark:!bg-hover-dark" : "h-full w-full group hover:bg-hover hover:dark:bg-hover-dark")">
+									@if (existentNote is not null && !string.IsNullOrEmpty(existentNote.Text))
+									{
+										<svg class="h-5 w-5 text-foreground dark:text-foreground-dark" viewBox="0 0 24 24" fill="none">
+											<path d="M8.04403 20.999C5.9716 20.9533 4.32825 19.236 4.37398 17.1636V6.65646C4.42263 4.61711 6.09419 2.99128 8.13451 3.00004H13.7855C14.344 3.00004 14.8782 3.22674 15.2644 3.62955L19.0561 7.57884C19.4219 7.96121 19.6272 8.47008 19.6272 8.9984V17.1636C19.6409 19.2185 18.0238 20.9163 15.9698 21M8.04403 20.999C8.07419 20.999 8.10435 21 8.13451 21H15.9698M8.04403 20.999C8.07419 20.999 15.9698 21 15.9698 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M14.2695 3.0625V5.95514C14.2686 7.36692 15.4118 8.51211 16.8236 8.51503H19.5625" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M8.51562 16.4818H12.9748M8.51562 13.0612H15.2427M8.51562 9.64062H11.4579" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									}
+									else
+									{
+										<svg class="w-4 h-4 group-hover:flex hidden text-foreground-accent dark:text-foreground-accentdark" viewBox="0 0 24 24" fill="none">
+											<path d="M13.4414 19.8047H19.4829" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M6.98575 19.9226L8.6523 19.4378C9.54806 19.1768 10.3285 18.6192 10.8644 17.8568L17.2532 8.99764C18.018 7.94832 17.7872 6.4789 16.7379 5.71406L15.0044 4.45028C13.9553 3.68674 12.4845 3.91766 11.7208 4.96552L5.26193 13.9239C4.76904 14.6259 4.5086 15.4642 4.51577 16.3224L4.53179 18.0982C4.54389 19.369 5.76578 20.2772 6.98575 19.9226Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M10.3516 6.88086L15.8732 10.9384" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									}
+								</CustomButton>
+								<MudPopover @ref="popovers[dayCell.Date.Day]"
+											@key="dayCell"
+											Open="@(PopupOpenState(dayCell.Date.Day) ? true : false)"
+											AnchorOrigin="Origin.BottomRight"
+											TransformOrigin="Origin.TopRight"
+											Elevation="0"
+											Class="!shadow-lg mt-2 rounded-2xl !w-[16rem] md:!w-[24rem] md:w-fit">
+									<MudTextFieldExtended Variant="Variant.Outlined"
+														  Placeholder="Add note..."
+														  AutoFocus="true"
+														  Clearable="true"
+														  AutoSize="false"
+														  Lines="3"
+														  T="string"
+														  DebounceInterval="600"
+														  Value="@existentNote?.Text"
+														  OnClearButtonClick="@(() => HandleOnNoteChange("", existentNote, dayCell.Date))"
+														  OnBlur="@(() => ClosePopup(dayCell.Date.Day))"
+														  ValueChanged="@((args) => HandleOnNoteChange(args, existentNote, dayCell.Date))"
+														  OnKeyDown="@((args) => KeyPressed(args, dayCell.Date.Day))"
+														  Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:!border-border [&_.mud-input-outlined-border]:dark:!border-border:dark [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl" />
+								</MudPopover>
+							}
+						</div>
+					</div>
+				}
+
+				<div class="rounded-r-2xl bg-container dark:bg-container-dark"></div>
+				break;
+			}
+		case ViewType.MonthView:
+			{
+				@foreach (var dayCell in Scheduler?.DayCells ?? new())
+				{
+					var existentNote = Scheduler?.Notes?.SingleOrDefault(x => x.Date.IsDateEqual(dayCell.Date));
+					<div class="h-[4rem] bg-container dark:bg-container-dark">
+						<div class="flex flex-row w-full h-full justify-between rounded-r-2xl border-r border-border dark:border-border-dark">
+							@{
+								<CustomButton @ref="buttons[dayCell.Date.Day]"
+											  OnClick="@(() => OpenPopup(dayCell.Date.Day))"
+											  Rounded="true"
+											  Class="@(PopupOpenState(dayCell.Date.Day) ? "h-full w-full group hover:bg-hover hover:dark:bg-hover-dark !bg-hover dark:!bg-hover-dark" : "h-full w-full group hover:bg-hover hover:dark:bg-hover-dark")">
+									@if (existentNote is not null && !string.IsNullOrEmpty(existentNote.Text))
+									{
+										<svg class="h-5 w-5 text-foreground dark:text-foreground-dark" viewBox="0 0 24 24" fill="none">
+											<path d="M8.04403 20.999C5.9716 20.9533 4.32825 19.236 4.37398 17.1636V6.65646C4.42263 4.61711 6.09419 2.99128 8.13451 3.00004H13.7855C14.344 3.00004 14.8782 3.22674 15.2644 3.62955L19.0561 7.57884C19.4219 7.96121 19.6272 8.47008 19.6272 8.9984V17.1636C19.6409 19.2185 18.0238 20.9163 15.9698 21M8.04403 20.999C8.07419 20.999 8.10435 21 8.13451 21H15.9698M8.04403 20.999C8.07419 20.999 15.9698 21 15.9698 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M14.2695 3.0625V5.95514C14.2686 7.36692 15.4118 8.51211 16.8236 8.51503H19.5625" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M8.51562 16.4818H12.9748M8.51562 13.0612H15.2427M8.51562 9.64062H11.4579" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									}
+									else
+									{
+										<svg class="w-4 h-4 group-hover:flex hidden text-foreground text-foreground-dark" viewBox="0 0 24 24" fill="none">
+											<path d="M13.4414 19.8047H19.4829" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M6.98575 19.9226L8.6523 19.4378C9.54806 19.1768 10.3285 18.6192 10.8644 17.8568L17.2532 8.99764C18.018 7.94832 17.7872 6.4789 16.7379 5.71406L15.0044 4.45028C13.9553 3.68674 12.4845 3.91766 11.7208 4.96552L5.26193 13.9239C4.76904 14.6259 4.5086 15.4642 4.51577 16.3224L4.53179 18.0982C4.54389 19.369 5.76578 20.2772 6.98575 19.9226Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M10.3516 6.88086L15.8732 10.9384" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									}
+								</CustomButton>
+								<MudPopover @ref="popovers[dayCell.Date.Day]"
+											@key="dayCell"
+											Open="@(PopupOpenState(dayCell.Date.Day) ? true : false)"
+											AnchorOrigin="Origin.BottomRight"
+											TransformOrigin="Origin.TopRight"
+											OverflowBehavior="OverflowBehavior.FlipAlways"
+											Elevation="0"
+											Class="!shadow-lg mt-2 rounded-2xl !w-[16rem] md:!w-[24rem] md:w-fit">
+									<MudTextFieldExtended Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:!border-border [&_.mud-input-outlined-border]:dark:!border-border:dark [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl"
+														  Variant="Variant.Outlined"
+														  Placeholder="Add note..."
+														  AutoFocus="true"
+														  Clearable="true"
+														  AutoSize="false"
+														  Lines="3"
+														  T="string"
+														  DebounceInterval="600"
+														  Value="@existentNote?.Text"
+														  OnClearButtonClick="@(() => HandleOnNoteChange("", existentNote, dayCell.Date))"
+														  OnBlur="@(() => ClosePopup(dayCell.Date.Day))"
+														  ValueChanged="@((args) => HandleOnNoteChange(args, existentNote, dayCell.Date))"
+														  OnKeyDown="@((args) => KeyPressed(args, dayCell.Date.Day))" />
+								</MudPopover>
+							}
+						</div>
+					</div>
+				}
+
+				<div class="rounded-r-2xl bg-container dark:bg-container-dark"></div>
+				break;
+			}
+		default: break;
+	}
+}
+
+@namespace GOPS.Blazor.Server.Components.Internal
+
+@code {
+	int openPopup;
+	readonly Dictionary<int, CustomButton> buttons = new();
+	readonly Dictionary<int, MudPopover> popovers = new();
+
+	[CascadingParameter]
+	private Scheduler? Scheduler { get; set; }
+
+	[Parameter]
+	public EventCallback<Note> OnNoteChange { get; set; }
+
+	private async Task HandleOnNoteChange(string text, Note? dayNote, DateTime date)
+	{
+		dayNote ??= new Note()
+			{
+				Date = date
+			};
+
+		dayNote.Text = text;
+
+		await OnNoteChange.InvokeAsync(dayNote);
+	}
+
+	void OpenPopup(int index)
+	{
+
+		openPopup = index;
+		popovers[index].Open = true;
+		buttons[index].Class += "!bg-hover dark:!bg-hover-dark";
+	}
+
+	void ClosePopup(int index)
+	{
+		popovers[index].Open = false;
+		openPopup = 0;
+		buttons[index].Class = "";
+	}
+
+	bool PopupOpenState(int index)
+	{
+		if (popovers.ContainsKey(index))
+		{
+			return popovers[index].Open;
+		}
+
+		return false;
+	}
+
+	void KeyPressed(KeyboardEventArgs e, int index)
+	{
+		int newIndex;
+
+		switch (e)
+		{
+			case { CtrlKey: true, Key: "ArrowLeft" }:
+				{
+					newIndex = index - 1;
+					if (!popovers.ContainsKey(newIndex)) return;
+					break;
+				}
+			case { CtrlKey: true, Key: "ArrowRight" }:
+				{
+					newIndex = index + 1;
+					if (!popovers.ContainsKey(newIndex)) return;
+					break;
+				}
+			case { CtrlKey: true, Key: "Enter" }:
+				ClosePopup(index);
+				return;
+			default:
+				return;
+		}
+
+		ClosePopup(index);
+		OpenPopup(newIndex);
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"scripts": {
+		"buildcss:debug": "cross-env NODE_ENV=development ./node_modules/tailwindcss/lib/cli.js -i ./Styles/app.css -o ./wwwroot/css/app.css --watch",
+		"buildcss:release": "cross-env NODE_ENV=production postcss ./Styles/app.css -o ./wwwroot/css/app.min.css"
+	},
+	"devDependencies": {
+		"autoprefixer": "^10.4.16",
+		"cross-env": "^7.0.3",
+		"cssnano": "^6.0.1",
+		"postcss": "^8.4.32",
+		"postcss-cli": "^11.0.0",
+		"postcss-nesting": "^12.0.1",
+		"tailwindcss": "^3.4.0"
+	}
+}

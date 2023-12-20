@@ -1,0 +1,130 @@
+﻿<div class="@className"
+	 @onclick:stopPropagation="true">
+	@if (Label is not null)
+	{
+		<span class="@textClass">
+			@Label
+		</span>
+	}
+	<button @onclick="@Clicked"
+			disabled="@Disabled"
+			type="button"
+			class="@switchClass">
+		<span class="@thumbClass">
+			<span class="@uncheckClass">
+				<svg class="@iconClass"
+					 fill="none"
+					 viewBox="0 0 12 12"
+					 stroke="currentColor"
+					 stroke-width="2"
+					 stroke-linecap="round"
+					 stroke-linejoin="round">
+					<path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" />
+				</svg>
+			</span>
+			<span class="@checkClass">
+				<svg class="@iconClass"
+					 fill="currentColor"
+					 viewBox="0 0 12 12">
+					<path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
+				</svg>
+			</span>
+		</span>
+	</button>
+</div>
+
+@namespace GOPS.Blazor.Server.Components
+
+@code {
+
+	string className => new CssBuilder("flex items-center")
+		.AddClass(Class)
+		.Build();
+
+	string textClass => new CssBuilder("select-none text-xs font-medium")
+		.AddClass("!text-disabled dark:!text-disabled-dark", Disabled)
+		.AddClass(TextClass)
+		.Build();
+
+	string switchClass => new CssBuilder($"focus:{RingColor} relative h-[28px] w-[48px] inline-flex items-center flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-752")
+		.AddClass("pointer-events-none cursor-pointer !bg-container dark:!bg-container-dark", Disabled)
+		.AddClass($"{CheckColor}", Checked)
+		.AddClass($"{UnCheckColor}", !Checked)
+		.Build();
+
+	string thumbClass => new CssBuilder("pointer-events-none absolute inline-block h-[24px] w-[24px] transform rounded-full shadow ring-0 transition duration-200 ease-in-out")
+		.AddClass("!bg-neutral-200 dark:!bg-surface-dark", Disabled)
+		.AddClass($"!translate-x-[0.6rem] {ThumbColorCheck}", Checked)
+		.AddClass($"!-translate-x-2.5 {ThumbColorUnCheck}", !Checked)
+		.Build();
+
+	string checkClass => new CssBuilder("absolute inset-0 flex h-full w-full items-center justify-center transition-opacity")
+		.AddClass("opacity-100 duration-200 ease-in", Checked)
+		.AddClass("opacity-0 duration-100 ease-out", !Checked)
+		.Build();
+
+	string uncheckClass => new CssBuilder("ease-in absolute inset-0 flex h-full w-full items-center justify-center transition-opacity")
+		.AddClass("opacity-0 duration-100 ease-out", Checked)
+		.AddClass("opacity-100 duration-200 ease-in", !Checked)
+		.Build();
+
+	string iconClass => new CssBuilder("h-3 w-3")
+		.AddClass("!text-disabled dark:!text-disabled-dark", Disabled)
+		.AddClass($"{CheckIconColor}", Checked)
+		.AddClass($"{UnCheckIconColor}", !Checked)
+		.Build();
+
+	[Parameter]
+	public bool Checked { get; set; }
+
+	[Parameter]
+	public string? Label { get; set; }
+
+	[Parameter]
+	public string Class { get; set; } = "";
+
+	[Parameter]
+	public string TextClass { get; set; } = "text-neutral-700 dark:text-foreground-dark";
+
+	[Parameter]
+	public string RingColor { get; set; } = "ring-primary";
+
+	[Parameter]
+	public string CheckColor { get; set; } = "bg-indigo-600";
+
+	[Parameter]
+	public string UnCheckColor { get; set; } = "bg-neutral-300 dark:bg-default-700";
+
+	[Parameter]
+	public string CheckIconColor { get; set; } = "text-default-700";
+
+	[Parameter]
+	public string UnCheckIconColor { get; set; } = "text-default-300 dark:text-default-400";
+
+	[Parameter]
+	public string ThumbColorUnCheck { get; set; } = "bg-white dark:bg-surface-dark";
+
+	[Parameter]
+	public string ThumbColorCheck { get; set; } = "bg-white";
+
+	[Parameter]
+	public bool Disabled { get; set; }
+
+	[Parameter]
+	public EventCallback OnClick { get; set; }
+
+	[Parameter]
+	public EventCallback<bool> CheckedChanged { get; set; }
+
+	private async Task Clicked()
+	{
+		if (Disabled)
+		{
+			return;
+		}
+
+		Checked = !Checked;
+		await CheckedChanged.InvokeAsync(Checked);
+		await OnClick.InvokeAsync();
+	}
+}

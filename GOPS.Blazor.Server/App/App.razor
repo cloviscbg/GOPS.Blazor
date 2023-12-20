@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<base href="/" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+	<link href="_content/CodeBeam.MudBlazor.Extensions/MudExtensions.min.css" rel="stylesheet" />
+	<link href="css/app.css" rel="stylesheet" />
+	<link rel="icon" type="image/png" href="favicon.png" />
+	<HeadOutlet />
+</head>
+
+<body>
+	<div id="app" class="dark">
+		<Routes @rendermode="RenderMode.InteractiveServer" />
+	</div>
+
+	<script src="_framework/blazor.web.js"></script>
+	<script src="_content/MudBlazor/MudBlazor.min.js"></script>
+	<script src="_content/CodeBeam.MudBlazor.Extensions/MudExtensions.min.js"></script>
+	<script src="js/app.js"></script>
+</body>
+
+</html>

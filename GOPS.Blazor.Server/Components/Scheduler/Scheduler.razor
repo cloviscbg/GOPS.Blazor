@@ -1,0 +1,89 @@
+﻿<CascadingValue Value="@this">
+	<SchedulerToolbar OnViewChange="SetView"
+					  OnOffsetDate="OffsetDate" />
+
+	<div class="flex flex-col overflow-auto h-[calc(100vh-19rem)] md:h-[calc(100vh-17.5rem)] schedulerScrollbar">
+		<div class="flex z-60 min-w-fit pb-1 rounded-b-2xl bg-surface dark:bg-surface-dark"
+			 style="@FixedHeaderStyle">
+			<div class="grid w-full gap-y-1"
+				 style="@GridTemplateStyle">
+				<SchedulerHeader />
+
+				<SchedulerPeoplesScheduled />
+
+				<SchedulerNotes OnNoteChange="NoteChange" />
+			</div>
+		</div>
+
+		<SchedulerGroup @ref="@schedulerGroup"
+						T="Group"
+						Groups="Groups">
+			<TitleContent Context="groupHeader">
+				<SchedulerGroupTitle GroupName="@groupHeader.Name"
+									 PeopleCount="@groupHeader.Peoples.Count"
+									 TotalGroupHours="0" />
+			</TitleContent>
+
+			<ShiftContent Context="group">
+				<div class="flex flex-col pt-3 gap-y-6 bg-surface dark:bg-surface-dark">
+					@foreach (var people in group.Peoples)
+					{
+						<div class="flex flex-row min-h-24 shadow-lg ring-1 ring-inset dark:ring-0 ring-border rounded-2xl bg-surface dark:bg-container-dark">
+							<div class="grid w-full"
+								 style="@GridTemplateStyle">
+								<div class="flex py-4 pl-4 md:!pl-3 pr-3 w-full h-full items-center rounded-r-2xl border-r border-border dark:border-border-dark">
+									<User Title="@($"{people.FirstName} {people.LastName}")"
+										  Description="0 Hrs"
+										  Image="@people.ImageProfile"
+										  Class="overflow-hidden"
+										  AvatarClass="hidden md:flex !h-12 !w-12 bg-container dark:bg-surface-dark"
+										  ImageClass="inline-block h-9 w-9"
+										  FallBackClass="text-base font-black leading-none text-primary-400 dark:text-primary-400"
+										  TitleClass="text-ellipsis whitespace-break-spaces overflow-hidden font-black text-xs text-foreground dark:text-foreground-dark"
+										  DescriptionClass="text-xs font-medium text-foreground- dark:text-foreground-dark" />
+								</div>
+
+								@if (CurrentView is ViewType.WeekView || CurrentView is ViewType.MonthView)
+								{
+									@foreach (var dayCell in DayCells ?? new())
+									{
+										var shifts = GetShift(dayCell.Date.Day, people.Id).ToList();
+
+										if (shifts.Count <= 0)
+										{
+											<div class="mud-ripple flex p-1 items-start rounded-r-2xl border-r border-divider dark:border-border-dark hover:bg-hover hover:dark:bg-hover-dark hover:cursor-pointer">
+											</div>
+										}
+										else
+										{
+											foreach (var shift in shifts)
+											{
+												<div class=" group flex p-[6px] items-start rounded-r-2xl border-r border-divider dark:border-border-dark hover:cursor-pointer">
+													<div class=@($"{shift.Color} mud-ripple flex flex-col w-full h-full px-1 py-2 rounded-2xl border-l-4 dark:!border-l-8 dark:border-r dark:border-y text-xs font-normal italic text-foreground dark:text-foreground-accentdark dark:bg-surface-dark group-hover:opacity-80 ")>
+														<span>
+															@shift.StartDate.ToString(@"HH:mm") @shift.EndDate.ToString(@"HH:mm")
+														</span>
+													</div>
+												</div>
+											}
+										}
+									}
+								}
+								<div class="rounded-r-2xl"></div>
+							</div>
+						</div>
+					}
+				</div>
+
+			</ShiftContent>
+		</SchedulerGroup>
+	</div>
+
+	<MudScrollbar Selector=".schedulerScrollbar"
+				  Hide="true" />
+
+</CascadingValue>
+
+@namespace GOPS.Blazor.Server.Components
+
+					@using GOPS.Blazor.Server.Components.Internal

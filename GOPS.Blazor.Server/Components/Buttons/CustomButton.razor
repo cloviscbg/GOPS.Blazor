@@ -1,0 +1,64 @@
+﻿<MudElement Class="@className"
+			Style="@Style"
+			HtmlTag="button"
+			ClickPropagation="@ClickPropagation"
+			type="button"
+			disabled="@Disabled"
+			@onclick="@Click"
+			@onblur="HandleOnBlur">
+	@ChildContent
+</MudElement>
+
+@namespace GOPS.Blazor.Server.Components
+
+@code {
+	protected string className => new CssBuilder("py-3 px-4 cursor-pointer")
+		.AddClass("mud-ripple", !Disabled)
+		.AddClass("rounded-2xl", Rounded)
+		.AddClass("shadow-lg", Elevation)
+		.AddClass("pointer-events-none !cursor-default !text-disabled dark:!text-disabled-dark", Disabled)
+		.AddClass(Class)
+		.Build();
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string Class { get; set; } = "";
+
+	[Parameter]
+	public bool Rounded { get; set; }
+
+	[Parameter]
+	public bool Disabled { get; set; }
+
+	[Parameter]
+	public bool Elevation { get; set; }
+
+	[Parameter]
+	public bool ClickPropagation { get; set; }
+
+	[Parameter]
+	public string? Style { get; set; }
+
+	[Parameter]
+	public EventCallback OnClick { get; set; }
+
+	[Parameter]
+	public EventCallback OnBlur { get; set; }
+
+	async Task Click()
+	{
+		if (Disabled)
+		{
+			return;
+		}
+
+		await OnClick.InvokeAsync();
+	}
+
+	async Task HandleOnBlur()
+	{
+		await OnBlur.InvokeAsync();
+	}
+}

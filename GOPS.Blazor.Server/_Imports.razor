@@ -1,0 +1,28 @@
+﻿@using System.Net.Http
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+
+@using GOPS.Blazor.Server
+@using GOPS.Blazor.Server.App
+@using GOPS.Blazor.Server.Components
+
+@using GOPS.Blazor.Wasm
+
+@using GOPS.Client.Shared.Enums;
+@using GOPS.Client.Shared.Models;
+@using GOPS.Client.Shared.Utils;
+@using GOPS.Client.Shared.Extensions
+@using GOPS.Client.Shared.Interfaces;
+@using GOPS.Client.Shared.Models.Preference;
+@using GOPS.Client.Shared.Services
+
+
+@using MudBlazor
+@using MudExtensions
+
+@inject IPreferenceService UserPreference

@@ -1,0 +1,51 @@
+﻿@if (Scheduler!.ShowPeopleScheduled && Scheduler?.CurrentView != ViewType.WeekView)
+{
+	<div class="select-none rounded-l-2xl bg-container dark:bg-container-dark">
+		<div class="flex pt-8 pb-3 pl-4 w-full h-full items-end rounded-r-2xl border-r border-border dark:border-border-dark">
+			<span class="text-xs font-light select-none text-foreground dark:text-foreground-dark ">
+				People schedule
+			</span>
+		</div>
+	</div>
+
+	@if (Scheduler!.CurrentView is ViewType.DayView)
+	{
+		@foreach (var _ in Enumerable.Range(0, Scheduler!.ColumnCount / 2))
+		{
+			<div class="col-span-2 bg-container dark:bg-container-dark">
+				<div class="flex flex-row w-full h-full items-center justify-center ">
+					<span class="w-full text-center text-xs font-light select-none text-foreground dark:text-foreground-dark ">
+						0
+					</span>
+					<Divider Vertical="true"
+							 Class="h-[1rem] !border-l-0 border-r rounded-r-2xl !border-border dark:!border-border-dark" />
+				</div>
+			</div>
+		}
+	}
+	else
+	{
+		@foreach (var _ in Scheduler?.DayCells ?? new())
+		{
+			<div class="bg-container dark:bg-container-dark">
+				<div class="flex flex-row w-full h-full items-center justify-center ">
+					<span class="w-full text-center text-xs font-light select-none text-foreground dark:text-foreground-dark ">
+						0
+					</span>
+					<Divider Vertical="true"
+							 Class="h-[1.5rem] !border-l-0 border-r" />
+				</div>
+			</div>
+		}
+	}
+
+	<div class="rounded-r-2xl bg-container dark:bg-container-dark"></div>
+}
+
+@namespace GOPS.Blazor.Server.Components.Internal
+
+@code {
+
+	[CascadingParameter]
+	private Scheduler? Scheduler { get; set; }
+}

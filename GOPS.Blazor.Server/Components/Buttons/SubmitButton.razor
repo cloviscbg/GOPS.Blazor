@@ -1,0 +1,27 @@
+﻿<button class="@Class mud-ripple px-6 py-2 rounded-xl shadow-lg text-xs font-semibold text-foreground-accentdark bg-primary-600 saturate-[4]"
+		style="@Style"
+		@onclick="@Click">
+	@ChildContent
+</button>
+
+@namespace GOPS.Blazor.Server.Components
+
+@code {
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public string? Class { get; set; }
+
+	[Parameter]
+	public string? Style { get; set; }
+
+	[Parameter]
+	public EventCallback OnClick { get; set; }
+
+	async Task Click()
+	{
+		await OnClick.InvokeAsync();
+	}
+}

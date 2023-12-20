@@ -1,0 +1,52 @@
+﻿<MudExpansionPanels @ref="mudExpansionPanels"
+	
+					Class="scheduler-groups !min-w-fit rounded-2xl"
+					MultiExpansion="true"
+					Elevation="0"
+					Style="-webkit-tap-highlight-color: transparent">
+	@foreach (var group in Groups ?? Enumerable.Empty<T>())
+	{
+		<MudExpansionPanel HideIcon="true"
+						   Class="mt-4 rounded-2xl !bg-container dark:!bg-container-dark hover:!bg-hover hover:dark:!bg-hover-dark">
+			<TitleContent>
+				@TitleContent?.Invoke(group)
+			</TitleContent>
+
+			<ChildContent>
+				@ShiftContent?.Invoke(group)
+			</ChildContent>
+		</MudExpansionPanel>
+	}
+</MudExpansionPanels>
+
+
+@namespace GOPS.Blazor.Server.Components.Internal
+@typeparam T
+
+
+@code {
+	MudExpansionPanels? mudExpansionPanels;
+
+	[CascadingParameter]
+	Scheduler? Scheduler { get; set; }
+
+	[Parameter]
+	public IEnumerable<T>? Groups { get; set; }
+
+	[Parameter]
+	public RenderFragment<T>? TitleContent { get; set; }
+
+	[Parameter]
+	public RenderFragment<T>? ShiftContent { get; set; }
+
+	public void ExpandGroups(bool expand)
+	{
+		if (expand)
+		{
+			mudExpansionPanels?.ExpandAll();
+			return;
+		}
+
+		mudExpansionPanels?.CollapseAll();
+	}
+}

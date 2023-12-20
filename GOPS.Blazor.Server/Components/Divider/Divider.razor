@@ -1,0 +1,23 @@
+﻿@if (Vertical)
+{
+	<hr class="border-y-0 border-l border-r-0 w-[1px] border-divider dark:border-divider-dark @Class"
+		style="@Style" />
+}
+else
+{
+	<hr class="border-b border-t-0 border-x-0 h-[1px] w-full border-divider dark:border-divider-dark @Class"
+		style="@Style" />
+}
+
+@namespace GOPS.Blazor.Server.Components
+
+@code {
+	[Parameter]
+	public string? Class { get; set; }
+
+	[Parameter]
+	public string? Style { get; set; }
+
+	[Parameter]
+	public bool Vertical { get; set; }
+}

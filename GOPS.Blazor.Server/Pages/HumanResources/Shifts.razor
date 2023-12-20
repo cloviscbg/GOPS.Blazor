@@ -1,0 +1,78 @@
+﻿<div class="flex flex-row mb-2 p-4 rounded-2xl bg-container dark:bg-container-dark">
+	<MudMenu DisableElevation="true"
+			 AnchorOrigin="Origin.BottomLeft"
+			 TransformOrigin="Origin.TopLeft"
+			 PopoverClass="min-w-[10rem] !mt-3 !shadow-lg rounded-2xl ring-1 ring-black dark:ring-border-dark ring-opacity-5 dark:bg-background-dark"
+			 ListClass="!p-2"
+			 @ref="MyMenu"
+			 id="myMenu">
+		<ActivatorContent>
+			<button class="mud-ripple min-w-[4.5rem] flex grow-0 shrink-0 py-[0.6rem] !rounded-xl shadow-lg text-base font-black text-foreground-accent dark:text-primary-400 bg-surface dark:bg-surface-dark">
+				@currentStation
+			</button>
+		</ActivatorContent>
+		<ChildContent>
+			@foreach (var station in stations.Order())
+			{
+				<MudMenuItem Class="px-4 py-3 rounded-2xl hover:bg-hover hover:dark:bg-container-dark"
+							 OnAction="@(() => ChangeStation(station))">
+					<span class="text-sm text-foreground dark:text-foreground-dark">
+						@station
+					</span>
+				</MudMenuItem>
+			}
+		</ChildContent>
+	</MudMenu>
+
+	<MudSpacer />
+
+	<SubmitButton>Publish</SubmitButton>
+</div>
+
+<Scheduler />
+
+@page "/rh/shifts"
+@implements IDisposable
+@inject IJSRuntime JS
+
+@code {
+	string currentStation = "SID";
+	string[] stations = { "SID", "RAI", "VXE", "BVC", "SFL", "MMO", "SNE" };
+	MudMenu? MyMenu;
+	DotNetObjectReference<Shifts>? dotNetReference;
+
+	protected override void OnInitialized()
+	{
+		dotNetReference = DotNetObjectReference.Create(this);
+	}
+
+	private IJSObjectReference? jsModule;
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			jsModule = await JS.InvokeAsync<IJSObjectReference>(
+				"import", "./Pages/HumanResources/Shifts.razor.js");
+
+			await jsModule.InvokeVoidAsync("clickOutside.register", new[] { ".mud-popover", "#myMenu" }, dotNetReference);
+		}
+	}
+
+	void ChangeStation(string station)
+	{
+		currentStation = station;
+	}
+
+	[JSInvokable]
+	public Task OnClickOutside()
+	{
+		MyMenu?.CloseMenu();
+		return Task.CompletedTask;
+	}
+
+	public void Dispose()
+	{
+		jsModule?.DisposeAsync();
+		dotNetReference?.Dispose();
+	}
+}

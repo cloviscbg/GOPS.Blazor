@@ -1,0 +1,53 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	font-family: Inter;
+}
+
+/* MudBlazor Overrides */
+
+.mud-nav-link {
+	padding: 12px;
+}
+
+	.mud-nav-link .mud-nav-link-text {
+		display: flex;
+		flex-direction: row;
+		-moz-column-gap: 0.75rem;
+		column-gap: 0.75rem;
+		align-items: center;
+		margin-left: 0px;
+		margin-inline-start: 0px;
+		margin-inline-end: unset;
+		font-weight: 600;
+		font-size: 0.75rem;
+		line-height: 1rem;
+	}
+
+
+
+.mud-overlay .mud-overlay-scrim {
+	opacity: 1;
+	background-color: rgba(0, 0, 0, 0.1) !important;
+	backdrop-filter: saturate(180%) blur(20px);
+	transition: backdrop-filter .8s ease;
+}
+
+.scheduler-groups .mud-expand-panel {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.scheduler-groups .mud-expand-panel-header {
+	padding: 16px 0;
+}
+
+.scheduler-groups .mud-expand-panel .mud-expand-panel-content {
+	padding: 0;
+}
+
+.scheduler-groups .mud-expand-panel.mud-expand-panel-border {
+	border-bottom: 0;
+}
