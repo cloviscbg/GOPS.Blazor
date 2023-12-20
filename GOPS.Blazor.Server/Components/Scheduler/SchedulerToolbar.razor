@@ -7,12 +7,11 @@
 
 	<Spacer />
 
-	<div class="h-[2.7rem] relative flex items-center justify-self-end rounded-2xl shadow-lg bg-surface dark:bg-surface-dark">
-		<div class="pointer-events-none absolute z-10 inset-0 rounded-2xl dark:ring-1 dark:ring-inset dark:ring-default-700"></div>
+	<div class="relative flex items-center rounded-2xl shadow-lg">
 		<CustomButton Elevation="false"
 					  Rounded="false"
 					  OnClick=@(() => OffsetDate(-1))
-					  Class="h-full flex items-center justify-center rounded-l-2xl pl-3 pr-4 text-foreground-accent dark:text-foreground-dark focus:relative">
+					  Class="h-full flex items-center justify-center rounded-l-2xl pl-3 pr-4 text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70 focus:relative">
 			<svg class="h-5 w-5"
 				 viewBox="0 0 20 20"
 				 fill="currentColor"
@@ -25,7 +24,7 @@
 		<CustomButton Elevation="false"
 					  Rounded="false"
 					  OnClick=@(() => OffsetDate(0))
-					  Class="h-full hidden md:block !px-4 text-xs font-semibold text-foreground-accent dark:text-foreground-dark focus:relative">
+					  Class="hidden md:flex h-full items-center justify-center text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70 focus:relative">
 			Today
 		</CustomButton>
 
@@ -35,7 +34,7 @@
 		<CustomButton Elevation="false"
 					  Rounded="false"
 					  OnClick=@(() => OffsetDate(1))
-					  Class="h-full flex items-center justify-center rounded-r-2xl !pl-3 !pr-4 text-foreground-accent dark:text-foreground-dark hover:!bg-surface/20 hover:dark:!bg-surface-dark/70 focus:relative">
+					  Class="h-full flex items-center justify-center rounded-r-2xl !pl-3 !pr-4 text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70 focus:relative">
 			<svg class="h-5 w-5"
 				 viewBox="0 0 20 20"
 				 fill="currentColor"
