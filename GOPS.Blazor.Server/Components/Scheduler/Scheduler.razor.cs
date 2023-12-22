@@ -200,13 +200,5 @@ public partial class Scheduler
 
 	public void StateChange() => StateHasChanged();
 
-	public IEnumerable<Shift> GetShift(int day, Guid peopleId)
-	{
-		var shifts = Shifts?
-			.Where(x => x.PeopleId == peopleId && x.StartDate.Day == day);
-
-		return shifts ?? Enumerable.Empty<Shift>();
-	}
-
 	public string GetGridTemplateStyle() => GridTemplateStyle;
 }

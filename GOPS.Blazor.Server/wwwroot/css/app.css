@@ -1021,6 +1021,11 @@ video {
   border-right-width: 0px;
 }
 
+.border-y {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
 .border-y-0 {
   border-top-width: 0px;
   border-bottom-width: 0px;
@@ -1038,8 +1043,8 @@ video {
   border-left-width: 1px;
 }
 
-.border-l-4 {
-  border-left-width: 4px;
+.border-l-8 {
+  border-left-width: 8px;
 }
 
 .border-r {
@@ -1362,6 +1367,11 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .font-black {
@@ -1728,8 +1738,8 @@ body {
   color: rgb(67 56 202 / var(--tw-text-opacity));
 }
 
-.group:hover .group-hover\:opacity-80 {
-  opacity: 0.8;
+.group:hover .group-hover\:opacity-60 {
+  opacity: 0.6;
 }
 
 @media not all and (min-width: 640px) {
@@ -1871,19 +1881,6 @@ body {
   }
 }
 
-:is(:where(.dark) .dark\:border-y) {
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-}
-
-:is(:where(.dark) .dark\:\!border-l-8) {
-  border-left-width: 8px !important;
-}
-
-:is(:where(.dark) .dark\:border-r) {
-  border-right-width: 1px;
-}
-
 :is(:where(.dark) .dark\:\!border-border-dark) {
   border-color: rgba(48, 48, 61, 0.5) !important;
 }
@@ -1934,6 +1931,41 @@ body {
 :is(:where(.dark) .dark\:bg-surface-dark) {
   --tw-bg-opacity: 1;
   background-color: rgb(31 30 47 / var(--tw-bg-opacity));
+}
+
+:is(:where(.dark) .dark\:\!bg-default-600) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(21 21 32 / var(--tw-bg-opacity)) !important;
+}
+
+:is(:where(.dark) .dark\:\!bg-default-800) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(14 14 22 / var(--tw-bg-opacity)) !important;
+}
+
+:is(:where(.dark) .dark\:\!bg-default-400) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(59 59 69 / var(--tw-bg-opacity)) !important;
+}
+
+:is(:where(.dark) .dark\:\!bg-default-500) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(24 24 36 / var(--tw-bg-opacity)) !important;
+}
+
+:is(:where(.dark) .dark\:\!bg-default-900) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(8 8 13 / var(--tw-bg-opacity)) !important;
+}
+
+:is(:where(.dark) .dark\:\!bg-indigo-400) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(129 140 248 / var(--tw-bg-opacity)) !important;
+}
+
+:is(:where(.dark) .dark\:\!bg-indigo-950) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(30 27 75 / var(--tw-bg-opacity)) !important;
 }
 
 :is(:where(.dark) .dark\:\!text-disabled-dark) {
