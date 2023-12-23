@@ -1,4 +1,5 @@
 ﻿<div class="flex flex-row items-center md:justify-between md:justify-normal md:gap-x-2 md:w-full p-2 md:p-4 mb-1 rounded-2xl bg-container dark:bg-container-dark">
+	<!--DatePicker Control-->
 	<CustomButton Elevation="true"
 				  Rounded="true"
 				  Class="px-6 py-3 text-xs font-semibold text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
@@ -7,6 +8,7 @@
 
 	<Spacer />
 
+	<!--OffsetDate Control-->
 	<div class="group relative flex items-center rounded-2xl shadow-lg bg-surface dark:bg-surface-dark">
 		<CustomButton Elevation="false"
 					  Rounded="false"
@@ -45,6 +47,7 @@
 		</CustomButton>
 	</div>
 
+	<!--Menu to change view-->
 	<MudMenu DisableElevation="true"
 			 AnchorOrigin="Origin.BottomRight"
 			 TransformOrigin="Origin.TopRight"
@@ -147,6 +150,7 @@
 	<ToggleButton @bind-Toggle="@Scheduler!.GroupsExpanded"
 				  Rounded="true"
 				  Elevation="true"
+				  Disabled="@(!Scheduler!.ShowGroups)"
 				  Class="max-sm:hidden text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
 		<ToggleOnContent>
 			<svg class="h-5 w-5"
