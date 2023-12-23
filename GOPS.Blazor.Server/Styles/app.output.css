@@ -1709,6 +1709,10 @@ body {
   background-color: rgb(255 255 255 / 0.2);
 }
 
+.hover\:\!bg-surface\/20:hover {
+  background-color: rgb(255 255 255 / 0.2) !important;
+}
+
 .hover\:text-primary:hover {
   --tw-text-opacity: 1;
   color: rgb(67 56 202 / var(--tw-text-opacity));
@@ -1731,6 +1735,10 @@ body {
 
 .group:hover .group-hover\:flex {
   display: flex;
+}
+
+.group:hover .group-hover\:\!bg-surface\/20 {
+  background-color: rgb(255 255 255 / 0.2) !important;
 }
 
 .group:hover .group-hover\:text-primary {
@@ -2035,9 +2043,17 @@ body {
   background-color: rgb(31 30 47 / 0.7);
 }
 
+:is(:where(.dark) .hover\:dark\:\!bg-surface-dark\/70):hover {
+  background-color: rgb(31 30 47 / 0.7) !important;
+}
+
 :is(:where(.dark) .hover\:dark\:text-primary-400):hover {
   --tw-text-opacity: 1;
   color: rgb(129 140 248 / var(--tw-text-opacity));
+}
+
+.group:hover :is(:where(.dark) .group-hover\:dark\:\!bg-surface-dark\/70) {
+  background-color: rgb(31 30 47 / 0.7) !important;
 }
 
 .group:hover :is(:where(.dark) .group-hover\:dark\:text-primary-400) {

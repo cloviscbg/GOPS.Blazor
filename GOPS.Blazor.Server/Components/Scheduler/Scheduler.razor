@@ -15,21 +15,32 @@
 			</div>
 		</div>
 
-		<SchedulerGroup @ref="@schedulerGroup"
-						T="Group"
-						Groups="Groups">
-			<TitleContent Context="groupHeader">
-				<SchedulerGroupTitle GroupName="@groupHeader.Name"
-									 PeopleCount="@groupHeader.Peoples.Count"
-									 TotalGroupHours="0" />
-			</TitleContent>
+		@if (ShowGroups)
+		{
+			<SchedulerGroup @ref="@schedulerGroup"
+							T="Group"
+							Groups="Groups">
+				<TitleContent Context="groupHeader">
+					<SchedulerGroupTitle GroupName="@groupHeader.Name"
+										 PeopleCount="@groupHeader.Peoples.Count"
+										 TotalGroupHours="0" />
+				</TitleContent>
 
-			<ShiftContent Context="group">
-				<SchedulerShifts Peoples="group.Peoples"
-								 FixedStyle="@FixedStyle"
-								 GridTemplateStyle="@GridTemplateStyle" />
-			</ShiftContent>
-		</SchedulerGroup>
+				<ShiftContent Context="group">
+					<SchedulerShifts Peoples="group.Peoples"
+									 FixedStyle="@FixedStyle"
+									 GridTemplateStyle="@GridTemplateStyle" />
+				</ShiftContent>
+			</SchedulerGroup>
+		}
+		else
+		{
+
+			<SchedulerShifts Peoples="Peoples"
+							 FixedStyle="@FixedStyle"
+							 GridTemplateStyle="@GridTemplateStyle" />
+		}
+
 	</div>
 
 	<MudScrollbar Selector=".schedulerScrollbar"

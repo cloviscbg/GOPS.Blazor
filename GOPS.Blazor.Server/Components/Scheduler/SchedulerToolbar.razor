@@ -7,11 +7,11 @@
 
 	<Spacer />
 
-	<div class="relative flex items-center rounded-2xl shadow-lg">
+	<div class="group relative flex items-center rounded-2xl shadow-lg bg-surface dark:bg-surface-dark">
 		<CustomButton Elevation="false"
 					  Rounded="false"
 					  OnClick=@(() => OffsetDate(-1))
-					  Class="h-full flex items-center justify-center rounded-l-2xl pl-3 pr-4 text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70 focus:relative">
+					  Class="h-full flex items-center justify-center rounded-l-2xl py-3 px-4 text-foreground-accent dark:text-foreground-dark group-hover:!bg-surface/20 group-hover:dark:!bg-surface-dark/70 focus:relative">
 			<svg class="h-5 w-5"
 				 viewBox="0 0 20 20"
 				 fill="currentColor"
@@ -24,7 +24,7 @@
 		<CustomButton Elevation="false"
 					  Rounded="false"
 					  OnClick=@(() => OffsetDate(0))
-					  Class="hidden md:flex h-full !py-3 items-center justify-center text-xs font-semibold text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70 focus:relative">
+					  Class="hidden md:flex h-full py-3 px-4 items-center justify-center text-xs font-semibold text-foreground-accent dark:text-foreground-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70 focus:relative">
 			Today
 		</CustomButton>
 
@@ -34,7 +34,7 @@
 		<CustomButton Elevation="false"
 					  Rounded="false"
 					  OnClick=@(() => OffsetDate(1))
-					  Class="h-full flex items-center justify-center rounded-r-2xl !pl-3 !pr-4 text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70 focus:relative">
+					  Class="h-full flex items-center justify-center rounded-r-2xl py-3 px-4  text-foreground-accent dark:text-foreground-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70 focus:relative">
 			<svg class="h-5 w-5"
 				 viewBox="0 0 20 20"
 				 fill="currentColor"
@@ -52,7 +52,7 @@
 			 PopoverClass="w-56 !mt-3 !shadow-lg rounded-2xl ring-1 ring-black dark:ring-border-dark ring-opacity-5 dark:bg-background-dark"
 			 ListClass="!p-2">
 		<ActivatorContent>
-			<button class="mud-ripple md:min-w-[7rem] flex items-center shrink-0 grow-0 px-4 py-3 shadow-lg rounded-2xl text-sm font-semibold bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
+			<button class="mud-ripple md:min-w-[7rem] flex items-center shrink-0 grow-0 py-3 px-4 shadow-lg rounded-2xl text-sm font-semibold bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
 				<svg class="h-5 w-5 md:hidden text-neutral-700 dark:text-foreground-dark"
 					 viewBox="0 0 25 25"
 					 fill="none"
@@ -109,7 +109,7 @@
 	<!--AddGroup-->
 	<CustomButton Elevation="true"
 				  Rounded="true"
-				  Class="max-sm:hidden text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
+				  Class="max-sm:hidden py-3 px-4 text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
 		<svg class="h-5 w-5"
 			 viewBox="0 0 25 24"
 			 fill="none"
@@ -128,7 +128,7 @@
 	<!--ReorderGroup-->
 	<CustomButton Elevation="true"
 				  Rounded="true"
-				  Class="max-sm:hidden text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
+				  Class="max-sm:hidden py-3 px-4 text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
 		<svg class="h-5 w-5"
 			 viewBox="0 0 25 25"
 			 fill="none"
@@ -209,10 +209,10 @@
 							  Class="mb-2 justify-between" />
 				<Divider Class="w-[95%] my-1" />
 				<span class="pb-2 pt-3 text-xs font-medium text-neutral-400 dark:text-neutral-500">View by:</span>
-				<CustomSwitch @bind-Checked="@viewByPeople"
+				<CustomSwitch @bind-Checked="@Scheduler!.ViewByPeople"
 							  Label="People"
 							  Class="mb-2 justify-between" />
-				<CustomSwitch @bind-Checked="@viewByShift"
+				<CustomSwitch @bind-Checked="@Scheduler!.ViewByShift"
 							  Label="Shift"
 							  Class="mb-2 justify-between" />
 				<Divider Class="w-[95%] my-1" />
@@ -220,7 +220,7 @@
 				<CustomSwitch @bind-Checked="@showFlights"
 							  Label="Flights"
 							  Class="mb-2 justify-between" />
-				<CustomSwitch @bind-Checked="@showGroups"
+				<CustomSwitch @bind-Checked="@Scheduler!.ShowGroups"
 							  Label="Groups"
 							  Class="mb-2 justify-between" />
 				<CustomSwitch @bind-Checked="@Scheduler!.ShowNotes"
@@ -306,10 +306,10 @@
 							  Class="mb-2 justify-between" />
 				<Divider Class="w-[95%] my-1" />
 				<span class="pb-2 pt-3 text-xs font-medium text-neutral-400 dark:text-neutral-500">View by:</span>
-				<CustomSwitch @bind-Checked="@viewByPeople"
+				<CustomSwitch @bind-Checked="@Scheduler!.ViewByPeople"
 							  Label="People"
 							  Class="mb-2 justify-between" />
-				<CustomSwitch @bind-Checked="@viewByShift"
+				<CustomSwitch @bind-Checked="@Scheduler!.ViewByShift"
 							  Label="Shift"
 							  Class="mb-2 justify-between" />
 				<Divider Class="w-[95%] my-1" />
@@ -317,7 +317,7 @@
 				<CustomSwitch @bind-Checked="@showFlights"
 							  Label="Flights"
 							  Class="mb-2 justify-between" />
-				<CustomSwitch @bind-Checked="@showGroups"
+				<CustomSwitch @bind-Checked="@Scheduler!.ShowGroups"
 							  Label="Groups"
 							  Class="mb-2 justify-between" />
 				<CustomSwitch @bind-Checked="@Scheduler!.ShowNotes"
@@ -337,13 +337,7 @@
 @namespace GOPS.Blazor.Server.Components.Internal
 
 @code {
-	bool fixedHeader;
-	bool fixedMember;
-	bool viewByPeople;
-	bool viewByShift;
 	bool showFlights;
-	bool showGroups;
-	bool showNotes;
 	bool showShiftConflicts;
 
 	[CascadingParameter]

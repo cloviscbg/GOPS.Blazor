@@ -15,6 +15,9 @@ public partial class Scheduler
 	bool groupsExpanded;
 	bool fixedHeader;
 	bool fixedMember;
+	bool viewByPeople;
+	bool viewByShift;
+	bool showGroups;
 	bool showPeopleSchedule;
 	bool showNotes;
 	SchedulerGroup<Group>? schedulerGroup;
@@ -34,6 +37,8 @@ public partial class Scheduler
 	{
 		DefaultMinutesInterval = 30;
 		CurrentDate = TimeProvider.System.GetLocalNow().Date;
+		viewByPeople = true;
+		showGroups = true;
 		SetView(ViewType.DayView);
 		UpdateData();
 		base.OnInitialized();
@@ -78,6 +83,65 @@ public partial class Scheduler
 		}
 	}
 
+	public bool FixedHeader
+	{
+		get { return fixedHeader; }
+		set
+		{
+			fixedHeader = value;
+			StateHasChanged();
+		}
+	}
+
+	public bool FixedMember
+	{
+		get { return fixedMember; }
+		set
+		{
+			fixedMember = value;
+			StateHasChanged();
+		}
+	}
+
+	public bool ViewByPeople
+	{
+		get { return viewByPeople; }
+		set
+		{
+			viewByPeople = value;
+			if (viewByPeople)
+			{
+				viewByShift = false;
+			}
+			else
+			{
+				viewByShift = true;
+			}
+			StateHasChanged();
+		}
+	}
+
+	public bool ViewByShift
+	{
+		get { return viewByShift; }
+		set
+		{
+			viewByShift = value;
+			StateHasChanged();
+		}
+	}
+
+	public bool ShowGroups
+	{
+		get { return showGroups; }
+		set
+		{
+			showGroups = value;
+			StateHasChanged();
+		}
+	}
+
+
 	public bool ShowPeopleScheduled
 	{
 		get { return showPeopleSchedule; }
@@ -96,28 +160,6 @@ public partial class Scheduler
 			StateHasChanged();
 		}
 	}
-
-	public bool FixedHeader
-	{
-		get { return fixedHeader; }
-		set
-		{
-			fixedHeader = value;
-			StateHasChanged();
-		}
-	}
-
-	public bool FixedMember
-	{
-		get { return fixedMember; }
-		set 
-		{ 
-			fixedMember = value;
-			StateHasChanged();
-		}
-	}
-
-
 
 	public void SetView(ViewType view)
 	{
