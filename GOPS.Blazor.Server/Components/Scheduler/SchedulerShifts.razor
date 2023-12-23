@@ -34,12 +34,11 @@
 
 						if (shifts?.Count <= 0)
 						{
-							<SchedulerCell ShiftClass="!border-0 "
-								Disabled="@isPast">
-
-							</SchedulerCell>
-@* 							<div class="mud-ripple flex p-1 items-start rounded-r-2xl border-r border-divider dark:border-border-dark hover:bg-hover hover:dark:bg-hover-dark hover:cursor-pointer"></div>
- *@						}
+							<SchedulerCell Class="hover:bg-hover hover:dark:bg-hover-dark"
+										   ShiftClass="hidden"
+										   DisableRipple="@isPast"
+										   Disabled="@isPast" />
+						}
 						else
 						{
 							foreach (var shift in shifts ?? [])
@@ -47,22 +46,13 @@
 								if (shift.StartDate.IsDateEqual(dayCell.Date))
 								{
 									<SchedulerCell ShiftClass="@shift.Color"
+												   DisableRipple="true"
 												   Disabled="@isPast">
 										<CustomButton Disabled="@isPast"
 													  Class="mud-ripple flex flex-col items-start justify-start w-full h-full !px-1 !py-2 text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
 											@shift.StartDate.ToString(@"HH:mm") @shift.EndDate.ToString(@"HH:mm")
 										</CustomButton>
-										@* 										<button class="mud-ripple flex flex-col items-start justify-start w-full h-full px-1 py-2 text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
-				@shift.StartDate.ToString(@"HH:mm") @shift.EndDate.ToString(@"HH:mm")
-				</button> *@
 									</SchedulerCell>
-									@* 									<div class=" group flex p-[6px] rounded-r-2xl border-r border-divider dark:border-border-dark hover:cursor-pointer">
-			<div class=@($"{shift.Color} w-full h-full rounded-2xl border-l-8 border-r border-y dark:bg-surface-dark group-hover:opacity-60")>
-			<button class="mud-ripple flex flex-col items-start justify-start w-full h-full px-1 py-2 text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
-			@shift.StartDate.ToString(@"HH:mm") @shift.EndDate.ToString(@"HH:mm")
-			</button>
-			</div>
-			</div> *@
 								}
 							}
 						}

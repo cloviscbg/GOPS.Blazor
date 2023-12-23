@@ -1012,10 +1012,6 @@ video {
   border-bottom-right-radius: 0.375rem;
 }
 
-.\!border-0 {
-  border-width: 0px !important;
-}
-
 .border-2 {
   border-width: 2px;
 }
@@ -1703,6 +1699,10 @@ body {
 
 .hover\:bg-surface\/20:hover {
   background-color: rgb(255 255 255 / 0.2);
+}
+
+.hover\:\!bg-transparent:hover {
+  background-color: transparent !important;
 }
 
 .hover\:text-primary:hover {

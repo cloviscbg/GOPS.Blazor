@@ -1,7 +1,14 @@
 ﻿<div class="@className">
-	<div class="@shiftClass">
-		@ChildContent
-	</div>
+	@if (ChildContent is null)
+	{
+		<div class="@shiftClass"></div>
+	}
+	else
+	{
+		<div class="@shiftClass">
+			@ChildContent
+		</div>
+	}
 </div>
 @namespace GOPS.Blazor.Server.Components.Internal
 
@@ -9,12 +16,14 @@
 
 	protected string className => new CssBuilder("group flex p-[6px] rounded-r-2xl border-r border-divider dark:border-border-dark")
 		.AddClass("hover:cursor-pointer", !Disabled)
-		.AddClass("hover:!cursor-default", Disabled)
+		.AddClass("mud-ripple", !DisableRipple)
+		.AddClass("hover:!cursor-default hover:!bg-transparent", Disabled)
 		.AddClass(Class)
 		.Build();
 
 	protected string shiftClass => new CssBuilder("w-full h-full rounded-2xl border-l-8 border-r border-y dark:bg-surface-dark group-hover:opacity-60")
 		.AddClass("!bg-container !border-disabled dark:!bg-disabled-dark/10 dark:!border-disabled-dark/50 group-hover:!opacity-100", Disabled)
+		.AddClass("mud-ripple", !DisableRipple)
 		.AddClass(ShiftClass)
 		.Build();
 
@@ -32,4 +41,7 @@
 
 	[Parameter]
 	public bool Disabled { get; set; }
+
+	[Parameter]
+	public bool DisableRipple { get; set; }
 }
