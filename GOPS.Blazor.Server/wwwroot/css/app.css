@@ -1693,16 +1693,16 @@ body {
   background-color: rgba(0, 0, 0, 0.058823529411764705) !important;
 }
 
+.hover\:\!bg-transparent:hover {
+  background-color: transparent !important;
+}
+
 .hover\:bg-hover:hover {
   background-color: rgba(0, 0, 0, 0.058823529411764705);
 }
 
 .hover\:bg-surface\/20:hover {
   background-color: rgb(255 255 255 / 0.2);
-}
-
-.hover\:\!bg-transparent:hover {
-  background-color: transparent !important;
 }
 
 .hover\:text-primary:hover {

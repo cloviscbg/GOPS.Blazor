@@ -25,12 +25,12 @@
 	}
 	else
 	{
-		@foreach (var _ in Scheduler?.DayCells ?? new())
+		@foreach (var dayCell in Scheduler?.DayCells ?? new())
 		{
 			<div class="bg-container dark:bg-container-dark">
 				<div class="flex flex-row w-full h-full items-center justify-center ">
 					<span class="w-full text-center text-xs font-light select-none text-foreground dark:text-foreground-dark ">
-						0
+						@Scheduler?.GetTotalPeoplesSchedule(dayCell.Date)
 					</span>
 					<Divider Vertical="true"
 							 Class="h-[1.5rem] !border-l-0 border-r" />

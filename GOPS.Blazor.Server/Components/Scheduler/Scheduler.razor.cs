@@ -59,7 +59,7 @@ public partial class Scheduler
 	public DateTime CurrentDate { get; private set; }
 	public int DefaultMinutesInterval { get; private set; }
 	public string CurrentDateText { get; private set; } = "";
-	public ViewType? CurrentView { get; private set; }
+    public ViewType? CurrentView { get; private set; }
 	public List<DayCell>? DayCells { get; set; }
 	public List<Note>? Notes { get; set; }
 	public List<Group>? Groups { get; set; }
@@ -127,6 +127,14 @@ public partial class Scheduler
 		set
 		{
 			viewByShift = value;
+			if (viewByShift)
+			{
+				viewByPeople = false;
+			}
+			else
+			{
+				viewByPeople = true;
+			}
 			StateHasChanged();
 		}
 	}
@@ -240,7 +248,42 @@ public partial class Scheduler
 		Shifts = ShiftService.GetAllOfMonth(CurrentDate).ToList();
 	}
 
-	public void StateChange() => StateHasChanged();
+	//int GetGroupTotalHours(int groupdId)
+	//{
+	//	var peoples = Peoples?.Where(p => p.GroupId == groupdId);
+	//	var totalHours = Shifts?.Where()
+
+	//	return totalHours;
+	//}
+
+	public int GetTotalHours()
+	{
+		if (CurrentView is ViewType.DayView)
+		{
+			return 0;
+		}
+
+		var start = DayCells?[0].Date ?? new();
+		var end = DayCells?[^1].Date ?? new();
+
+		var totalHours = Shifts?
+			.Where(s => s.StartDate.IsBetweenDates(start, end))
+			.Sum(x => (int)x.TotalTime.TotalHours) ?? 0;
+
+		return totalHours;
+	}
+
+	public int GetTotalPeoplesSchedule(DateTime date)
+		=> Shifts?.Count(s => s.StartDate.IsDateEqual(date)) ?? 0;
+
+	public int GetTotalHoursPerDay(DateTime date)
+		=> Shifts?.Where(s => s.StartDate.IsDateEqual(date))
+				  .Sum(x => (int)x.TotalTime.TotalHours) ?? 0;
+
 
 	public string GetGridTemplateStyle() => GridTemplateStyle;
+
+	public void StateChange() => StateHasChanged();
+
+
 }

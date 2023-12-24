@@ -39,7 +39,7 @@
 			<div class="select-none rounded-l-2xl bg-container dark:bg-container-dark">
 				<div class="flex py-3 pl-4 w-full h-full items-end rounded-r-2xl border-r border-border dark:border-border-dark">
 					<span class="text-xs font-light select-none text-foreground dark:text-foreground-dark ">
-						Week: 0 Hrs
+						Week: @Scheduler?.GetTotalHours() Hrs
 					</span>
 				</div>
 			</div>
@@ -65,11 +65,11 @@
 									<path d="M17.9854 10.7598C19.1444 10.7598 20.084 9.82018 20.084 8.66113C20.084 7.50209 19.1444 6.5625 17.9854 6.5625C16.8263 6.5625 15.8867 7.50209 15.8867 8.66113C15.8867 9.82018 16.8263 10.7598 17.9854 10.7598Z" />
 								</svg>
 								<span class=@($"ml-1 text-xs font-light {headerStyle.Item2}")>
-									0
+									@Scheduler?.GetTotalPeoplesSchedule(cell.Date)
 								</span>
 							</div>
 							<span class=@($"self-end text-xs font-light {headerStyle.Item2}")>
-								0 Hrs
+								@Scheduler?.GetTotalHoursPerDay(cell.Date) Hrs
 							</span>
 						</div>
 					</div>
@@ -83,7 +83,7 @@
 			<div class="select-none rounded-l-2xl bg-container dark:bg-container-dark">
 				<div class="flex py-3 pl-4 w-full h-full items-end rounded-r-2xl border-r border-border dark:border-border-dark">
 					<span class="text-xs font-light select-none text-foreground dark:text-foreground-dark ">
-						Month: 0 Hrs
+						Month: @Scheduler?.GetTotalHours() Hrs
 					</span>
 				</div>
 			</div>
@@ -99,7 +99,7 @@
 							@cell.Date.ToShortDayString(3)
 						</span>
 						<span class=@($"text-xs font-normal {headerStyle.Item2}")>
-							0
+							@Scheduler?.GetTotalHoursPerDay(cell.Date)H
 						</span>
 					</div>
 				</div>
