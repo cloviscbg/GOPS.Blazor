@@ -75,13 +75,15 @@
 			</button>
 		</ActivatorContent>
 		<ChildContent>
-			<MudMenuItem Class="md:hidden px-4 py-3 rounded-2xl hover:bg-hover hover:dark:bg-container-dark">
-				<span class="text-sm text-foreground dark:text-foreground-dark">
+			<MudMenuItem Disabled="!Scheduler!.ShowGroups"
+						 Class="md:hidden px-4 py-3 rounded-2xl hover:bg-hover hover:dark:bg-container-dark">
+				<span class="@menuItemClass">
 					Add groups
 				</span>
 			</MudMenuItem>
-			<MudMenuItem Class="md:hidden px-4 py-3 rounded-2xl hover:bg-hover hover:dark:bg-container-dark">
-				<span class="text-sm text-foreground dark:text-foreground-dark">
+			<MudMenuItem Disabled="!Scheduler!.ShowGroups"
+						 Class="md:hidden px-4 py-3 rounded-2xl hover:bg-hover hover:dark:bg-container-dark">
+				<span class="@menuItemClass">
 					Reorder groups
 				</span>
 			</MudMenuItem>
@@ -343,6 +345,10 @@
 @code {
 	bool showFlights;
 	bool showShiftConflicts;
+
+	string menuItemClass => new CssBuilder("text-sm text-foreground dark:text-foreground-dark")
+		.AddClass("!text-disabled dark:!text-disabled-dark", !Scheduler!.ShowGroups)
+		.Build();
 
 	[CascadingParameter]
 	private Scheduler? Scheduler { get; set; }

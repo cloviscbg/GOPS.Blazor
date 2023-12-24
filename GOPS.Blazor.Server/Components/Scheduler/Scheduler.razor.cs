@@ -277,7 +277,7 @@ public partial class Scheduler
 		return foundShifts;
 	}
 
-	public IEnumerable<Shift> GetShiftsPerDate(DateTime date)
+	public IEnumerable<Shift> GetShiftsByDate(DateTime date)
 	{
 		var foundShifts = Shifts?.Where(x => x.StartDate.IsDateEqual(date)) ?? [];
 		return foundShifts;
@@ -290,7 +290,7 @@ public partial class Scheduler
 	}
 
 	public int GetTotalHoursPerDay(DateTime date)
-		=> GetShiftsPerDate(date).Sum(x => (int)x.TotalTime.TotalHours);
+		=> GetShiftsByDate(date).Sum(x => (int)x.TotalTime.TotalHours);
 
 	public int GetTotalHoursPerPeople(Guid peopleId)
 	{
