@@ -1,7 +1,7 @@
 ﻿<div class="flex flex-col pt-3 gap-y-6 bg-surface dark:bg-surface-dark">
 	@foreach (var people in Peoples ?? [])
 	{
-		var totalHours = GetTotalHours(people.Id);
+		var totalHours = Scheduler?.GetTotalHoursPerPeople(people.Id);
 
 		<div class="flex flex-row min-h-24 shadow-lg ring-1 ring-inset dark:ring-0 ring-border rounded-2xl bg-surface dark:bg-container-dark">
 			<div class="grid w-full"
@@ -81,25 +81,6 @@
 	[Parameter]
 	public string? GridTemplateStyle { get; set; }
 
-	List<Shift> GetShifts(Guid peopleId)
-	{
-		List<Shift> foundShifts = [];
-
-		if (Scheduler?.CurrentView is ViewType.DayView)
-		{
-			return foundShifts;
-		}
-
-		var start = Scheduler?.DayCells?[0].Date ?? new();
-		var end = Scheduler?.DayCells?[^1].Date ?? new();
-
-		foundShifts = Scheduler?.Shifts?
-			.Where(x => x.PeopleId == peopleId && x.StartDate.IsBetweenDates(start, end))
-			.ToList() ?? [];
-
-		return foundShifts;
-	}
-
 	List<Shift> GetShift(int day, Guid peopleId)
 	{
 		var shifts = Scheduler?.Shifts?
@@ -107,11 +88,5 @@
 			.ToList();
 
 		return shifts ?? [];
-	}
-
-	int GetTotalHours(Guid peopleId)
-	{
-		var totalHours = GetShifts(peopleId).Sum(x => (int)x.TotalTime.TotalHours);
-		return totalHours;
 	}
 }

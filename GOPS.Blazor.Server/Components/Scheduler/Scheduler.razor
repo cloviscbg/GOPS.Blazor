@@ -23,7 +23,7 @@
 				<TitleContent Context="groupHeader">
 					<SchedulerGroupTitle GroupName="@groupHeader.Name"
 										 PeopleCount="@groupHeader.Peoples.Count"
-										 TotalGroupHours="0" />
+										 TotalGroupHours="GetTotalHoursPerGroup(groupHeader.Id)" />
 				</TitleContent>
 
 				<ShiftContent Context="group">
@@ -40,7 +40,6 @@
 								 FixedStyle="@FixedStyle"
 								 GridTemplateStyle="@GridTemplateStyle" />
 			</div>
-
 		}
 
 	</div>

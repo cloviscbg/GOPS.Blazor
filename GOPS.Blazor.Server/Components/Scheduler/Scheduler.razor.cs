@@ -8,6 +8,7 @@ using GOPS.Client.Shared.Utils;
 using GOPS.Client.Shared.Extensions;
 using GOPS.Client.Shared.Services;
 using GOPS.Blazor.Server.Components.Internal;
+using System.Net.WebSockets;
 
 public partial class Scheduler
 {
@@ -59,7 +60,7 @@ public partial class Scheduler
 	public DateTime CurrentDate { get; private set; }
 	public int DefaultMinutesInterval { get; private set; }
 	public string CurrentDateText { get; private set; } = "";
-    public ViewType? CurrentView { get; private set; }
+	public ViewType? CurrentView { get; private set; }
 	public List<DayCell>? DayCells { get; set; }
 	public List<Note>? Notes { get; set; }
 	public List<Group>? Groups { get; set; }
@@ -248,38 +249,67 @@ public partial class Scheduler
 		Shifts = ShiftService.GetAllOfMonth(CurrentDate).ToList();
 	}
 
-	//int GetGroupTotalHours(int groupdId)
-	//{
-	//	var peoples = Peoples?.Where(p => p.GroupId == groupdId);
-	//	var totalHours = Shifts?.Where()
-
-	//	return totalHours;
-	//}
-
-	public int GetTotalHours()
+	public IEnumerable<Shift> GetShiftsBetweenDates(Guid? peopleId = null)
 	{
+		List<Shift> foundShifts = [];
+
 		if (CurrentView is ViewType.DayView)
 		{
-			return 0;
+			return foundShifts;
 		}
 
 		var start = DayCells?[0].Date ?? new();
 		var end = DayCells?[^1].Date ?? new();
 
-		var totalHours = Shifts?
-			.Where(s => s.StartDate.IsBetweenDates(start, end))
-			.Sum(x => (int)x.TotalTime.TotalHours) ?? 0;
+		if (peopleId is not null)
+		{
+			foundShifts = Shifts?
+				.Where(x => x.PeopleId == peopleId && x.StartDate.IsBetweenDates(start, end))
+				.ToList() ?? [];
 
+			return foundShifts;
+		}
+
+		foundShifts = Shifts?
+			.Where(x => x.StartDate.IsBetweenDates(start, end))
+			.ToList() ?? [];
+
+		return foundShifts;
+	}
+
+	public IEnumerable<Shift> GetShiftsPerDate(DateTime date)
+	{
+		var foundShifts = Shifts?.Where(x => x.StartDate.IsDateEqual(date)) ?? [];
+		return foundShifts;
+	}
+
+	public int GetTotalHours()
+	{
+		var totalHours = GetShiftsBetweenDates().Sum(x => (int)x.TotalTime.TotalHours);
 		return totalHours;
+	}
+
+	public int GetTotalHoursPerDay(DateTime date)
+		=> GetShiftsPerDate(date).Sum(x => (int)x.TotalTime.TotalHours);
+
+	public int GetTotalHoursPerPeople(Guid peopleId)
+	{
+		var totalHours = GetShiftsBetweenDates(peopleId).Sum(x => (int)x.TotalTime.TotalHours);
+		return totalHours;
+	}
+
+	public int GetTotalHoursPerGroup(int groupId)
+	{
+		var totalGroupHours =
+			Groups?.SingleOrDefault(g => g.Id == groupId)?.Peoples
+				.Select(p => GetTotalHoursPerPeople(p.Id))
+				.Sum()?? 0;
+
+		return totalGroupHours;
 	}
 
 	public int GetTotalPeoplesSchedule(DateTime date)
 		=> Shifts?.Count(s => s.StartDate.IsDateEqual(date)) ?? 0;
-
-	public int GetTotalHoursPerDay(DateTime date)
-		=> Shifts?.Where(s => s.StartDate.IsDateEqual(date))
-				  .Sum(x => (int)x.TotalTime.TotalHours) ?? 0;
-
 
 	public string GetGridTemplateStyle() => GridTemplateStyle;
 
