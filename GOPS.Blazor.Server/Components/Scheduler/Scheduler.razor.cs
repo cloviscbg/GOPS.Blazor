@@ -62,6 +62,7 @@ public partial class Scheduler
 	public string CurrentDateText { get; private set; } = "";
 	public ViewType? CurrentView { get; private set; }
 	public List<DayCell>? DayCells { get; set; }
+	public Dictionary<TimeSpan, int>? Minutes { get; set; }
 	public List<Note>? Notes { get; set; }
 	public List<Group>? Groups { get; set; }
 	public List<People>? Peoples { get; set; }
@@ -219,7 +220,11 @@ public partial class Scheduler
 		switch (CurrentView)
 		{
 			case ViewType.DayView:
-				columnCount = new TimeSpan().CreateMinutesInterval(DefaultMinutesInterval).Count;
+				if (Minutes is null)
+				{
+					Minutes = new TimeSpan().CreateMinutesInterval(DefaultMinutesInterval);
+					ColumnCount = Minutes.Count;
+				}
 				CurrentDateText = CurrentDate.ToString("ddd, dd MMM yy").Capitalize();
 				break;
 			case ViewType.WeekView:

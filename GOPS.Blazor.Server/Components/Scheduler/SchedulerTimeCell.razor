@@ -1,0 +1,70 @@
+﻿@if (Shifts.Count <= 0)
+{
+	<div class="@className py-[6px] hover:bg-hover hover:dark:bg-hover-dark"></div>
+}
+else
+{
+	<div class="@className py-[6px]">
+		<div class="grid w-full h-full gap-y-1"
+			 style="@($"grid-template-columns: repeat({Minutes?.Count}, minmax(1.5rem, 1fr)) 2rem;")">
+			@foreach (var shift in Shifts)
+			{
+				var startKey = Minutes?[shift.StartDate.TimeOfDay] + 1; //Grid starts at 1
+				var endKey = Minutes?[shift.TotalTime];
+
+				<div class="@shiftClass @shift.Color"
+					 style="@($"grid-column: {startKey} / span {endKey}; {(Shifts.Count < 1 ? "grid-row: 1 / span 1" : "")}")">
+					<CustomButton Disabled="@Disabled"
+								  Class="flex flex-col items-start justify-start w-full h-full !px-1 !py-2 text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
+						@shift.StartDate.ToString(@"HH:mm") @shift.EndDate.ToString(@"HH:mm")
+					</CustomButton>
+				</div>
+			}
+		</div>
+	</div>
+}
+
+@namespace GOPS.Blazor.Server.Components.Internal
+
+@code {
+
+	protected string className => new CssBuilder("col-start-2 col-span-full rounded-r-2xl border-r border-divider dark:border-border-dark")
+		.AddClass("hover:cursor-pointer", !Disabled)
+		.AddClass("mud-ripple", Shifts.Count <= 0 && !Disabled)
+		.AddClass("hover:!cursor-default hover:!bg-transparent", Disabled)
+		.AddClass(Class)
+		.Build();
+
+	protected string shiftClass => new CssBuilder("w-full h-full rounded-2xl border-l-8 border-r border-y dark:bg-surface-dark hover:opacity-60")
+		.AddClass("!bg-container dark:!bg-disabled-dark/10 !border-disabled dark:!border-disabled-dark/50 hover:!opacity-100", Disabled)
+		.AddClass("mud-ripple", !DisableRipple)
+		.AddClass(ShiftClass)
+		.Build();
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	[Parameter]
+	public List<Shift> Shifts { get; set; } = [];
+
+	[Parameter]
+	public Dictionary<TimeSpan, int>? Minutes { get; set; }
+
+	[Parameter]
+	public string Class { get; set; } = "";
+
+	[Parameter]
+	public string ShiftClass { get; set; } = "";
+
+	[Parameter]
+	public string GridStyle { get; set; } = "";
+
+	[Parameter]
+	public string? Style { get; set; }
+
+	[Parameter]
+	public bool Disabled { get; set; }
+
+	[Parameter]
+	public bool DisableRipple { get; set; }
+}

@@ -23,43 +23,31 @@
 
 				@if (Scheduler?.CurrentView is ViewType.DayView)
 				{
+					var currentDate = Scheduler!.CurrentDate;
+					var shifts = GetShift(currentDate, people.Id);
+					var isPast = currentDate.IsPastDate();
 
+					<SchedulerTimeCell Shifts="@shifts"
+									   Minutes="@Scheduler?.Minutes"
+									   Disabled="@isPast"
+									   DisableRipple="@isPast" />
 				}
 				else
 				{
 					@foreach (var dayCell in Scheduler?.DayCells ?? new())
 					{
-						var shifts = GetShift(dayCell.Date.Day, people.Id);
+						var shifts = GetShift(dayCell.Date, people.Id);
 						var isPast = dayCell.Date.IsPastDate();
 
-						if (shifts?.Count <= 0)
-						{
-							<SchedulerCell Class="hover:bg-hover hover:dark:bg-hover-dark"
-										   ShiftClass="hidden"
-										   DisableRipple="@isPast"
-										   Disabled="@isPast" />
-						}
-						else
-						{
-							foreach (var shift in shifts ?? [])
-							{
-								if (shift.StartDate.IsDateEqual(dayCell.Date))
-								{
-									<SchedulerCell ShiftClass="@shift.Color"
-												   DisableRipple="true"
-												   Disabled="@isPast">
-										<CustomButton Disabled="@isPast"
-													  Class="mud-ripple flex flex-col items-start justify-start w-full h-full !px-1 !py-2 text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
-											@shift.StartDate.ToString(@"HH:mm") @shift.EndDate.ToString(@"HH:mm")
-										</CustomButton>
-									</SchedulerCell>
-								}
-							}
-						}
+						<SchedulerCell Shifts="@shifts"
+									   CellDate="@dayCell.Date"
+									   Disabled="@isPast"
+									   DisableRipple="@isPast"
+									   Class="flex flex-col gap-y-1 p-[6px]" />
 					}
+					<div class="rounded-r-2xl"></div>
 				}
 
-				<div class="rounded-r-2xl"></div>
 			</div>
 		</div>
 	}
@@ -81,10 +69,11 @@
 	[Parameter]
 	public string? GridTemplateStyle { get; set; }
 
-	List<Shift> GetShift(int day, Guid peopleId)
+	List<Shift> GetShift(DateTime date, Guid peopleId)
 	{
 		var shifts = Scheduler?.Shifts?
-			.Where(x => x.PeopleId == peopleId && x.StartDate.Day == day)
+			.Where(x => x.PeopleId == peopleId && x.StartDate.IsDateEqual(date))
+			.OrderBy(x => x.StartDate)
 			.ToList();
 
 		return shifts ?? [];
