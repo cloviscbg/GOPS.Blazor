@@ -62,7 +62,6 @@ public partial class Scheduler
 	public string CurrentDateText { get; private set; } = "";
 	public ViewType? CurrentView { get; private set; }
 	public List<DayCell>? DayCells { get; set; }
-	public Dictionary<TimeSpan, int>? Minutes { get; set; }
 	public List<Note>? Notes { get; set; }
 	public List<Group>? Groups { get; set; }
 	public List<People>? Peoples { get; set; }
@@ -220,11 +219,7 @@ public partial class Scheduler
 		switch (CurrentView)
 		{
 			case ViewType.DayView:
-				if (Minutes is null)
-				{
-					Minutes = new TimeSpan().CreateMinutesInterval(DefaultMinutesInterval);
-					ColumnCount = Minutes.Count;
-				}
+				ColumnCount = new TimeSpan().CreateMinutesInterval(DefaultMinutesInterval).Count;
 				CurrentDateText = CurrentDate.ToString("ddd, dd MMM yy").Capitalize();
 				break;
 			case ViewType.WeekView:
@@ -308,7 +303,7 @@ public partial class Scheduler
 		var totalGroupHours =
 			Groups?.SingleOrDefault(g => g.Id == groupId)?.Peoples
 				.Select(p => GetTotalHoursPerPeople(p.Id))
-				.Sum()?? 0;
+				.Sum() ?? 0;
 
 		return totalGroupHours;
 	}

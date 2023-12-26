@@ -21,7 +21,7 @@ else
 
 @code {
 
-	protected string className => new CssBuilder("rounded-r-2xl border-r border-divider dark:border-border-dark")
+	protected string className => new CssBuilder("flex flex-col gap-y-1 p-[6px] rounded-r-2xl border-r border-divider dark:border-border-dark")
 		.AddClass("hover:cursor-pointer", !Disabled)
 		.AddClass("mud-ripple", Shifts.Count <= 0 && !Disabled)
 		.AddClass("hover:!cursor-default hover:!bg-transparent", Disabled)
