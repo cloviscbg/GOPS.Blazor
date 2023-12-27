@@ -1,5 +1,4 @@
-﻿namespace GOPS.Blazor.Server.Components;
-
+﻿
 using Microsoft.AspNetCore.Components;
 
 using GOPS.Client.Shared.Enums;
@@ -8,8 +7,8 @@ using GOPS.Client.Shared.Utils;
 using GOPS.Client.Shared.Extensions;
 using GOPS.Client.Shared.Services;
 using GOPS.Blazor.Server.Components.Internal;
-using System.Net.WebSockets;
 
+namespace GOPS.Blazor.Server.Components;
 public partial class Scheduler
 {
 	int columnCount;
@@ -219,7 +218,8 @@ public partial class Scheduler
 		switch (CurrentView)
 		{
 			case ViewType.DayView:
-				ColumnCount = new TimeSpan().CreateMinutesInterval(DefaultMinutesInterval).Count;
+				//Get the total minutes of 24h and then divide for the desired DefaultMinutesInterval to get the total column count of the grid;
+				columnCount = 1440/DefaultMinutesInterval;
 				CurrentDateText = CurrentDate.ToString("ddd, dd MMM yy").Capitalize();
 				break;
 			case ViewType.WeekView:

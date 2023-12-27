@@ -6,14 +6,14 @@ else
 {
 	<div class="@className py-[6px]">
 		<div class="grid w-full h-full gap-y-1"
-			 style="@($"grid-template-columns: repeat({minutes?.Count}, minmax(1.5rem, 1fr)) 2rem;")">
+			 style="@($"grid-template-columns: repeat({ColumnCount}, minmax(1.5rem, 1fr)) 2rem;")">
 			@foreach (var shift in Shifts)
 			{
-				var startKey = minutes?[shift.StartDate.TimeOfDay] + 1; //Grid starts at 1
-				var endKey = minutes?[shift.TotalTime];
+				var startPos = CalculateShiftPosition(shift.StartDate.TimeOfDay);
+				var endPos = CalculateShiftPosition(shift.TotalTime, false);
 
 				<div class="@shiftClass @shift.Color"
-					 style="@($"grid-column: {startKey} / span {endKey}; {(Shifts.Count < 1 ? "grid-row: 1 / span 1" : "")}")">
+					 style="@($"grid-column: {startPos} / span {endPos}; {(Shifts.Count < 1 ? "grid-row: 1 / span 1" : "")}")">
 					<CustomButton Disabled="@Disabled"
 								  Class="flex flex-col items-start justify-start w-full h-full !px-1 !py-2 text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
 						@shift.StartDate.ToString(@"HH:mm") @shift.EndDate.ToString(@"HH:mm")
@@ -27,7 +27,6 @@ else
 @namespace GOPS.Blazor.Server.Components.Internal
 
 @code {
-	Dictionary<TimeSpan, int>? minutes { get; set; } = [];
 
 	protected string className => new CssBuilder("col-start-2 col-span-full rounded-r-2xl border-r border-divider dark:border-border-dark")
 		.AddClass("hover:cursor-pointer", !Disabled)
@@ -49,7 +48,7 @@ else
 	public List<Shift> Shifts { get; set; } = [];
 
 	[Parameter]
-	public int MinutesInterval { get; set; }
+	public int ColumnCount { get; set; }
 
 	[Parameter]
 	public string Class { get; set; } = "";
@@ -63,9 +62,15 @@ else
 	[Parameter]
 	public bool DisableRipple { get; set; }
 
-	protected override void OnInitialized()
+	int CalculateShiftPosition(TimeSpan timeToCalculate, bool isStartPostion = true)
 	{
-		minutes = new TimeSpan().CreateMinutesInterval(MinutesInterval);
-		base.OnInitialized();
+		//To get the position where a shift must take you must get the total minustes of the desired timespan times the total
+		//column count of the grid and divide to total of minutes of 1 day
+		var position = (int)(timeToCalculate.TotalMinutes * ColumnCount / 1440);
+
+		if (isStartPostion)
+			return position + 1; //Grid starts at 1
+
+		return position;
 	}
 }

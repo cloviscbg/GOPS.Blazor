@@ -28,7 +28,7 @@
 					var isPast = currentDate.IsPastDate();
 
 					<SchedulerTimeCell Shifts="@shifts"
-									   MinutesInterval="@Scheduler!.DefaultMinutesInterval"
+									   ColumnCount="@Scheduler!.ColumnCount"
 									   Disabled="@isPast"
 									   DisableRipple="@isPast" />
 				}
@@ -40,9 +40,8 @@
 						var isPast = dayCell.Date.IsPastDate();
 
 						<SchedulerDayCell Shifts="@shifts"
-									   CellDate="@dayCell.Date"
-									   Disabled="@isPast"
-									   DisableRipple="@isPast" />
+										  Disabled="@isPast"
+										  DisableRipple="@isPast" />
 					}
 					<div class="rounded-r-2xl"></div>
 				}

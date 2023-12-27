@@ -1719,12 +1719,12 @@ body {
   color: rgb(67 56 202 / var(--tw-text-opacity));
 }
 
-.hover\:opacity-60:hover {
-  opacity: 0.6;
-}
-
 .hover\:\!opacity-100:hover {
   opacity: 1 !important;
+}
+
+.hover\:opacity-60:hover {
+  opacity: 0.6;
 }
 
 .focus\:relative:focus {
@@ -1753,14 +1753,6 @@ body {
 .group:hover .group-hover\:text-primary {
   --tw-text-opacity: 1;
   color: rgb(67 56 202 / var(--tw-text-opacity));
-}
-
-.group:hover .group-hover\:\!opacity-100 {
-  opacity: 1 !important;
-}
-
-.group:hover .group-hover\:opacity-60 {
-  opacity: 0.6;
 }
 
 @media not all and (min-width: 640px) {
