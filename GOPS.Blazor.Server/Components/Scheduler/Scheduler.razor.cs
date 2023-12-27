@@ -23,8 +23,8 @@ public partial class Scheduler
 
 	string GridTemplateStyle => new CssBuilder()
 		.AddClass($"grid-template-columns: auto repeat({columnCount}, minmax(1.5rem, 1fr)) 2rem;", CurrentView is ViewType.DayView)
-		.AddClass($"grid-template-columns: auto repeat({columnCount}, minmax(9rem, 1fr)) 2rem;", CurrentView is ViewType.WeekView)
-		.AddClass($"grid-template-columns: auto repeat({columnCount},minmax(4rem, 1fr)) 2rem;", CurrentView is ViewType.MonthView)
+		.AddClass($"grid-template-columns: auto repeat({columnCount}, minmax(9rem, 1fr)) 1rem;", CurrentView is ViewType.WeekView)
+		.AddClass($"grid-template-columns: auto repeat({columnCount},minmax(4rem, 1fr)) 1rem;", CurrentView is ViewType.MonthView)
 		.Build();
 
 	string FirstColumnWitdh => new CssBuilder("z-50 rounded-r-2xl bg-surface dark:bg-surface-dark")

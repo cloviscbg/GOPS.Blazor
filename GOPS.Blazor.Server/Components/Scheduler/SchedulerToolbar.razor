@@ -330,6 +330,7 @@
 							  Label="Notes"
 							  Class="mb-2 justify-between" />
 				<CustomSwitch @bind-Checked="@Scheduler!.ShowPeopleScheduled"
+							  Disabled="@(Scheduler!.CurrentView is not ViewType.WeekView ? false : true)"
 							  Label="People Schedule"
 							  Class="mb-2 justify-between" />
 				<CustomSwitch @bind-Checked="@showShiftConflicts"
