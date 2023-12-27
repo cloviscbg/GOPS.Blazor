@@ -2,7 +2,8 @@
 	<SchedulerToolbar OnViewChange="SetView"
 					  OnOffsetDate="OffsetDate" />
 
-	<div class="schedulerScrollbar flex flex-col overflow-auto h-[calc(100vh-19rem)] md:h-[calc(100vh-17.5rem)] rounded-2xl">
+	<div id="scheduler_section"
+		 class="schedulerScrollbar flex flex-col overflow-auto h-[calc(100vh-19rem)] md:h-[calc(100vh-17.5rem)] rounded-2xl">
 		<div class="flex z-60 min-w-fit pb-1 rounded-b-2xl bg-surface dark:bg-surface-dark"
 			 style="@FixedStyle">
 			<div class="grid w-full gap-y-1"
@@ -41,6 +42,22 @@
 								 GridTemplateStyle="@GridTemplateStyle" />
 			</div>
 		}
+
+		<MudScrollToTop TopOffset="100"
+						Selector="#scheduler_section"
+						VisibleCssClass="visible absolute p-4 rounded-full border border-border text-foreground-accentdark dark:text-foreground dark:border-border-dark bg-primary dark:bg-foreground-dark"
+						HiddenCssClass="invisible">
+			<svg width="24px"
+				 height="24px"
+				 viewBox="0 0 24 24"
+				 fill="none"
+				 stroke="currentColor"
+				 stroke-width="1.5"
+				 stroke-linecap="round"
+				 stroke-linejoin="round">
+				<path d="M5 16L12 9L19 16" />
+			</svg>
+		</MudScrollToTop>
 
 	</div>
 

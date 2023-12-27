@@ -548,6 +548,14 @@ video {
   pointer-events: none;
 }
 
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
 .static {
   position: static;
 }
@@ -1220,6 +1228,11 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-primary {
+  --tw-bg-opacity: 1;
+  background-color: rgb(67 56 202 / var(--tw-bg-opacity));
 }
 
 .\!p-2 {
@@ -1989,6 +2002,11 @@ body {
   background-color: rgb(31 30 47 / var(--tw-bg-opacity));
 }
 
+:is(:where(.dark) .dark\:bg-foreground-dark) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(174 178 196 / var(--tw-bg-opacity));
+}
+
 :is(:where(.dark) .dark\:\!text-disabled-dark) {
   --tw-text-opacity: 1 !important;
   color: rgb(57 60 72 / var(--tw-text-opacity)) !important;
@@ -2032,6 +2050,21 @@ body {
 :is(:where(.dark) .dark\:text-primary-400) {
   --tw-text-opacity: 1;
   color: rgb(129 140 248 / var(--tw-text-opacity));
+}
+
+:is(:where(.dark) .dark\:text-foreground) {
+  --tw-text-opacity: 1;
+  color: rgb(92 92 101 / var(--tw-text-opacity));
+}
+
+:is(:where(.dark) .dark\:text-container) {
+  --tw-text-opacity: 1;
+  color: rgb(244 244 245 / var(--tw-text-opacity));
+}
+
+:is(:where(.dark) .dark\:text-container-dark) {
+  --tw-text-opacity: 1;
+  color: rgb(17 17 27 / var(--tw-text-opacity));
 }
 
 :is(:where(.dark) .dark\:ring-0) {
