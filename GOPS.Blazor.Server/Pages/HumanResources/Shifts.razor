@@ -7,9 +7,11 @@
 			 @ref="MyMenu"
 			 id="myMenu">
 		<ActivatorContent>
-			<button class="mud-ripple min-w-[4.5rem] flex grow-0 shrink-0 py-[0.6rem] !rounded-xl shadow-lg text-base font-black text-foreground-accent dark:text-primary-400 bg-surface dark:bg-surface-dark">
-				@currentStation
-			</button>
+			<CustomTooltip Text="Station">
+				<button class="mud-ripple min-w-[4.5rem] flex grow-0 shrink-0 py-[0.6rem] !rounded-xl shadow-lg text-base font-black text-foreground-accent dark:text-primary-400 bg-surface dark:bg-surface-dark">
+					@currentStation
+				</button>
+			</CustomTooltip>
 		</ActivatorContent>
 		<ChildContent>
 			@foreach (var station in stations.Order())

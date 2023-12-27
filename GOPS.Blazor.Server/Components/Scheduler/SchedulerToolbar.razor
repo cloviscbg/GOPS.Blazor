@@ -266,37 +266,39 @@
 <div class="md:hidden flex flex-row items-center justify-between md:justify-normal gap-x-2 md:w-full p-2 mb-1 rounded-2xl bg-container dark:bg-container-dark">
 	<Spacer />
 	<!--ExpandGroups-->
-	<ToggleButton @bind-Toggle="@Scheduler!.GroupsExpanded"
-				  Rounded="true"
-				  Elevation="true"
-				  Class="text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
-		<ToggleOnContent>
-			<svg class="h-5 w-5"
-				 viewBox="0 0 25 25"
-				 fill="none"
-				 stroke="currentColor"
-				 stroke-width="1.5"
-				 stroke-linecap="round"
-				 stroke-linejoin="round">
-				<path d="M8.28313 3.76562H16.7178C19.6659 3.76562 21.5 5.84584 21.5 8.792V16.7392C21.5 19.6844 19.6659 21.7656 16.7169 21.7656H8.28313C5.33503 21.7656 3.5 19.6844 3.5 16.7392V8.792C3.5 5.84584 5.34378 3.76562 8.28313 3.76562Z" />
-				<path d="M15.2444 17.2411L12.4987 14.5664L9.75391 17.2411" />
-				<path d="M9.75391 8.28906L12.4996 10.9647L15.2444 8.28906" />
-			</svg>
-		</ToggleOnContent>
-		<ToggleOffContent>
-			<svg class="h-5 w-5"
-				 viewBox="0 0 25 25"
-				 fill="none"
-				 stroke="currentColor"
-				 stroke-width="1.5"
-				 stroke-linecap="round"
-				 stroke-linejoin="round">
-				<path d="M8.28313 3.76562H16.7178C19.6659 3.76562 21.5 5.84584 21.5 8.792V16.7392C21.5 19.6844 19.6659 21.7656 16.7169 21.7656H8.28313C5.33503 21.7656 3.5 19.6844 3.5 16.7392V8.792C3.5 5.84584 5.34378 3.76562 8.28313 3.76562Z" />
-				<path d="M15.2444 14.8945L12.4987 17.5692L9.75391 14.8945" />
-				<path d="M9.75391 10.6366L12.4996 7.96094L15.2444 10.6366" />
-			</svg>
-		</ToggleOffContent>
-	</ToggleButton>
+	<CustomTooltip Text="@(Scheduler!.GroupsExpanded ? "Collapse groups" : "Expand groups")">
+		<ToggleButton @bind-Toggle="@Scheduler!.GroupsExpanded"
+					  Rounded="true"
+					  Elevation="true"
+					  Class="text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
+			<ToggleOnContent>
+				<svg class="h-5 w-5"
+					 viewBox="0 0 25 25"
+					 fill="none"
+					 stroke="currentColor"
+					 stroke-width="1.5"
+					 stroke-linecap="round"
+					 stroke-linejoin="round">
+					<path d="M8.28313 3.76562H16.7178C19.6659 3.76562 21.5 5.84584 21.5 8.792V16.7392C21.5 19.6844 19.6659 21.7656 16.7169 21.7656H8.28313C5.33503 21.7656 3.5 19.6844 3.5 16.7392V8.792C3.5 5.84584 5.34378 3.76562 8.28313 3.76562Z" />
+					<path d="M15.2444 17.2411L12.4987 14.5664L9.75391 17.2411" />
+					<path d="M9.75391 8.28906L12.4996 10.9647L15.2444 8.28906" />
+				</svg>
+			</ToggleOnContent>
+			<ToggleOffContent>
+				<svg class="h-5 w-5"
+					 viewBox="0 0 25 25"
+					 fill="none"
+					 stroke="currentColor"
+					 stroke-width="1.5"
+					 stroke-linecap="round"
+					 stroke-linejoin="round">
+					<path d="M8.28313 3.76562H16.7178C19.6659 3.76562 21.5 5.84584 21.5 8.792V16.7392C21.5 19.6844 19.6659 21.7656 16.7169 21.7656H8.28313C5.33503 21.7656 3.5 19.6844 3.5 16.7392V8.792C3.5 5.84584 5.34378 3.76562 8.28313 3.76562Z" />
+					<path d="M15.2444 14.8945L12.4987 17.5692L9.75391 14.8945" />
+					<path d="M9.75391 10.6366L12.4996 7.96094L15.2444 10.6366" />
+				</svg>
+			</ToggleOffContent>
+		</ToggleButton>
+	</CustomTooltip>
 
 	<!--ViewOptions-->
 	<MudMenu DisableElevation="true"
@@ -305,18 +307,20 @@
 			 PopoverClass="w-56 !mr-3 !shadow-lg rounded-2xl ring-1 ring-black dark:ring-border-dark ring-opacity-5 dark:bg-background-dark"
 			 ListClass="!p-2">
 		<ActivatorContent>
-			<MudElement class="mud-ripple px-4 py-3 rounded-2xl shadow-lg text-sm font-semibold bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
-				<svg class="h-5 w-5 text-foreground-accent dark:text-foreground-dark"
-					 viewBox="0 0 24 25"
-					 fill="none"
-					 stroke="currentColor"
-					 stroke-width="1.5"
-					 stroke-linecap="round"
-					 stroke-linejoin="round">
-					<path d="M4 13.7064C7.2 6.77236 16.8 6.77236 20 13.7064" />
-					<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0034 17.4366C10.7314 17.4366 9.69141 16.4016 9.69141 15.1236C9.69141 13.8466 10.7314 12.8105 12.0034 12.8105C13.2764 12.8105 14.3164 13.8466 14.3164 15.1236C14.3164 16.4016 13.2764 17.4366 12.0034 17.4366Z" />
-				</svg>
-			</MudElement>
+			<CustomTooltip Text="View options">
+				<button class="mud-ripple px-4 py-3 rounded-2xl shadow-lg text-sm font-semibold bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
+					<svg class="h-5 w-5 text-foreground-accent dark:text-foreground-dark"
+						 viewBox="0 0 24 25"
+						 fill="none"
+						 stroke="currentColor"
+						 stroke-width="1.5"
+						 stroke-linecap="round"
+						 stroke-linejoin="round">
+						<path d="M4 13.7064C7.2 6.77236 16.8 6.77236 20 13.7064" />
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0034 17.4366C10.7314 17.4366 9.69141 16.4016 9.69141 15.1236C9.69141 13.8466 10.7314 12.8105 12.0034 12.8105C13.2764 12.8105 14.3164 13.8466 14.3164 15.1236C14.3164 16.4016 13.2764 17.4366 12.0034 17.4366Z" />
+					</svg>
+				</button>
+			</CustomTooltip>
 		</ActivatorContent>
 		<ChildContent>
 			<div class="p-1 flex flex-col ">
