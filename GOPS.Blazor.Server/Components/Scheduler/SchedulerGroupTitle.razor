@@ -34,21 +34,23 @@
 				 PopoverClass="w-56 !mt-3 !shadow-lg rounded-2xl ring-1 ring-black dark:ring-border-dark ring-opacity-5 dark:bg-background-dark"
 				 ListClass="!p-2">
 			<ActivatorContent>
-				<MudElement class="mud-ripple group p-2 rounded-full shadow-lg text-sm font-semibold bg-surface dark:bg-surface-dark">
-					<svg class="h-6 w-6 group-hover:text-primary group-hover:dark:text-primary-400 text-foreground text-foreground-dark"
-						 viewBox="0 0 25 25"
-						 fill="none"
-						 fill-rule="evenodd"
-						 clip-rule="evenodd"
-						 stroke="currentColor"
-						 stroke-width="1.5"
-						 stroke-linecap="round"
-						 stroke-linejoin="round">
-						<path d="M6.5 12.7656C6.5 13.3176 6.052 13.7656 5.5 13.7656C4.948 13.7656 4.5 13.3176 4.5 12.7656C4.5 12.2136 4.948 11.7656 5.5 11.7656C6.052 11.7656 6.5 12.2136 6.5 12.7656Z" />
-						<path d="M13.5 12.7656C13.5 13.3176 13.052 13.7656 12.5 13.7656C11.948 13.7656 11.5 13.3176 11.5 12.7656C11.5 12.2136 11.948 11.7656 12.5 11.7656C13.052 11.7656 13.5 12.2136 13.5 12.7656Z" />
-						<path d="M20.5 12.7656C20.5 13.3176 20.052 13.7656 19.5 13.7656C18.948 13.7656 18.5 13.3176 18.5 12.7656C18.5 12.2136 18.948 11.7656 19.5 11.7656C20.052 11.7656 20.5 12.2136 20.5 12.7656Z" />
-					</svg>
-				</MudElement>
+				<CustomTooltip Text="More options">
+					<button class="mud-ripple group p-2 rounded-full shadow-lg text-sm font-semibold bg-surface dark:bg-surface-dark">
+						<svg class="h-6 w-6 group-hover:text-primary group-hover:dark:text-primary-400 text-foreground text-foreground-dark"
+							 viewBox="0 0 25 25"
+							 fill="none"
+							 fill-rule="evenodd"
+							 clip-rule="evenodd"
+							 stroke="currentColor"
+							 stroke-width="1.5"
+							 stroke-linecap="round"
+							 stroke-linejoin="round">
+							<path d="M6.5 12.7656C6.5 13.3176 6.052 13.7656 5.5 13.7656C4.948 13.7656 4.5 13.3176 4.5 12.7656C4.5 12.2136 4.948 11.7656 5.5 11.7656C6.052 11.7656 6.5 12.2136 6.5 12.7656Z" />
+							<path d="M13.5 12.7656C13.5 13.3176 13.052 13.7656 12.5 13.7656C11.948 13.7656 11.5 13.3176 11.5 12.7656C11.5 12.2136 11.948 11.7656 12.5 11.7656C13.052 11.7656 13.5 12.2136 13.5 12.7656Z" />
+							<path d="M20.5 12.7656C20.5 13.3176 20.052 13.7656 19.5 13.7656C18.948 13.7656 18.5 13.3176 18.5 12.7656C18.5 12.2136 18.948 11.7656 19.5 11.7656C20.052 11.7656 20.5 12.2136 20.5 12.7656Z" />
+						</svg>
+					</button>
+				</CustomTooltip>
 			</ActivatorContent>
 			<ChildContent>
 				<MudMenuItem Class="md:hidden px-4 py-3 rounded-2xl hover:bg-hover hover:dark:bg-container-dark">

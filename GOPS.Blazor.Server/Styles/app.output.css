@@ -576,6 +576,10 @@ video {
   right: 0px;
 }
 
+.z-50 {
+  z-index: 50;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -1868,6 +1872,10 @@ body {
 
   .md\:w-full {
     width: 100%;
+  }
+
+  .md\:w-\[10rem\] {
+    width: 10rem;
   }
 
   .md\:min-w-\[7rem\] {

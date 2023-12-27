@@ -27,11 +27,6 @@ public partial class Scheduler
 		.AddClass($"grid-template-columns: auto repeat({columnCount},minmax(4rem, 1fr)) 1rem;", CurrentView is ViewType.MonthView)
 		.Build();
 
-	string FirstColumnWitdh => new CssBuilder("z-50 rounded-r-2xl bg-surface dark:bg-surface-dark")
-		.AddClass("w-[6rem] md:w-[12rem] ", CurrentView is ViewType.WeekView)
-		.AddClass("w-[5rem] md:w-[8rem] ", CurrentView is ViewType.DayView or ViewType.MonthView)
-		.Build();
-
 	string FixedStyle => new CssBuilder()
 		.AddClass("position: sticky!important;top: 0;", FixedHeader)
 		.AddClass("position: sticky!important;left: 0;", FixedMember)
@@ -346,10 +341,7 @@ public partial class Scheduler
 		return count;
 	}
 
-
-
 	public string GetGridTemplateStyle() => GridTemplateStyle;
-	public string GetFirstColumnWitdh() => FirstColumnWitdh;
 
 	public void StateChange() => StateHasChanged();
 }

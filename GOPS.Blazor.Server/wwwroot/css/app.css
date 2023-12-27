@@ -576,6 +576,10 @@ video {
   right: 0px;
 }
 
+.z-50 {
+  z-index: 50;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -793,10 +797,6 @@ video {
   width: 5rem;
 }
 
-.w-\[6rem\] {
-  width: 6rem;
-}
-
 .w-\[95\%\] {
   width: 95%;
 }
@@ -816,10 +816,6 @@ video {
 
 .min-w-\[4\.5rem\] {
   min-width: 4.5rem;
-}
-
-.min-w-\[5rem\] {
-  min-width: 5rem;
 }
 
 .min-w-fit {
@@ -1024,6 +1020,10 @@ video {
   border-bottom-right-radius: 0.375rem;
 }
 
+.border {
+  border-width: 1px;
+}
+
 .border-2 {
   border-width: 2px;
 }
@@ -1135,6 +1135,11 @@ video {
 .\!bg-container {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(244 244 245 / var(--tw-bg-opacity)) !important;
+}
+
+.\!bg-foreground {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(92 92 101 / var(--tw-bg-opacity)) !important;
 }
 
 .\!bg-hover {
@@ -1429,6 +1434,11 @@ video {
 
 .\!text-disabled {
   color: rgba(0, 0, 0, 0.176471) !important;
+}
+
+.\!text-foreground-accentdark {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 
 .\!text-neutral-500 {
@@ -1841,16 +1851,12 @@ body {
     width: 100% !important;
   }
 
-  .md\:w-\[12rem\] {
-    width: 12rem;
+  .md\:w-\[10rem\] {
+    width: 10rem;
   }
 
   .md\:w-\[36rem\] {
     width: 36rem;
-  }
-
-  .md\:w-\[8rem\] {
-    width: 8rem;
   }
 
   .md\:w-fit {
@@ -1949,6 +1955,11 @@ body {
   background-color: rgb(57 60 72 / 0.1) !important;
 }
 
+:is(:where(.dark) .dark\:\!bg-foreground-dark) {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(174 178 196 / var(--tw-bg-opacity)) !important;
+}
+
 :is(:where(.dark) .dark\:\!bg-hover-dark) {
   background-color: rgba(0, 0, 0, 0.358824) !important;
 }
@@ -1981,6 +1992,11 @@ body {
 :is(:where(.dark) .dark\:\!text-disabled-dark) {
   --tw-text-opacity: 1 !important;
   color: rgb(57 60 72 / var(--tw-text-opacity)) !important;
+}
+
+:is(:where(.dark) .dark\:\!text-foreground) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(92 92 101 / var(--tw-text-opacity)) !important;
 }
 
 :is(:where(.dark) .dark\:text-default-300) {

@@ -6,7 +6,7 @@
 		<div class="flex flex-row min-h-24 shadow-lg ring-1 ring-inset dark:ring-0 ring-border rounded-2xl bg-surface dark:bg-container-dark">
 			<div class="grid w-full"
 				 style="@GridTemplateStyle">
-				<div class="@FirstColumnWidth"
+				<div class="z-50 w-[5rem] md:w-[10rem] rounded-r-2xl bg-surface dark:bg-surface-dark"
 					 style="@FixedStyle">
 					<div class="flex rounded-2xl w-full h-full items-center py-4 pl-4 md:!pl-3 pr-3 border-r border-border dark:border-border-dark bg-surface dark:bg-container-dark">
 						<User Title="@($"{people.FirstName} {people.LastName}")"
@@ -66,9 +66,6 @@
 
 	[Parameter]
 	public string? GridTemplateStyle { get; set; }
-
-	[Parameter]
-	public string? FirstColumnWidth { get; set; }
 
 	List<Shift> GetShift(DateTime date, Guid peopleId)
 	{

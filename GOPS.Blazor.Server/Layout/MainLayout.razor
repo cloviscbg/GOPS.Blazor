@@ -22,19 +22,23 @@
 				   ToolBarClass="px-2"
 				   Color="@Color.Transparent"
 				   Elevation="0">
-			<MudIconButton OnClick="@DrawerToggle"
-						   Class=" text-foreground dark:text-foreground-dark">
-				<svg width="24px"
-					 height="24px"
-					 viewBox="0 0 24 24"
-					 fill="none"
-					 stroke="currentColor"
-					 stroke-width="1.5"
-					 stroke-linecap="round"
-					 stroke-linejoin="round">
-					<path d="M17 12L7 12M7 12L11 16M7 12L11 8" />
-				</svg>
-			</MudIconButton>
+			<CustomTooltip Text="@(_drawerOpen ? "Close drawer" : "Open drawer")"
+						   Placement="Placement.Right">
+				<MudIconButton OnClick="@DrawerToggle"
+							   Class=" text-foreground dark:text-foreground-dark">
+					<svg width="24px"
+						 height="24px"
+						 viewBox="0 0 24 24"
+						 fill="none"
+						 stroke="currentColor"
+						 stroke-width="1.5"
+						 stroke-linecap="round"
+						 stroke-linejoin="round">
+						<path d="M17 12L7 12M7 12L11 16M7 12L11 8" />
+					</svg>
+				</MudIconButton>
+			</CustomTooltip>
+
 			<MudSpacer />
 
 			<ToggleButton Class="mr-2">
@@ -63,7 +67,7 @@
 
 @code {
 	bool _drawerOpen;
-	
+
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
