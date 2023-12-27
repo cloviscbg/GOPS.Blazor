@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 using GOPS.Client.Shared.Enums;
 using GOPS.Client.Shared.Models;
@@ -23,9 +22,14 @@ public partial class Scheduler
 	SchedulerGroup<Group>? schedulerGroup;
 
 	string GridTemplateStyle => new CssBuilder()
-		.AddClass($"grid-template-columns: 9rem repeat({columnCount}, minmax(1.5rem, 1fr)) 2rem;", CurrentView is ViewType.DayView)
-		.AddClass($"grid-template-columns: minmax(7rem, 12rem) repeat({columnCount}, minmax(9rem, 1fr)) 2rem;", CurrentView is ViewType.WeekView)
-		.AddClass($"grid-template-columns: 8rem repeat({columnCount},minmax(4rem, 1fr)) 2rem;", CurrentView is ViewType.MonthView)
+		.AddClass($"grid-template-columns: auto repeat({columnCount}, minmax(1.5rem, 1fr)) 2rem;", CurrentView is ViewType.DayView)
+		.AddClass($"grid-template-columns: auto repeat({columnCount}, minmax(9rem, 1fr)) 2rem;", CurrentView is ViewType.WeekView)
+		.AddClass($"grid-template-columns: auto repeat({columnCount},minmax(4rem, 1fr)) 2rem;", CurrentView is ViewType.MonthView)
+		.Build();
+
+	string FirstColumnWitdh => new CssBuilder("z-50 rounded-r-2xl bg-surface dark:bg-surface-dark")
+		.AddClass("w-[6rem] md:w-[12rem] ", CurrentView is ViewType.WeekView)
+		.AddClass("w-[5rem] md:w-[8rem] ", CurrentView is ViewType.DayView or ViewType.MonthView)
 		.Build();
 
 	string FixedStyle => new CssBuilder()
@@ -312,8 +316,7 @@ public partial class Scheduler
 		=> Shifts?.Count(s => s.StartDate.IsDateEqual(date)) ?? 0;
 
 	public string GetGridTemplateStyle() => GridTemplateStyle;
+	public string GetFirstColumnWitdh() => FirstColumnWitdh;
 
 	public void StateChange() => StateHasChanged();
-
-
 }

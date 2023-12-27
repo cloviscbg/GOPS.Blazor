@@ -2,8 +2,8 @@
 {
 	case ViewType.DayView:
 		{
-			<div class="select-none rounded-l-2xl bg-container dark:bg-container-dark">
-				<div class="flex h-[4rem] py-3 pl-4 w-full items-end rounded-r-md border-r border-border dark:border-border-dark">
+			<div class="min-w-[5rem] md:w-[8rem] md select-none rounded-l-2xl bg-container dark:bg-container-dark">
+				<div class="flex h-[4rem] py-3 pl-4 pr-1 w-full items-end rounded-r-md border-r border-border dark:border-border-dark">
 					<span class="text-xs font-light select-none text-foreground dark:text-foreground-dark ">
 						Day: 0 Hrs
 					</span>
@@ -36,7 +36,7 @@
 
 	case ViewType.WeekView:
 		{
-			<div class="select-none rounded-l-2xl bg-container dark:bg-container-dark">
+			<div class="w-[6rem] md:w-[12rem] select-none rounded-l-2xl bg-container dark:bg-container-dark">
 				<div class="flex py-3 pl-4 w-full h-full items-end rounded-r-2xl border-r border-border dark:border-border-dark">
 					<span class="text-xs font-light select-none text-foreground dark:text-foreground-dark ">
 						Week: @Scheduler?.GetTotalHours() Hrs
@@ -80,7 +80,7 @@
 		}
 	case ViewType.MonthView:
 		{
-			<div class="select-none rounded-l-2xl bg-container dark:bg-container-dark">
+			<div class="w-[5rem] md:w-[8rem] select-none rounded-l-2xl bg-container dark:bg-container-dark">
 				<div class="flex py-3 pl-4 w-full h-full items-end rounded-r-2xl border-r border-border dark:border-border-dark">
 					<span class="text-xs font-light select-none text-foreground dark:text-foreground-dark ">
 						Month: @Scheduler?.GetTotalHours() Hrs
