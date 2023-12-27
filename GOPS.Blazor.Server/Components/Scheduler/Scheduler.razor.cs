@@ -223,7 +223,7 @@ public partial class Scheduler
 		{
 			case ViewType.DayView:
 				//Get the total minutes of 24h and then divide for the desired DefaultMinutesInterval to get the total column count of the grid;
-				columnCount = 1440/DefaultMinutesInterval;
+				columnCount = 1440 / DefaultMinutesInterval;
 				CurrentDateText = CurrentDate.ToString("ddd, dd MMM yy").Capitalize();
 				break;
 			case ViewType.WeekView:
@@ -259,6 +259,19 @@ public partial class Scheduler
 
 		if (CurrentView is ViewType.DayView)
 		{
+			if (peopleId is not null)
+			{
+				foundShifts = Shifts?
+					.Where(x => x.PeopleId == peopleId && x.StartDate.IsDateEqual(CurrentDate))
+					.ToList() ?? [];
+
+				return foundShifts;
+			}
+
+			foundShifts = Shifts?
+				.Where(x => x.StartDate.IsDateEqual(CurrentDate))
+				.ToList() ?? [];
+
 			return foundShifts;
 		}
 
@@ -312,8 +325,28 @@ public partial class Scheduler
 		return totalGroupHours;
 	}
 
-	public int GetTotalPeoplesSchedule(DateTime date)
-		=> Shifts?.Count(s => s.StartDate.IsDateEqual(date)) ?? 0;
+	public int GetTotalPeoplesSchedule(DateTime? date = null, int hour = 0)
+	{
+		int count = 0;
+
+		if (CurrentView is ViewType.DayView)
+		{
+			if (hour < 0 || hour > 23)
+				return count;
+
+			var dateToCheck = CurrentDate + TimeSpan.FromHours(hour);
+
+			count = GetShiftsByDate(CurrentDate)
+				.Count(s => dateToCheck.IsBetween(s.StartDate, s.EndDate.AddHours(-1)));
+
+			return count;
+		}
+
+		count = Shifts?.Count(s => s.StartDate.IsDateEqual(date!.Value)) ?? 0;
+		return count;
+	}
+
+
 
 	public string GetGridTemplateStyle() => GridTemplateStyle;
 	public string GetFirstColumnWitdh() => FirstColumnWitdh;

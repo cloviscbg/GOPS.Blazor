@@ -10,12 +10,12 @@
 
 	@if (Scheduler!.CurrentView is ViewType.DayView)
 	{
-		@foreach (var _ in Enumerable.Range(0, Scheduler!.ColumnCount / 2))
+		@foreach (var index in Enumerable.Range(0, Scheduler!.ColumnCount / 2))
 		{
 			<div class="col-span-2 bg-container dark:bg-container-dark">
 				<div class="flex flex-row w-full h-full items-center justify-center ">
 					<span class="w-full text-center text-xs font-light select-none text-foreground dark:text-foreground-dark ">
-						0
+						@Scheduler?.GetTotalPeoplesSchedule(hour: index)
 					</span>
 					<Divider Vertical="true"
 							 Class="h-[1rem] !border-l-0 border-r rounded-r-2xl !border-border dark:!border-border-dark" />
