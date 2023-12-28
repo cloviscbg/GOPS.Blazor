@@ -11,7 +11,12 @@
 			<img class="h-[4rem] w-[4rem] saturate-[4]"
 				 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
 				 alt="Your Company">
-			GOPS
+				<span>
+					GOPS
+				</span>
+			<div class="select-none px-3 py-1 rounded-2xl text-xs font-black text-foreground-accentdark bg-primary saturate-[4]">
+				v1.0
+			</div>
 		</MudDrawerHeader>
 
 		<NavMenu />
@@ -79,4 +84,6 @@
 	{
 		await JSRuntime.InvokeVoidAsync("theme.toggleDarkMode");
 	}
+
+	string GetVersion() => "v1.0";
 }
