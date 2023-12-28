@@ -164,14 +164,14 @@ module.exports = {
 	},
 
 	safelist: [
-		'bg-shift-1', 'border-shift-1-dark',
-		'bg-shift-2', 'border-shift-2-dark',
-		'bg-shift-3', 'border-shift-3-dark',
-		'bg-shift-4', 'border-shift-4-dark',
-		'bg-shift-5', 'border-shift-5-dark',
-		'bg-shift-6', 'border-shift-6-dark',
-		'bg-shift-7', 'border-shift-7-dark',
-		'bg-shift-8', 'border-shift-8-dark'
+		'bg-shift-1', 'border-shift-1-dark', 'border-l-shift-1-dark', 'border-r-shift-1', 'border-y-shift-1', 'dark:border-r-shift-1-dark/45', 'dark:border-y-shift-1-dark/45', 'dark:!border-shift-1-dark',
+		'bg-shift-2', 'border-shift-2-dark', 'border-l-shift-2-dark', 'border-r-shift-2', 'border-y-shift-2', 'dark:border-r-shift-2-dark/45', 'dark:border-y-shift-2-dark/45', 'dark:!border-shift-2-dark',
+		'bg-shift-3', 'border-shift-3-dark', 'border-l-shift-3-dark', 'border-r-shift-3', 'border-y-shift-3', 'dark:border-r-shift-3-dark/45', 'dark:border-y-shift-3-dark/45', 'dark:!border-shift-3-dark',
+		'bg-shift-4', 'border-shift-4-dark', 'border-l-shift-4-dark', 'border-r-shift-4', 'border-y-shift-4', 'dark:border-r-shift-4-dark/45', 'dark:border-y-shift-4-dark/45', 'dark:!border-shift-4-dark',
+		'bg-shift-5', 'border-shift-5-dark', 'border-l-shift-5-dark', 'border-r-shift-5', 'border-y-shift-5', 'dark:border-r-shift-5-dark/45', 'dark:border-y-shift-5-dark/45', 'dark:!border-shift-5-dark',
+		'bg-shift-6', 'border-shift-6-dark', 'border-l-shift-6-dark', 'border-r-shift-6', 'border-y-shift-6', 'dark:border-r-shift-6-dark/45', 'dark:border-y-shift-6-dark/45', 'dark:!border-shift-6-dark',
+		'bg-shift-7', 'border-shift-7-dark', 'border-l-shift-7-dark', 'border-r-shift-7', 'border-y-shift-7', 'dark:border-r-shift-7-dark/45', 'dark:border-y-shift-7-dark/45', 'dark:!border-shift-7-dark',
+		'bg-shift-8', 'border-shift-8-dark', 'border-l-shift-8-dark', 'border-r-shift-8', 'border-y-shift-8', 'dark:border-r-shift-8-dark/45', 'dark:border-y-shift-8-dark/45', 'dark:!border-shift-8-dark'
 	],
 
 	plugins: [],

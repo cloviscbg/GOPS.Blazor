@@ -35,7 +35,7 @@ else
 		.AddClass(Class)
 		.Build();
 
-	protected string shiftClass => new CssBuilder("w-full h-full rounded-2xl border-l-8 border-r border-y dark:bg-surface-dark hover:opacity-60")
+	protected string shiftClass => new CssBuilder("w-full h-full rounded-2xl border-l-[4px] border-r border-y dark:bg-surface-dark hover:opacity-60")
 		.AddClass("!bg-container dark:!bg-disabled-dark/10 !border-disabled dark:!border-disabled-dark/50 hover:!opacity-100", Disabled)
 		.AddClass("mud-ripple", !DisableRipple)
 		.AddClass(ShiftClass)
