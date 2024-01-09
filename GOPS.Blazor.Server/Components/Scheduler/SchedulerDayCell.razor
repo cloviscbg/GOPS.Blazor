@@ -1,14 +1,22 @@
 ﻿@if (Shifts.Count <= 0)
 {
-	<div class="@className hover:bg-hover hover:dark:bg-hover-dark"></div>
+	<div class="@className hover:bg-hover hover:dark:bg-hover-dark">
+		<CustomButton Disabled="@Disabled"
+					  OnClick="@Click"
+					  OnDoubleClick="@(() => DoubleClick(null))"
+					  Class="flex w-full h-full" />
+	</div>
 }
 else
 {
 	<div class="@className">
 		@foreach (var shift in Shifts)
 		{
-			<div class="@shiftClass @shift.Color">
+			<div @key="@shift.Id"
+				 class="@shiftClass @shift.Color">
 				<CustomButton Disabled="@Disabled"
+							  OnClick="@Click"
+							  OnDoubleClick="@(() => DoubleClick(shift))"
 							  Class="flex flex-col items-start justify-start w-full h-full !px-1 !py-2 text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
 					@shift.StartDate.ToString(@"HH:mm") @shift.EndDate.ToString(@"HH:mm")
 				</CustomButton>
@@ -28,8 +36,8 @@ else
 		.AddClass(Class)
 		.Build();
 
-	protected string shiftClass => new CssBuilder("w-full h-full rounded-2xl border-l-[4px] border-r border-y dark:bg-surface-dark hover:opacity-60")
-		.AddClass("!bg-container dark:!bg-disabled-dark/10 !border-disabled dark:!border-disabled-dark/50 hover:!opacity-100", Disabled)
+	protected string shiftClass => new CssBuilder("w-full h-full rounded-2xl border-l-[4px] dark:border-r dark:border-y dark:bg-surface-dark hover:opacity-60")
+		.AddClass("!bg-container dark:!bg-disabled-dark/10 !border-disabled/10 dark:!border-disabled-dark/40 hover:!opacity-100", Disabled)
 		.AddClass("mud-ripple", !DisableRipple)
 		.AddClass(ShiftClass)
 		.Build();
@@ -54,4 +62,20 @@ else
 
 	[Parameter]
 	public bool DisableRipple { get; set; }
+
+	[Parameter]
+	public EventCallback OnClick { get; set; }
+
+	[Parameter]
+	public EventCallback<Shift?> OnDoubleClick { get; set; }
+
+	async Task Click()
+	{
+		await OnClick.InvokeAsync();
+	}
+
+	async Task DoubleClick(Shift? shift)
+	{
+		await OnDoubleClick.InvokeAsync(shift);
+	}
 }

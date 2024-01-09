@@ -38,7 +38,7 @@ public partial class Scheduler
 		CurrentDate = TimeProvider.System.GetLocalNow().Date;
 		viewByPeople = true;
 		showGroups = true;
-		SetView(ViewType.DayView);
+		SetView(ViewType.WeekView);
 		UpdateData();
 		base.OnInitialized();
 	}

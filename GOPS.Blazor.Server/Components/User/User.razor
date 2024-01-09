@@ -14,13 +14,16 @@
 		}
 	</MudAvatar>
 	<div class="flex flex-col gap-1 overflow-hidden">
-		@{
+@* 		@{
 			var titleSplit = Title.Split([",", " "], StringSplitOptions.RemoveEmptyEntries);
 			<span class="@titleClass">
 				@titleSplit[0] @titleSplit[^1]
 			</span>
 
-		}
+		} *@
+		<span class="@titleClass">
+			@Title
+		</span>
 		<span class="@descriptionClass">
 			@Description
 		</span>

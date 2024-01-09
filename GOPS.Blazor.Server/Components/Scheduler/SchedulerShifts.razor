@@ -3,13 +3,14 @@
 	{
 		var totalHours = Scheduler?.GetTotalHoursPerPeople(people.Id);
 
-		<div class="flex flex-row min-h-24 shadow-lg ring-1 ring-inset dark:ring-0 ring-border rounded-2xl bg-surface dark:bg-container-dark">
+		<div @key="people.Id"
+			 class="flex flex-row min-h-24 shadow-lg ring-1 ring-inset dark:ring-0 ring-border rounded-2xl bg-surface dark:bg-container-dark">
 			<div class="grid w-full"
 				 style="@GridTemplateStyle">
 				<div class="z-50 w-[5rem] md:w-[10rem] rounded-r-2xl bg-surface dark:bg-surface-dark"
 					 style="@FixedStyle">
 					<div class="flex rounded-2xl w-full h-full items-center py-4 pl-4 md:!pl-3 pr-3 border-r border-border dark:border-border-dark bg-surface dark:bg-container-dark">
-						<User Title="@($"{people.FirstName} {people.LastName}")"
+						<User Title="@people.ToString()"
 							  Description=@($"{totalHours} Hrs")
 							  Image="@people.ImageProfile"
 							  Class="overflow-hidden"
@@ -41,8 +42,10 @@
 
 						<SchedulerDayCell Shifts="@shifts"
 										  Disabled="@isPast"
-										  DisableRipple="@isPast" />
+										  DisableRipple="@isPast"
+										  OnDoubleClick="@((shift) => OpenDialog(shift, people))" />
 					}
+
 					<div class="rounded-r-2xl"></div>
 				}
 			</div>
@@ -75,5 +78,28 @@
 			.ToList();
 
 		return shifts ?? [];
+	}
+
+	void OpenDialog(Shift? shift, People people)
+	{
+		string title = shift is null ? "Add shift" : "Edit shift";
+
+		var parameters = new DialogParameters<SchedulerShiftDialog>()
+		{
+			{ x => x.SelectedShift, shift },
+			{ x => x.Title, title},
+			{ x => x.SelectedPeople, people},
+			{ x => x.Peoples, Scheduler?.Peoples}
+		};
+
+		var options = new DialogOptions
+			{
+				FullScreen = true,
+				CloseOnEscapeKey = true,
+				NoHeader = false,
+				MaxWidth = MaxWidth.Large
+			};
+
+		DialogService.Show<SchedulerShiftDialog>(title, parameters, options);
 	}
 }

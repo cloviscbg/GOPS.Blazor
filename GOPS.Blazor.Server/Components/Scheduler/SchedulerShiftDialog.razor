@@ -1,7 +1,101 @@
-﻿<h3>SchedulerShiftDialog</h3>
+﻿<MudDialog ClassContent="!flex !flex-col !gap-y-6 "
+		   Class="md:w-[40vw] md:h-[82vh] py-2 px-px md:!py-4 md:!px-2 md:rounded-2xl md:border md:border-border md:dark:border-border-dark bg-background dark:bg-background-dark">
+	<TitleContent>
+		<div class="flex flex-row items-center">
+			<span class="font-black text-2xl text-foreground-accent dark:text-foreground-accentdark">
+				@Title
+			</span>
+			<Spacer />
+			<MudIconButton OnClick="@Cancel"
+						   Class="text-foreground dark:text-foreground-dark hover:bg-hover hover:dark:bg-hover-dark">
+				<svg class="h-5 w-5"
+					 viewBox="0 0 24 24"
+					 fill="none"
+					 stroke="currentColor"
+					 stroke-width="1.5"
+					 stroke-linecap="round"
+					 stroke-linejoin="round">
+					<path d="M6 6L18 18" />
+					<path d="M18 6L6 18" />
+				</svg>
+			</MudIconButton>
+		</div>
+
+	</TitleContent>
+	<DialogContent>
+		<div class="@SelectedShift?.Color w-full h-[5rem] rounded-2xl border-l-[4px] dark:border-r dark:border-y dark:bg-surface-dark">
+			<div class="flex flex-col items-start justify-start w-full h-full !px-1 !py-2 select-none text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
+				@SelectedShift?.StartDate.ToString(@"HH:mm") @SelectedShift?.EndDate.ToString(@"HH:mm")
+			</div>
+		</div>
+		<MudSelectExtended ItemCollection="@Peoples"
+						   ValuePresenter="MudExtensions.Enums.ValuePresenter.ItemContent"
+						   @bind-Value="@SelectedPeople"
+						   Variant="Variant.Outlined"
+						   DisablePopoverPadding="true"
+						   SearchBox="true"
+						   SearchBoxClearable="true"
+						   SearchBoxPlaceholder="Search people..."
+						   ChipCloseable="true"
+						   ChipVariant="Variant.Text"
+						   ChipSize="MudBlazor.Size.Medium"
+						   AnchorOrigin="Origin.BottomCenter"
+						   ReadOnly="@isReadOnly"
+						   Class="rounded-2xl bg-surface dark:bg-surface-dark"
+						   PopoverClass="mt-4 !shadow-lg rounded-2xl ring-1 ring-black [&_.mud-input>input.mud-input-root]:text-sm dark:[&_.mud-input>input.mud-input-root]:text-foreground-dark dark:ring-border-dark ring-opacity-5 dark:bg-surface-dark dark:[&_.mud-list-subheader-extended]:!bg-surface-dark hover:[&_.mud-list-item-clickable-extended:hover:not(.mud-list-item-functional)]:dark:!bg-hover-dark dark:[&_.mud-icon-button-size-small.mud-icon-button-edge-end]:text-foreground-dark/50 [&_.mud-input-outlined-border]:!border-border dark:[&_.mud-input-outlined-border]:!border-border-dark focus [&_.mud-input.mud-input-outlined:focus-within_.mud-input-outlined-border]:!border-primary"
+						   InputClass="[&_.mud-select-input-extended]:!py-2 [&_.mud-input-outlined-border]:!rounded-2xl [&_.mud-input-outlined-border]:!border-border dark:[&_.mud-input-outlined-border]:!border-border-dark">
+			<ItemTemplate>
+				<User Title="@($"{context?.Value?.FirstName} {context?.Value?.LastName}")"
+					  Image="@context?.Value?.ImageProfile"
+					  Class="overflow-hidden"
+					  AvatarClass="!h-12 !w-12 bg-container dark:bg-background-dark"
+					  ImageClass="inline-block h-12 w-12"
+					  FallBackClass="text-base font-black leading-none text-primary-400 dark:text-primary-400"
+					  TitleClass="text-ellipsis whitespace-break-spaces overflow-hidden font-black text-xs text-foreground dark:text-foreground-dark"
+					  DescriptionClass="text-xs font-medium text-foreground- dark:text-foreground-dark" />
+			</ItemTemplate>
+		</MudSelectExtended>
+	</DialogContent>
+</MudDialog>
 
 @namespace GOPS.Blazor.Server.Components.Internal
 
 @code {
+	bool isReadOnly;
 
+	[CascadingParameter]
+	MudDialogInstance? MudDialog { get; set; }
+
+	[Parameter]
+	public string? Title { get; set; }
+
+	[Parameter]
+	public Shift? SelectedShift { get; set; }
+
+	[Parameter]
+	public People? SelectedPeople { get; set; }
+
+	[Parameter]
+	public List<People?>? Peoples { get; set; }
+
+	protected override void OnInitialized()
+	{
+		if (SelectedShift is null)
+		{
+			SelectedShift = new()
+				{
+					StartDate = DateTime.Now,
+					EndDate = DateTime.Now.AddHours(6),
+				};
+
+			base.OnInitialized();
+			return;
+		}
+
+		isReadOnly = true;
+		base.OnInitialized();
+	}
+
+	void Submit() => MudDialog?.Close(DialogResult.Ok(true));
+	void Cancel() => MudDialog?.Cancel();
 }

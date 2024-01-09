@@ -5,6 +5,7 @@
 			type="button"
 			disabled="@Disabled"
 			@onclick="@Click"
+			@ondblclick="DoubleClick"
 			@onblur="HandleOnBlur">
 	@ChildContent
 </MudElement>
@@ -35,6 +36,9 @@
 	public bool Disabled { get; set; }
 
 	[Parameter]
+	public bool DisableRipple { get; set; }
+
+	[Parameter]
 	public bool Elevation { get; set; }
 
 	[Parameter]
@@ -42,6 +46,9 @@
 
 	[Parameter]
 	public EventCallback OnClick { get; set; }
+
+	[Parameter]
+	public EventCallback OnDoubleClick { get; set; }
 
 	[Parameter]
 	public EventCallback OnBlur { get; set; }
@@ -54,6 +61,16 @@
 		}
 
 		await OnClick.InvokeAsync();
+	}
+
+	async Task DoubleClick()
+	{
+		if (Disabled)
+		{
+			return;
+		}
+
+		await OnDoubleClick.InvokeAsync();
 	}
 
 	async Task HandleOnBlur()

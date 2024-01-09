@@ -51,3 +51,14 @@ body {
 .scheduler-groups .mud-expand-panel.mud-expand-panel-border {
 	border-bottom: 0;
 }
+
+.mud-input.mud-input-outlined .mud-input-outlined-border {
+	border-radius: 1rem;
+}
+
+.mud-list-item-gutters-extended {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	width: auto;
+	border-radius: 1rem;
+}
