@@ -1,5 +1,4 @@
-﻿<MudDialog ClassContent="!flex !flex-col !gap-y-6 "
-		   Class="md:w-[40vw] md:h-[82vh] py-2 px-px md:!py-4 md:!px-2 md:rounded-2xl md:border md:border-border md:dark:border-border-dark bg-surface dark:bg-background-dark">
+﻿<MudDialog Class="add-shift-dialog">
 	<TitleContent>
 		<div class="flex flex-row items-center">
 			<span class="select-none font-black text-2xl text-foreground-accent dark:text-foreground-accentdark">
@@ -36,11 +35,11 @@
 						   SearchBox="true"
 						   SearchBoxClearable="true"
 						   SearchBoxPlaceholder="Search people..."
+						   AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown"
 						   AnchorOrigin="Origin.BottomCenter"
 						   ReadOnly="@isReadOnly"
-						   Class="!mt-0 rounded-2xl bg-container dark:bg-surface-dark"
-						   PopoverClass="mt-4 !shadow-lg rounded-2xl ring-1 ring-black [&_.mud-input>input.mud-input-root]:text-sm dark:[&_.mud-input>input.mud-input-root]:text-foreground-dark dark:ring-border-dark ring-opacity-5 dark:bg-surface-dark dark:[&_.mud-list-subheader-extended]:!bg-surface-dark hover:[&_.mud-list-item-clickable-extended:hover:not(.mud-list-item-functional)]:dark:!bg-hover-dark dark:[&_.mud-icon-button-size-small.mud-icon-button-edge-end]:text-foreground-dark/50 [&_.mud-input-outlined-border]:!border-border dark:[&_.mud-input-outlined-border]:!border-border-dark [&_.mud-input.mud-input-outlined:focus-within_.mud-input-outlined-border]:focus-within:!border-primary"
-						   InputClass="[&_.mud-select-input-extended]:!py-2 [&_.mud-input-outlined-border]:!rounded-2xl [&_.mud-input-outlined-border]:!border-border dark:[&_.mud-input-outlined-border]:!border-border-dark [&.mud-input.mud-input-outlined:focus-within_.mud-input-outlined-border]:focus-within:!border-primary">
+						   PopoverClass="add-shift-select-popover dark:[&_.mud-list-subheader-extended]:!bg-surface-dark"
+						   InputClass="add-shift-input">
 			<ItemTemplate>
 				<User Title="@($"{context?.Value?.FirstName} {context?.Value?.LastName}")"
 					  Image="@context?.Value?.ImageProfile"
@@ -57,9 +56,10 @@
 			<MudDatePicker @bind-Date="@StartDate"
 						   Variant="Variant.Outlined"
 						   ShowWeekNumbers="true"
-						   Label="Start date"
+						   Label="Date"
 						   DateFormat="dd/MM/yyyy"
 						   DisableToolbar="true"
+						   AdornmentIcon="@Icons.Material.Rounded.CalendarMonth"
 						   AnchorOrigin="Origin.BottomLeft"
 						   TransformOrigin="Origin.TopLeft"
 						   IconSize="Size.Small"
@@ -76,7 +76,7 @@
 					 stroke-linejoin="round">
 					<path d="M9 5L16 12L9 19" />
 				</svg>
-				<span class="text-base text-foreground dark:text-foreground-dark">
+				<span class="text-sm text-foreground dark:text-foreground-dark">
 					@EndDate?.ToString("dd/MM/yyyy")
 				</span>
 			}
@@ -88,6 +88,7 @@
 							   @bind-Value="@StartTime"
 							   ValuePresenter="MudExtensions.Enums.ValuePresenter.ItemContent"
 							   Variant="Variant.Outlined"
+							   AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown"
 							   AnchorOrigin="Origin.BottomLeft"
 							   TransformOrigin="Origin.TopLeft"
 							   Label="Start"
@@ -116,6 +117,7 @@
 							   @bind-Value="@EndTime"
 							   ValuePresenter="MudExtensions.Enums.ValuePresenter.ItemContent"
 							   Variant="Variant.Outlined"
+							   AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown"
 							   AnchorOrigin="Origin.BottomRight"
 							   TransformOrigin="Origin.TopRight"
 							   Label="End"

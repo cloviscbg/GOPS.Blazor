@@ -16,32 +16,40 @@
 			</div>
 		</div>
 
-		@if (ShowGroups)
+		@if (ViewByPeople)
 		{
-			<SchedulerGroup @ref="@schedulerGroup"
-							T="Group"
-							Groups="Groups">
-				<TitleContent Context="groupHeader">
-					<SchedulerGroupTitle GroupName="@groupHeader.Name"
-										 PeopleCount="@groupHeader.Peoples.Count"
-										 TotalGroupHours="GetTotalHoursPerGroup(groupHeader.Id)" />
-				</TitleContent>
+			@if (ShowGroups)
+			{
+				<SchedulerGroup @ref="@schedulerGroup"
+								T="Group"
+								Groups="Groups">
+					<TitleContent Context="groupHeader">
+						<SchedulerGroupTitle GroupName="@groupHeader.Name"
+											 PeopleCount="@groupHeader.Peoples.Count"
+											 TotalGroupHours="GetTotalHoursPerGroup(groupHeader.Id)" />
+					</TitleContent>
 
-				<ShiftContent Context="group">
-					<SchedulerShifts Peoples="group.Peoples"
+					<ShiftContent Context="group">
+						<SchedulerShifts Peoples="group.Peoples"
+										 FixedStyle="@FixedStyle"
+										 GridTemplateStyle="@GridTemplateStyle" />
+					</ShiftContent>
+				</SchedulerGroup>
+			}
+			else
+			{
+				<div class="min-w-fit">
+					<SchedulerShifts Peoples="Peoples"
 									 FixedStyle="@FixedStyle"
 									 GridTemplateStyle="@GridTemplateStyle" />
-				</ShiftContent>
-			</SchedulerGroup>
+				</div>
+			}
 		}
 		else
 		{
-			<div class="min-w-fit">
-				<SchedulerShifts Peoples="Peoples"
-								 FixedStyle="@FixedStyle"
-								 GridTemplateStyle="@GridTemplateStyle" />
-			</div>
+			
 		}
+
 
 		<MudScrollToTop TopOffset="100"
 						Selector="#scheduler_section"
