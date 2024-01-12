@@ -1,5 +1,5 @@
 ﻿<MudExpansionPanels @ref="mudExpansionPanels"
-					Class="scheduler-groups !min-w-fit rounded-2xl"
+					Class="scheduler-groups"
 					MultiExpansion="true"
 					Elevation="0"
 					Style="-webkit-tap-highlight-color: transparent">
@@ -7,7 +7,7 @@
 	{
 		<MudExpansionPanel @key="group"
 						   HideIcon="true"
-						   Class="mt-4 rounded-2xl !bg-container dark:!bg-container-dark hover:!bg-hover hover:dark:!bg-hover-dark">
+						   Class="mt-4">
 			<TitleContent>
 				@TitleContent?.Invoke(group)
 			</TitleContent>

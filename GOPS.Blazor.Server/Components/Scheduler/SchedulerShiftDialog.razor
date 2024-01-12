@@ -1,8 +1,8 @@
 ﻿<MudDialog ClassContent="!flex !flex-col !gap-y-6 "
-		   Class="md:w-[40vw] md:h-[82vh] py-2 px-px md:!py-4 md:!px-2 md:rounded-2xl md:border md:border-border md:dark:border-border-dark bg-background dark:bg-background-dark">
+		   Class="md:w-[40vw] md:h-[82vh] py-2 px-px md:!py-4 md:!px-2 md:rounded-2xl md:border md:border-border md:dark:border-border-dark bg-surface dark:bg-background-dark">
 	<TitleContent>
 		<div class="flex flex-row items-center">
-			<span class="font-black text-2xl text-foreground-accent dark:text-foreground-accentdark">
+			<span class="select-none font-black text-2xl text-foreground-accent dark:text-foreground-accentdark">
 				@Title
 			</span>
 			<Spacer />
@@ -25,7 +25,7 @@
 	<DialogContent>
 		<div class="@SelectedShift?.Color w-full h-[5rem] rounded-2xl border-l-[4px] dark:border-r dark:border-y dark:bg-surface-dark">
 			<div class="flex flex-col items-start justify-start w-full h-full !px-1 !py-2 select-none text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
-				@SelectedShift?.StartDate.ToString(@"HH:mm") @SelectedShift?.EndDate.ToString(@"HH:mm")
+				@StartDate?.ToString(@"HH:mm") @EndDate?.ToString(@"HH:mm")
 			</div>
 		</div>
 		<MudSelectExtended ItemCollection="@Peoples"
@@ -36,25 +36,104 @@
 						   SearchBox="true"
 						   SearchBoxClearable="true"
 						   SearchBoxPlaceholder="Search people..."
-						   ChipCloseable="true"
-						   ChipVariant="Variant.Text"
-						   ChipSize="MudBlazor.Size.Medium"
 						   AnchorOrigin="Origin.BottomCenter"
 						   ReadOnly="@isReadOnly"
-						   Class="rounded-2xl bg-surface dark:bg-surface-dark"
-						   PopoverClass="mt-4 !shadow-lg rounded-2xl ring-1 ring-black [&_.mud-input>input.mud-input-root]:text-sm dark:[&_.mud-input>input.mud-input-root]:text-foreground-dark dark:ring-border-dark ring-opacity-5 dark:bg-surface-dark dark:[&_.mud-list-subheader-extended]:!bg-surface-dark hover:[&_.mud-list-item-clickable-extended:hover:not(.mud-list-item-functional)]:dark:!bg-hover-dark dark:[&_.mud-icon-button-size-small.mud-icon-button-edge-end]:text-foreground-dark/50 [&_.mud-input-outlined-border]:!border-border dark:[&_.mud-input-outlined-border]:!border-border-dark focus [&_.mud-input.mud-input-outlined:focus-within_.mud-input-outlined-border]:!border-primary"
-						   InputClass="[&_.mud-select-input-extended]:!py-2 [&_.mud-input-outlined-border]:!rounded-2xl [&_.mud-input-outlined-border]:!border-border dark:[&_.mud-input-outlined-border]:!border-border-dark">
+						   Class="!mt-0 rounded-2xl bg-container dark:bg-surface-dark"
+						   PopoverClass="mt-4 !shadow-lg rounded-2xl ring-1 ring-black [&_.mud-input>input.mud-input-root]:text-sm dark:[&_.mud-input>input.mud-input-root]:text-foreground-dark dark:ring-border-dark ring-opacity-5 dark:bg-surface-dark dark:[&_.mud-list-subheader-extended]:!bg-surface-dark hover:[&_.mud-list-item-clickable-extended:hover:not(.mud-list-item-functional)]:dark:!bg-hover-dark dark:[&_.mud-icon-button-size-small.mud-icon-button-edge-end]:text-foreground-dark/50 [&_.mud-input-outlined-border]:!border-border dark:[&_.mud-input-outlined-border]:!border-border-dark [&_.mud-input.mud-input-outlined:focus-within_.mud-input-outlined-border]:focus-within:!border-primary"
+						   InputClass="[&_.mud-select-input-extended]:!py-2 [&_.mud-input-outlined-border]:!rounded-2xl [&_.mud-input-outlined-border]:!border-border dark:[&_.mud-input-outlined-border]:!border-border-dark [&.mud-input.mud-input-outlined:focus-within_.mud-input-outlined-border]:focus-within:!border-primary">
 			<ItemTemplate>
 				<User Title="@($"{context?.Value?.FirstName} {context?.Value?.LastName}")"
 					  Image="@context?.Value?.ImageProfile"
 					  Class="overflow-hidden"
 					  AvatarClass="!h-12 !w-12 bg-container dark:bg-background-dark"
 					  ImageClass="inline-block h-12 w-12"
-					  FallBackClass="text-base font-black leading-none text-primary-400 dark:text-primary-400"
+					  FallBackClass="text-base font-black leading-none text-primary-400"
 					  TitleClass="text-ellipsis whitespace-break-spaces overflow-hidden font-black text-xs text-foreground dark:text-foreground-dark"
 					  DescriptionClass="text-xs font-medium text-foreground- dark:text-foreground-dark" />
 			</ItemTemplate>
 		</MudSelectExtended>
+
+		<div class="flex flex-row items-center gap-x-4">
+			<MudDatePicker @bind-Date="@StartDate"
+						   Variant="Variant.Outlined"
+						   ShowWeekNumbers="true"
+						   Label="Start date"
+						   DateFormat="dd/MM/yyyy"
+						   DisableToolbar="true"
+						   AnchorOrigin="Origin.BottomLeft"
+						   TransformOrigin="Origin.TopLeft"
+						   IconSize="Size.Small"
+						   Class="add-shift-input" />
+
+			@if (EndDate!.Value.Date > StartDate!.Value.Date)
+			{
+				<svg class="h-5 w-5 text-foreground dark:text-foreground-dark"
+					 viewBox="0 0 24 24"
+					 fill="none"
+					 stroke="currentcolor"
+					 stroke-width="1.5"
+					 stroke-linecap="round"
+					 stroke-linejoin="round">
+					<path d="M9 5L16 12L9 19" />
+				</svg>
+				<span class="text-base text-foreground dark:text-foreground-dark">
+					@EndDate?.ToString("dd/MM/yyyy")
+				</span>
+			}
+		</div>
+
+
+		<div class="flex flex-row items-center gap-x-4">
+			<MudSelectExtended ItemCollection="@listTimes"
+							   @bind-Value="@StartTime"
+							   ValuePresenter="MudExtensions.Enums.ValuePresenter.ItemContent"
+							   Variant="Variant.Outlined"
+							   AnchorOrigin="Origin.BottomLeft"
+							   TransformOrigin="Origin.TopLeft"
+							   Label="Start"
+							   SearchBox="true"
+							   SearchBoxClearable="true"
+							   Class="add-shift-input"
+							   PopoverClass="add-shift-select-popover dark:[&_.mud-list-subheader-extended]:!bg-surface-dark">
+				<ItemTemplate>
+					<span class="py-2 text-foreground dark:text-foreground-dark">
+						@context.Value.ToString("hh':'mm")
+					</span>
+				</ItemTemplate>
+			</MudSelectExtended>
+
+			<svg class="h-5 w-5 text-foreground dark:text-foreground-dark"
+				 viewBox="0 0 24 24"
+				 fill="none"
+				 stroke="currentcolor"
+				 stroke-width="1.5"
+				 stroke-linecap="round"
+				 stroke-linejoin="round">
+				<path d="M9 5L16 12L9 19" />
+			</svg>
+
+			<MudSelectExtended ItemCollection="@listTimes"
+							   @bind-Value="@EndTime"
+							   ValuePresenter="MudExtensions.Enums.ValuePresenter.ItemContent"
+							   Variant="Variant.Outlined"
+							   AnchorOrigin="Origin.BottomRight"
+							   TransformOrigin="Origin.TopRight"
+							   Label="End"
+							   SearchBox="true"
+							   SearchBoxClearable="true"
+							   Class="add-shift-input"
+							   PopoverClass="add-shift-select-popover dark:[&_.mud-list-subheader-extended]:!bg-surface-dark">
+				<ItemTemplate>
+					<span class="py-2 text-foreground dark:text-foreground-dark">
+						@context.Value.ToString("hh':'mm")
+					</span>
+				</ItemTemplate>
+			</MudSelectExtended>
+
+			<span class="text-base font-black text-teal-400">
+				@totalHoursText
+			</span>
+		</div>
 	</DialogContent>
 </MudDialog>
 
@@ -62,6 +141,10 @@
 
 @code {
 	bool isReadOnly;
+	string? totalHoursText;
+	TimeSpan startTime;
+	TimeSpan endTime;
+	List<TimeSpan> listTimes = [];
 
 	[CascadingParameter]
 	MudDialogInstance? MudDialog { get; set; }
@@ -76,16 +159,48 @@
 	public People? SelectedPeople { get; set; }
 
 	[Parameter]
+	public DateTime? StartDate { get; set; }
+
+	public DateTime? EndDate { get; set; }
+
+	public TimeSpan StartTime
+	{
+		get { return startTime; }
+		set
+		{
+			startTime = value;
+			StartDate = StartDate?.Date + startTime;
+			EndDate = StartDate?.AddHours(CalculateTotalHours());
+		}
+	}
+
+	public TimeSpan EndTime
+	{
+		get { return endTime; }
+		set
+		{
+			endTime = value;
+			EndDate = StartDate?.AddHours(CalculateTotalHours());
+		}
+	}
+
+
+	[Parameter]
 	public List<People?>? Peoples { get; set; }
 
 	protected override void OnInitialized()
 	{
+		listTimes = new TimeSpan().CreateMinutes(15).ToList()!;
+
 		if (SelectedShift is null)
 		{
+			StartTime = TimeSpan.FromHours(DateTime.Now.Hour);
+			EndTime = startTime + TimeSpan.FromHours(6);
+
 			SelectedShift = new()
 				{
-					StartDate = DateTime.Now,
-					EndDate = DateTime.Now.AddHours(6),
+					StartDate = this.StartDate!.Value,
+					EndDate = this.StartDate!.Value
 				};
 
 			base.OnInitialized();
@@ -93,9 +208,35 @@
 		}
 
 		isReadOnly = true;
+		StartTime = SelectedShift.StartDate.TimeOfDay;
+		EndTime = SelectedShift.EndDate.TimeOfDay;
 		base.OnInitialized();
 	}
 
 	void Submit() => MudDialog?.Close(DialogResult.Ok(true));
 	void Cancel() => MudDialog?.Cancel();
+
+	double CalculateTotalHours()
+	{
+		TimeSpan tHours;
+		if (startTime <= endTime)
+		{
+			tHours = (endTime - startTime);
+			totalHoursText = TotalHoursText(tHours);
+			return tHours.TotalHours;
+		}
+
+		//By default if startTime is > endTime we assume that is another day
+		var timeToSubtract = new TimeSpan(1, endTime.Hours, endTime.Minutes, endTime.Seconds);
+		tHours = timeToSubtract.Subtract(startTime);
+		totalHoursText = TotalHoursText(tHours);
+
+		return tHours.TotalHours;
+	}
+
+	string TotalHoursText(TimeSpan totalHours)
+	{
+		var result = Math.Floor(totalHours.TotalHours) != totalHours.TotalHours;
+		return result ? totalHours.ToString("h' h 'mm' min'") : $"{totalHours.TotalHours.ToString()} h";
+	}
 }

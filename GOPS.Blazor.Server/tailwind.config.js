@@ -4,7 +4,7 @@ import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
 module.exports = {
-	content: ["./**/*.{razor,html,cshtml}"],
+	content: ["**/*.razor", "**/*.cshtml", "**/*.html"],
 
 	darkMode: 'class',
 
@@ -50,6 +50,9 @@ module.exports = {
 				disabled: {
 					DEFAULT: 'rgba(0, 0, 0, 0.176471)',
 					dark: '#393C48'
+				},
+				label: {
+					DEFAULT: '#818CF8',
 				},
 				default: {
 					DEFAULT: '#181824',

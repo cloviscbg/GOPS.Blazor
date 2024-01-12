@@ -43,7 +43,7 @@
 						<SchedulerDayCell Shifts="@shifts"
 										  Disabled="@isPast"
 										  DisableRipple="@isPast"
-										  OnDoubleClick="@((shift) => OpenDialog(shift, people))" />
+										  OnDoubleClick="@((shift) => OpenDialog(shift, people, dayCell.Date))" />
 					}
 
 					<div class="rounded-r-2xl"></div>
@@ -80,7 +80,7 @@
 		return shifts ?? [];
 	}
 
-	void OpenDialog(Shift? shift, People people)
+	void OpenDialog(Shift? shift, People people, DateTime selectDate)
 	{
 		string title = shift is null ? "Add shift" : "Edit shift";
 
@@ -89,7 +89,8 @@
 			{ x => x.SelectedShift, shift },
 			{ x => x.Title, title},
 			{ x => x.SelectedPeople, people},
-			{ x => x.Peoples, Scheduler?.Peoples}
+			{ x => x.Peoples!, Scheduler?.Peoples},
+			{ x => x.StartDate, selectDate}
 		};
 
 		var options = new DialogOptions
