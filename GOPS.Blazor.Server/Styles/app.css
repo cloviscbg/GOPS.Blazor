@@ -117,7 +117,7 @@ body {
 }
 .add-shift-dialog {
   overflow-y: scroll;
-  @apply max-lg:min-w-[100vw] max-lg:min-h-[100vh] lg:w-[40vw] px-px lg:px-2 lg:rounded-2xl lg:border lg:border-border lg:dark:border-border-dark bg-surface dark:bg-background-dark;
+  @apply xs:min-w-[100vw] xs:min-h-[100vh] min-w-[500px] px-px sm:px-2 sm:rounded-2xl sm:border sm:border-border sm:dark:border-border-dark bg-surface dark:bg-background-dark;
 }
 .add-shift-dialog .mud-dialog-content.mud-dialog-no-side-padding {
   @apply pt-0;
