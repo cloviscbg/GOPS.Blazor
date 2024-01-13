@@ -5,6 +5,10 @@ body {
   font-family: Inter;
 }
 
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
 .gops-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-foreground/40 dark:bg-foreground-dark;
 }
@@ -177,4 +181,4 @@ body {
   @apply absolute mb-4 p-4 rounded-full border border-border text-foreground-accentdark dark:text-foreground dark:border-border-dark bg-primary dark:bg-foreground-dark hover:bg-primary/90 hover:dark:bg-foreground-dark/90;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///D:/Sauce/GOPS/client/blazor/src/GOPS.Blazor.Server/Styles/styles.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;AACA;AACA;AAEA;EACC;;;AAIA;EACC;;AAEA;EACC;;;AAKH;AACA;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAID;EACC;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;;AAEA;EACC;;AAEA;EACC;;AAGD;EACC;;AAIF;EACC;;;AAKD;EACC;;AAEA;EACC;;AAKC;EACC;;AAIF;EACC;;AAIF;EACC;;AAIF;EACC;;AAGD;EACC;;;AAKD;EACC;;;AAKD;EACC;;AAEA;EACC;;AAIF;EACC;;AAEA;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAEA;EACC;;AAMF;EACC;;AAGD;EACC;;;AAOD;EACC;;AAEA;EACC;;AAEA;EACC;;AAIF;EACC;;AAKD;EACC;;AAIF;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAKH;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAKD;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;;AAMJ;EACC%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///D:/Sauce/GOPS/client/blazor/src/GOPS.Blazor.Server/Styles/styles.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;AACA;AACA;AAEA;EACC;;;AAGD;EACC;;;AAIA;EACC;;AAEA;EACC;;;AAKH;AACA;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAID;EACC;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;;AAEA;EACC;;AAEA;EACC;;AAGD;EACC;;AAIF;EACC;;;AAKD;EACC;;AAEA;EACC;;AAKC;EACC;;AAIF;EACC;;AAIF;EACC;;AAIF;EACC;;AAGD;EACC;;;AAKD;EACC;;;AAKD;EACC;;AAEA;EACC;;AAIF;EACC;;AAEA;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAEA;EACC;;AAMF;EACC;;AAGD;EACC;;;AAOD;EACC;;AAEA;EACC;;AAEA;EACC;;AAIF;EACC;;AAKD;EACC;;AAIF;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAKH;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAKD;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;;AAMJ;EACC%22%7D */

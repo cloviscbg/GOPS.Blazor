@@ -6,7 +6,11 @@ body {
 	font-family: Inter;
 }
 
-.gops-scrollbar{
+::-webkit-scrollbar-corner {
+	background-color: transparent;
+}
+
+.gops-scrollbar {
 	&::-webkit-scrollbar-thumb {
 		@apply bg-foreground/40 dark:bg-foreground-dark;
 
