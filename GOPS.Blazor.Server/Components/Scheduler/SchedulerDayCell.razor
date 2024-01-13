@@ -13,7 +13,7 @@ else
 		@foreach (var shift in Shifts)
 		{
 			<div @key="@shift.Id"
-				 class="@shiftClass @shift.Color">
+				 class="@shiftClass @(ShiftColor.FromValue(shift.Color).ToString())">
 				<CustomButton Disabled="@Disabled"
 							  OnClick="@Click"
 							  OnDoubleClick="@(() => DoubleClick(shift))"

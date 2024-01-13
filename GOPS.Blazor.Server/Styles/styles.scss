@@ -93,6 +93,10 @@ body {
 	.mud-shrink ~ label.mud-input-label.mud-input-label-inputcontrol {
 		@apply text-sm font-bold text-label;
 	}
+
+	.mud-input-helper-text {
+		@apply text-foreground/80 dark:text-foreground-dark/80;
+	}
 }
 
 .mud-select-extended {
@@ -103,11 +107,7 @@ body {
 
 .add-shift {
 	&-dialog {
-		@apply md:w-[40vw] md:h-[82vh] py-2 px-px md:py-4 md:px-2 md:rounded-2xl md:border md:border-border md:dark:border-border-dark bg-surface dark:bg-background-dark;
-
-		.mud-dialog-content {
-			@apply flex flex-col gap-y-6;
-		}
+		@apply md:w-[40vw] md:h-[90%] py-2 px-px md:py-4 md:px-2 md:rounded-2xl md:border md:border-border md:dark:border-border-dark bg-surface dark:bg-background-dark;
 	}
 
 	&-select-popover {
@@ -119,6 +119,10 @@ body {
 
 		.mud-list-extended {
 			@apply gops-scrollbar px-4;
+
+			.mud-input > input.mud-input-root-outlined, div.mud-input-slot.mud-input-root-outlined {
+				padding: 18.5px 14px;
+			}
 		}
 
 		.mud-list-item-clickable-extended {

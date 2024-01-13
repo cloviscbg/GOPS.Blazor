@@ -12,7 +12,7 @@ else
 				var startPos = CalculateShiftPosition(shift.StartDate.TimeOfDay);
 				var endPos = CalculateShiftPosition(shift.TotalTime, false);
 
-				<div class="@shiftClass @shift.Color"
+				<div class="@shiftClass @(ShiftColor.FromValue(shift.Color).ToString())"
 					 style="@($"grid-column: {startPos} / span {endPos}; {(Shifts.Count < 1 ? "grid-row: 1 / span 1" : "")}")">
 					<CustomButton Disabled="@Disabled"
 								  Class="flex flex-col items-start justify-start w-full h-full !px-1 !py-2 text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
