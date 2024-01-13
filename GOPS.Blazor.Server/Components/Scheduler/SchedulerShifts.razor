@@ -11,16 +11,16 @@
 					 style="@FixedStyle">
 					<div class="flex rounded-2xl w-full h-full items-center py-4 pl-4 md:!pl-3 pr-3 border-r border-border dark:border-border-dark bg-surface dark:bg-container-dark">
 
-							<User Title="@people.ToString()"
-								  Description=@($"{totalHours} Hrs")
-								  Image="@people.ImageProfile"
-								  TooltipPlacement="Placement.Right"
-								  Class="overflow-hidden"
-								  AvatarClass="hidden md:flex !h-12 !w-12 bg-container dark:bg-surface-dark"
-								  ImageClass="inline-block h-12 w-12"
-								  FallBackClass="text-base font-black leading-none text-primary-400 dark:text-primary-400"
-								  TitleClass="text-ellipsis whitespace-break-spaces overflow-hidden font-black text-xs text-foreground dark:text-foreground-dark"
-								  DescriptionClass="text-xs font-medium text-foreground- dark:text-foreground-dark" />
+						<User Title="@people.ToString()"
+							  Description=@($"{totalHours} Hrs")
+							  Image="@people.ImageProfile"
+							  TooltipPlacement="Placement.Right"
+							  Class="overflow-hidden"
+							  AvatarClass="hidden md:flex !h-12 !w-12 bg-container dark:bg-surface-dark"
+							  ImageClass="inline-block h-12 w-12"
+							  FallBackClass="text-base font-black leading-none text-primary-400 dark:text-primary-400"
+							  TitleClass="text-ellipsis whitespace-break-spaces overflow-hidden font-black text-xs text-foreground dark:text-foreground-dark"
+							  DescriptionClass="text-xs font-medium text-foreground- dark:text-foreground-dark" />
 					</div>
 				</div>
 
@@ -96,9 +96,10 @@
 
 		var options = new DialogOptions
 			{
-				FullScreen = true,
+				FullScreen = false,
 				CloseOnEscapeKey = true,
 				NoHeader = false,
+				Position = DialogPosition.Center,
 				MaxWidth = MaxWidth.Large
 			};
 

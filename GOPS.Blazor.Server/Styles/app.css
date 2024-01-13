@@ -17,6 +17,24 @@ body {
 }
 
 /* MudBlazor Overrides */
+.mud-main-content {
+  @apply h-screen md:h-content sm:pt-[calc(var(--mud-appbar-height)_-_var(--mud-appbar-height)/8)] md:pt-0 md:rounded-2xl drop-shadow-xl md:border md:border-divider md:dark:border-divider-dark bg-surface dark:bg-surface-dark !important;
+}
+
+.mud-appbar {
+  @apply md:w-full md:relative md:rounded-t-2xl md:ml-0 !important;
+}
+.mud-appbar .mud-toolbar {
+  @apply h-[var(--mud-appbar-height)] px-2 !important;
+}
+
+.mud-drawer {
+  @apply p-2 max-sm:rounded-r-2xl max-sm:border-r max-sm:border-divider max-sm:dark:border-divider-dark bg-background dark:bg-background-dark;
+}
+.mud-drawer .mud-drawer-header {
+  @apply flex px-1 py-0 items-center gap-x-4 text-2xl font-black text-foreground-accent dark:text-foreground-dark;
+}
+
 .mud-nav-link {
   padding: 12px;
 }
@@ -88,11 +106,24 @@ body {
   @apply py-4;
 }
 
+.add-shift {
+  /*	&-dialog {
+  	@apply lg:w-[40vw] lg:h-[90%] px-px lg:px-2 lg:rounded-2xl lg:border lg:border-border lg:dark:border-border-dark bg-surface dark:bg-background-dark;
+
+  	.mud-dialog-content.mud-dialog-no-side-padding {
+  		@apply pt-0;
+  	}
+  }*/
+}
 .add-shift-dialog {
-  @apply lg:w-[40vw] lg:h-[90%] px-px lg:px-2 lg:rounded-2xl lg:border lg:border-border lg:dark:border-border-dark bg-surface dark:bg-background-dark;
+  overflow-y: scroll;
+  @apply max-lg:min-w-[100vw] max-lg:min-h-[100vh] lg:w-[40vw] px-px lg:px-2 lg:rounded-2xl lg:border lg:border-border lg:dark:border-border-dark bg-surface dark:bg-background-dark;
 }
 .add-shift-dialog .mud-dialog-content.mud-dialog-no-side-padding {
   @apply pt-0;
+}
+.add-shift-dialog .mud-dialog-actions {
+  @apply py-8;
 }
 .add-shift-select-popover {
   @apply min-w-56 mt-4 drop-shadow-lg rounded-2xl ring-1 ring-black ring-opacity-5 dark:ring-border-dark dark:bg-surface-dark;
@@ -181,4 +212,4 @@ body {
   @apply absolute mb-4 p-4 rounded-full border border-border text-foreground-accentdark dark:text-foreground dark:border-border-dark bg-primary dark:bg-foreground-dark hover:bg-primary/90 hover:dark:bg-foreground-dark/90;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///D:/Sauce/GOPS/client/blazor/src/GOPS.Blazor.Server/Styles/styles.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;AACA;AACA;AAEA;EACC;;;AAGD;EACC;;;AAIA;EACC;;AAEA;EACC;;;AAKH;AACA;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAID;EACC;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;;AAEA;EACC;;AAEA;EACC;;AAGD;EACC;;AAIF;EACC;;;AAKD;EACC;;AAEA;EACC;;AAKC;EACC;;AAIF;EACC;;AAIF;EACC;;AAIF;EACC;;AAGD;EACC;;;AAKD;EACC;;;AAKD;EACC;;AAEA;EACC;;AAIF;EACC;;AAEA;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAEA;EACC;;AAMF;EACC;;AAGD;EACC;;;AAOD;EACC;;AAEA;EACC;;AAEA;EACC;;AAIF;EACC;;AAKD;EACC;;AAIF;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAKH;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAKD;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;;AAMJ;EACC%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///D:/Sauce/GOPS/client/blazor/src/GOPS.Blazor.Server/Styles/styles.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;AACA;AACA;AAEA;EACC;;;AAGD;EACC;;;AAIA;EACC;;AAEA;EACC;;;AAKH;AAGA;EACC;;;AAGD;EACC;;AAEA;EACC;;;AAIF;EACC;;AAEA;EACC;;;AAKF;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAID;EACC;EACA;EACA;EACA;;;AAGD;EACC;;;AAGD;EACC;;AAEA;EACC;;AAEA;EACC;;AAGD;EACC;;AAIF;EACC;;;AAKD;EACC;;AAEA;EACC;;AAKC;EACC;;AAIF;EACC;;AAIF;EACC;;AAIF;EACC;;AAGD;EACC;;;AAKD;EACC;;;AAIF;AAcC;AAAA;;AAAA;AAAA;AAAA;AAAA;;AAbA;EACC;EAEA;;AAEA;EACC;;AAGD;EACC;;AAWF;EACC;;AAEA;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAEA;EACC;;AAMF;EACC;;AAGD;EACC;;;AAOD;EACC;;AAEA;EACC;;AAEA;EACC;;AAIF;EACC;;AAKD;EACC;;AAIF;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAKH;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAKD;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;;AAMJ;EACC%22%7D */

@@ -5,9 +5,8 @@
 <MudLayout Class="md:p-2 bg-background dark:bg-background-dark">
 	<MudDrawer @bind-Open="@_drawerOpen"
 			   Elevation="0"
-			   Width="250px"
-			   Class="p-2 max-sm:rounded-r-2xl max-sm:border-r max-sm:border-divider max-sm:dark:border-divider-dark bg-background dark:bg-background-dark">
-		<MudDrawerHeader Class="flex px-1 py-0 items-center gap-x-4 text-2xl font-black text-foreground-accent dark:text-foreground-dark">
+			   Width="270px">
+		<MudDrawerHeader>
 			<img class="h-[4rem] w-[4rem] saturate-[4]"
 				 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
 				 alt="Your Company">
@@ -22,10 +21,8 @@
 		<NavMenu />
 	</MudDrawer>
 
-	<MudMainContent class="h-screen md:h-content md:!pt-0 md:rounded-2xl drop-shadow-xl md:border md:border-divider md:dark:border-divider-dark bg-surface dark:bg-surface-dark">
-		<MudAppBar Class="md:!w-full md:w-full md:!relative md:rounded-t-2xl md:!ml-0"
-				   ToolBarClass="px-2"
-				   Color="@Color.Transparent"
+	<MudMainContent>
+		<MudAppBar Color="@Color.Transparent"
 				   Elevation="0">
 			<CustomTooltip Text="@(_drawerOpen ? "Close drawer" : "Open drawer")"
 						   Placement="Placement.Right">
@@ -56,10 +53,10 @@
 			</ToggleButton>
 
 			<ThemeSwitch DarkChanged="@ChangeTheme"
-						 Class=" text-foreground dark:text-foreground-dark" />
+						 Class="text-foreground dark:text-foreground-dark" />
 		</MudAppBar>
 
-		<div class="!px-2 md:!px-4 pt-6">
+		<div class="px-2 md:!px-4 pt-6">
 			@Body
 		</div>
 

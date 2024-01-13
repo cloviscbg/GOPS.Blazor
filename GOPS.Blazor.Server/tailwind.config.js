@@ -9,6 +9,18 @@ module.exports = {
 	darkMode: 'class',
 
 	theme: {
+		screens: {
+			'xs': { 'max': '600px' },
+			'sm': '600px',
+			'max-sm': { 'max': '960px' },
+			'md': '960px',
+			'max-md': { 'max': '1280px' },
+			'lg': '1280px',
+			'max-lg': { 'max': '1920px'},
+			'xl': '1920px',
+			'max-xl': { 'max': '2560px' },
+			'2xl': '2560px',
+		},
 		extend: {
 			fontFamily: {
 				sans: ['Inter var', ...defaultTheme.fontFamily.sans],

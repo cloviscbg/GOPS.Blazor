@@ -1,4 +1,4 @@
-﻿<MudDialog DisableSidePadding="true" Class="add-shift-dialog">
+﻿<MudDialog DisableSidePadding="true" Class="add-shift-dialog gops-scrollbar">
 	<TitleContent>
 		<div class="flex flex-row items-center">
 			<span class="select-none font-black text-2xl text-foreground-accent dark:text-foreground-accentdark">
@@ -22,8 +22,7 @@
 
 	</TitleContent>
 	<DialogContent>
-		<div class="gops-scrollbar h-[calc(100vh-12rem)] px-6 flex flex-col gap-y-6"
-			 style="overflow-y: scroll">
+		<div class="px-6 flex flex-col gap-y-6">
 			<MudSelectExtended T="int"
 							   ItemCollection="@colors"
 							   @bind-Value="@SelectedColor"
@@ -170,19 +169,20 @@
 								  Immediate="true"
 								  Clearable="true"
 								  Class="add-shift-input" />
-
-			<div class="mb-6 flex flex-row items-center justify-end gap-x-4">
-				<CustomButton OnClick="Cancel"
-							  Class="px-6 py-3 rounded-2xl shadow-lg text-xs font-semibold ring-1 ring-divider/40 dark:ring-divider-dark/70 text-foreground dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-hover hover:dark:bg-surface-dark/70">
-					Cancel
-				</CustomButton>
-				<SubmitButton OnClick="Submit"
-							  Class="px-6 py-3">
-					Save
-				</SubmitButton>
-			</div>
 		</div>
 	</DialogContent>
+	<DialogActions>
+		<div class="px-4 flex flex-row items-center gap-x-4">
+			<CustomButton OnClick="Cancel"
+						  Class="px-6 py-3 rounded-2xl shadow-lg text-xs font-semibold ring-1 ring-divider/40 dark:ring-divider-dark/70 text-foreground dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-hover hover:dark:bg-surface-dark/70">
+				Cancel
+			</CustomButton>
+			<SubmitButton OnClick="Submit"
+						  Class="px-6 py-3">
+				Save
+			</SubmitButton>
+		</div>
+	</DialogActions>
 </MudDialog>
 
 @namespace GOPS.Blazor.Server.Components.Internal
