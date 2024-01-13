@@ -6,11 +6,13 @@ body {
 	font-family: Inter;
 }
 
-.gops-scrollbar::-webkit-scrollbar-thumb {
-	@apply bg-foreground/40 dark:bg-foreground-dark;
+.gops-scrollbar{
+	&::-webkit-scrollbar-thumb {
+		@apply bg-foreground/40 dark:bg-foreground-dark;
 
-	&:hover {
-		@apply bg-foreground/50 dark:bg-foreground-dark/80;
+		&:hover {
+			@apply bg-foreground/50 dark:bg-foreground-dark/80;
+		}
 	}
 }
 
@@ -107,7 +109,11 @@ body {
 
 .add-shift {
 	&-dialog {
-		@apply md:w-[40vw] md:h-[90%] py-2 px-px md:py-4 md:px-2 md:rounded-2xl md:border md:border-border md:dark:border-border-dark bg-surface dark:bg-background-dark;
+		@apply lg:w-[40vw] lg:h-[90%] px-px lg:px-2 lg:rounded-2xl lg:border lg:border-border lg:dark:border-border-dark bg-surface dark:bg-background-dark;
+
+		.mud-dialog-content.mud-dialog-no-side-padding {
+			@apply pt-0;
+		}
 	}
 
 	&-select-popover {

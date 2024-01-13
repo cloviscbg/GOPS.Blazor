@@ -1,4 +1,4 @@
-﻿<MudDialog Class="add-shift-dialog">
+﻿<MudDialog DisableSidePadding="true" Class="add-shift-dialog">
 	<TitleContent>
 		<div class="flex flex-row items-center">
 			<span class="select-none font-black text-2xl text-foreground-accent dark:text-foreground-accentdark">
@@ -22,7 +22,8 @@
 
 	</TitleContent>
 	<DialogContent>
-		<div class="flex flex-col gap-y-6">
+		<div class="gops-scrollbar h-[calc(100vh-12rem)] px-6 flex flex-col gap-y-6"
+			 style="overflow-y: scroll">
 			<MudSelectExtended T="int"
 							   ItemCollection="@colors"
 							   @bind-Value="@SelectedColor"
@@ -44,7 +45,7 @@
 				</ItemTemplate>
 			</MudSelectExtended>
 
-			<div class="@(ShiftColor.FromValue(SelectedShift!.Color).ToString()) w-full h-[5rem] rounded-2xl border-l-[4px] dark:border-r dark:border-y dark:bg-surface-dark">
+			<div class="@(ShiftColor.FromValue(SelectedShift!.Color).ToString()) w-full h-[5rem] flex-shrink-0 rounded-2xl border-l-[4px] dark:border-r dark:border-y dark:bg-surface-dark">
 				<div class="flex flex-col items-start justify-start w-full h-full !px-1 !py-2 select-none text-xs font-normal italic text-foreground dark:text-foreground-accentdark">
 					@StartDate?.ToString(@"HH:mm") @EndDate?.ToString(@"HH:mm")
 				</div>
@@ -169,20 +170,31 @@
 								  Immediate="true"
 								  Clearable="true"
 								  Class="add-shift-input" />
+
+			<div class="mb-6 flex flex-row items-center justify-end gap-x-4">
+				<CustomButton OnClick="Cancel"
+							  Class="px-6 py-3 rounded-2xl shadow-lg text-xs font-semibold ring-1 ring-divider/40 dark:ring-divider-dark/70 text-foreground dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-hover hover:dark:bg-surface-dark/70">
+					Cancel
+				</CustomButton>
+				<SubmitButton OnClick="Submit"
+							  Class="px-6 py-3">
+					Save
+				</SubmitButton>
+			</div>
 		</div>
 	</DialogContent>
-	<DialogActions>
-		<div class="mt-32 md:mt-8 px-4 flex flex-row items-center justify-end gap-x-4">
-			<CustomButton OnClick="Cancel"
-						  Class="px-6 py-3 rounded-2xl shadow-lg text-xs font-semibold ring-1 ring-divider/40 dark:ring-divider-dark/70 text-foreground dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-hover hover:dark:bg-surface-dark/70">
-				Cancel
-			</CustomButton>
-			<SubmitButton OnClick="Submit"
-						  Class="px-6 py-3">
-				Save
-			</SubmitButton>
-		</div>
-	</DialogActions>
+	@* 	<DialogActions>
+	<div class="mt-32 md:mt-8 px-4 flex flex-row items-center justify-end gap-x-4">
+	<CustomButton OnClick="Cancel"
+	Class="px-6 py-3 rounded-2xl shadow-lg text-xs font-semibold ring-1 ring-divider/40 dark:ring-divider-dark/70 text-foreground dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-hover hover:dark:bg-surface-dark/70">
+	Cancel
+	</CustomButton>
+	<SubmitButton OnClick="Submit"
+	Class="px-6 py-3">
+	Save
+	</SubmitButton>
+	</div>
+	</DialogActions> *@
 </MudDialog>
 
 @namespace GOPS.Blazor.Server.Components.Internal
