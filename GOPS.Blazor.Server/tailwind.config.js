@@ -160,6 +160,14 @@ module.exports = {
 					8: {
 						DEFAULT: 'rgba(244, 114, 182, 0.2)',
 						dark: 'rgba(236, 72, 153, 0.8)'
+					},
+					9: {
+						DEFAULT: 'rgba(253, 224, 71, 0.2)',
+						dark: 'rgba(250, 204, 21, 0.8)'
+					},
+					10: {
+						DEFAULT: 'rgba(203, 213, 225, 0.2)',
+						dark: 'rgba(148, 163, 184, 0.8)'
 					}
 				}
 			}
@@ -174,7 +182,10 @@ module.exports = {
 		'bg-shift-5', 'bg-shift-5-dark', 'border-shift-5-dark', 'border-l-shift-5-dark', 'border-r-shift-5', 'border-y-shift-5', 'dark:!border-shift-5-dark',
 		'bg-shift-6', 'bg-shift-6-dark', 'border-shift-6-dark', 'border-l-shift-6-dark', 'border-r-shift-6', 'border-y-shift-6', 'dark:!border-shift-6-dark',
 		'bg-shift-7', 'bg-shift-7-dark', 'border-shift-7-dark', 'border-l-shift-7-dark', 'border-r-shift-7', 'border-y-shift-7', 'dark:!border-shift-7-dark',
-		'bg-shift-8', 'bg-shift-8-dark', 'border-shift-8-dark', 'border-l-shift-8-dark', 'border-r-shift-8', 'border-y-shift-8', 'dark:!border-shift-8-dark'
+		'bg-shift-8', 'bg-shift-8-dark', 'border-shift-8-dark', 'border-l-shift-8-dark', 'border-r-shift-8', 'border-y-shift-8', 'dark:!border-shift-8-dark',
+		'bg-shift-9', 'bg-shift-9-dark', 'border-shift-9-dark', 'border-l-shift-9-dark', 'border-r-shift-9', 'border-y-shift-9', 'dark:!border-shift-9-dark',
+		'bg-shift-10', 'bg-shift-10-dark', 'border-shift-10-dark', 'border-l-shift-10-dark', 'border-r-shift-10', 'border-y-shift-10', 'dark:!border-shift-10-dark'
+
 	],
 
 	plugins: [],
