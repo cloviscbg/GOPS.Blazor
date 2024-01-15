@@ -10,15 +10,14 @@ body {
 	background-color: transparent;
 }
 
-.gops-scrollbar {
-	&::-webkit-scrollbar-thumb {
-		@apply bg-foreground/40 dark:bg-foreground-dark;
+::-webkit-scrollbar-thumb {
+	@apply bg-foreground/40 dark:bg-foreground-dark;
 
-		&:hover {
-			@apply bg-foreground/50 dark:bg-foreground-dark/80;
-		}
+	&:hover {
+		@apply bg-foreground/50 dark:bg-foreground-dark/80;
 	}
 }
+
 
 /* MudBlazor Overrides */
 
@@ -164,7 +163,7 @@ body {
 		}
 
 		.mud-list-extended {
-			@apply gops-scrollbar px-4;
+			@apply px-4;
 
 			.mud-input > input.mud-input-root-outlined, div.mud-input-slot.mud-input-root-outlined {
 				padding: 18.5px 14px;

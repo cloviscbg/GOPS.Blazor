@@ -3,7 +3,7 @@
 					  OnOffsetDate="OffsetDate" />
 
 	<div id="scheduler_section"
-		 class="gops-scrollbar flex flex-col overflow-auto h-[calc(100vh-280px)] md:h-[calc(100vh-276px)] rounded-2xl">
+		 class="scheduler-scrollbar flex flex-col overflow-auto h-[calc(100vh-280px)] md:h-[calc(100vh-276px)] rounded-2xl">
 		<div class="flex z-60 min-w-fit pb-1 rounded-b-2xl bg-surface dark:bg-surface-dark"
 			 style="@FixedStyle">
 			<div class="grid w-full gap-y-1"
@@ -66,6 +66,11 @@
 				<path d="M5 16L12 9L19 16" />
 			</svg>
 		</MudScrollToTop>
+
+		<MudScrollbar Selector=".scheduler-scrollbar"
+					  Hide="false"
+					  Style="width: 0px !important;"
+					  BorderRadius="6" />
 
 	</div>
 </CascadingValue>
