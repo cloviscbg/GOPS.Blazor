@@ -26,7 +26,6 @@
 									<MudTextFieldExtended T="string"
 														  Value="@note?.Text"
 														  Lines="3"
-														  id="test"
 														  Variant="Variant.Outlined"
 														  AutoFocus="false"
 														  FullWidth="true"
@@ -42,19 +41,19 @@
 											AnchorOrigin="Origin.CenterLeft"
 											TransformOrigin="Origin.CenterLeft"
 											Class="max-sm:!hidden w-[16rem] md:w-[36rem] !drop-shadow rounded-2xl">
-									<MudTextFieldExtended Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl"
+									<MudTextFieldExtended T="string"
+														  Lines="3"
 														  Variant="Variant.Outlined"
 														  Placeholder="Add note..."
 														  AutoFocus="true"
 														  Clearable="true"
 														  AutoSize="false"
-														  Lines="3"
-														  T="string"
 														  DebounceInterval="600"
 														  Value="@note?.Text"
 														  OnBlur="@(() => ClosePopup(currentDate!.Date.Day))"
 														  ValueChanged="@((args) => HandleOnNoteChange(args, note, currentDate.Date))"
-														  OnClearButtonClick="@(() => HandleOnNoteChange("", note, currentDate.Date))" />
+														  OnClearButtonClick="@(() => HandleOnNoteChange("", note, currentDate.Date))"
+														  Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl" />
 								</MudPopover>
 								<MudPopover @ref="popovers[currentDate.Date.Day]"
 											Open="@(PopupOpenState(currentDate.Date.Day) ? true : false)"
@@ -63,19 +62,19 @@
 											AnchorOrigin="Origin.CenterLeft"
 											TransformOrigin="Origin.CenterLeft"
 											Class="md:!hidden w-[16rem] md:w-[36rem] !drop-shadow rounded-2xl">
-									<MudTextFieldExtended Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl"
-														  Variant="Variant.Outlined"
+									<MudTextFieldExtended T="string"
+														  Lines="3"
 														  Placeholder="Add note..."
 														  AutoFocus="true"
 														  Clearable="true"
 														  AutoSize="false"
-														  Lines="3"
-														  T="string"
+														  Variant="Variant.Outlined"
 														  DebounceInterval="600"
 														  Value="@note?.Text"
 														  OnBlur="@(() => ClosePopup(note!.Date.Day))"
 														  ValueChanged="@((args) => HandleOnNoteChange(args, note, currentDate.Date))"
-														  OnClearButtonClick="@(() => HandleOnNoteChange("", note, currentDate.Date))" />
+														  OnClearButtonClick="@(() => HandleOnNoteChange("", note, currentDate.Date))"
+														  Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl" />
 								</MudPopover>
 							</CustomButton>
 						}
@@ -119,17 +118,17 @@
 											TransformOrigin="Origin.TopRight"
 											Elevation="0"
 											Class="!shadow-lg mt-2 rounded-2xl !w-[16rem] md:!w-[24rem] md:w-fit">
-									<MudTextFieldExtended Variant="Variant.Outlined"
+									<MudTextFieldExtended T="string"
+														  Lines="3"
 														  Placeholder="Add note..."
 														  AutoFocus="true"
 														  Clearable="true"
 														  AutoSize="false"
-														  Lines="3"
-														  T="string"
+														  Variant="Variant.Outlined"
 														  DebounceInterval="600"
 														  Value="@existentNote?.Text"
-														  OnClearButtonClick="@(() => HandleOnNoteChange("", existentNote, dayCell.Date))"
 														  OnBlur="@(() => ClosePopup(dayCell.Date.Day))"
+														  OnClearButtonClick="@(() => HandleOnNoteChange("", existentNote, dayCell.Date))"
 														  ValueChanged="@((args) => HandleOnNoteChange(args, existentNote, dayCell.Date))"
 														  OnKeyDown="@((args) => KeyPressed(args, dayCell.Date.Day))"
 														  Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:!border-border [&_.mud-input-outlined-border]:dark:!border-border:dark [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl" />
@@ -179,20 +178,20 @@
 											OverflowBehavior="OverflowBehavior.FlipAlways"
 											Elevation="0"
 											Class="!shadow-lg mt-2 rounded-2xl !w-[16rem] md:!w-[24rem] md:w-fit">
-									<MudTextFieldExtended Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:!border-border [&_.mud-input-outlined-border]:dark:!border-border:dark [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl"
+									<MudTextFieldExtended T="string"
+														  Lines="3"
 														  Variant="Variant.Outlined"
 														  Placeholder="Add note..."
 														  AutoFocus="true"
 														  Clearable="true"
 														  AutoSize="false"
-														  Lines="3"
-														  T="string"
 														  DebounceInterval="600"
 														  Value="@existentNote?.Text"
 														  OnClearButtonClick="@(() => HandleOnNoteChange("", existentNote, dayCell.Date))"
 														  OnBlur="@(() => ClosePopup(dayCell.Date.Day))"
 														  ValueChanged="@((args) => HandleOnNoteChange(args, existentNote, dayCell.Date))"
-														  OnKeyDown="@((args) => KeyPressed(args, dayCell.Date.Day))" />
+														  OnKeyDown="@((args) => KeyPressed(args, dayCell.Date.Day))"
+														  Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:!border-border [&_.mud-input-outlined-border]:dark:!border-border:dark [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl" />
 								</MudPopover>
 							}
 						</div>
