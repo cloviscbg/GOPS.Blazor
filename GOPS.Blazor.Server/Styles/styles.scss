@@ -18,12 +18,14 @@ body {
 	}
 }
 
+::-webkit-scrollbar-thumb {
+	border-radius: 6px !important;
+}
 
 /* MudBlazor Overrides */
-
-
 .mud-main-content {
-	@apply h-screen md:h-content sm:pt-[calc(var(--mud-appbar-height)_-_var(--mud-appbar-height)/8)] md:pt-0 md:rounded-2xl drop-shadow-xl md:border md:border-divider md:dark:border-divider-dark bg-surface dark:bg-surface-dark #{!important};
+	@apply h-screen md:h-content sm:pt-[calc(var(--mud-appbar-height)_-_var(--mud-appbar-height)/8)] md:pt-0 md:rounded-2xl drop-shadow-xl md:border md:border-divider md:dark:border-divider-dark bg-surface dark:bg-surface-dark #{!important
+};
 }
 
 .mud-appbar {
@@ -137,7 +139,7 @@ body {
 	&-dialog {
 		overflow-y: scroll;
 
-		@apply xs:min-w-[100vw] xs:min-h-[100vh] min-w-[500px] px-px sm:px-2 sm:rounded-2xl sm:border sm:border-border sm:dark:border-border-dark bg-surface dark:bg-background-dark;
+		@apply xs:min-w-[100vw] xs:min-h-[100vh] min-w-[500px] pl-2 sm:rounded-2xl sm:border sm:border-border sm:dark:border-border-dark bg-surface dark:bg-background-dark;
 
 		.mud-dialog-content.mud-dialog-no-side-padding {
 			@apply pt-0;
