@@ -27,8 +27,8 @@
 				@if (Scheduler?.CurrentView is ViewType.DayView)
 				{
 					var currentDate = Scheduler!.CurrentDate;
-					var shifts = GetShift(currentDate, people.Id);
-					var isPast = currentDate.IsPastDate();
+					var shifts = GetShift(currentDate!.Value, people.Id);
+					var isPast = currentDate!.Value.IsPastDate();
 
 					<SchedulerTimeCell Shifts="@shifts"
 									   ColumnCount="@Scheduler!.ColumnCount"
@@ -71,10 +71,10 @@
 	[Parameter]
 	public string? GridTemplateStyle { get; set; }
 
-	List<Shift> GetShift(DateTime date, Guid peopleId)
+	List<Shift> GetShift(DateTime? date, Guid peopleId)
 	{
 		var shifts = Scheduler?.Shifts?
-			.Where(x => x.PeopleId == peopleId && x.StartDate.IsDateEqual(date))
+			.Where(x => x.PeopleId == peopleId && x.StartDate.IsDateEqual(date!.Value))
 			.OrderBy(x => x.StartDate)
 			.ToList();
 

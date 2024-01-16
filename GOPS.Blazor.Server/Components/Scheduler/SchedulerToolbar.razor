@@ -1,11 +1,25 @@
 ﻿<div class="flex flex-row items-center md:justify-between md:justify-normal md:w-full p-2 md:p-4 mb-1 rounded-2xl bg-container dark:bg-container-dark">
 	<!--DatePicker Control-->
-	<CustomButton Elevation="true"
-				  Rounded="true"
-				  Class="px-6 py-3 text-xs font-semibold text-foreground-accent dark:text-foreground-dark bg-surface dark:bg-surface-dark hover:bg-surface/20 hover:dark:bg-surface-dark/70">
-		@Scheduler?.CurrentDateText
-	</CustomButton>
+	<MudDatePicker @bind-Date="@Scheduler!.CurrentDate"
+				   Variant="Variant.Outlined"
+				   ShowWeekNumbers="true"
+				   DateFormat="@Scheduler!.CurrentDateFormat"
+				   DisableToolbar="true"
+				   
+				   Adornment="Adornment.None"
+				   AnchorOrigin="Origin.BottomLeft"
+				   TransformOrigin="Origin.TopLeft"
+				   Class="shift-date-picker mr-2" />
 
+	<Spacer />
+	<Spacer />
+	<Spacer />
+	<Spacer />
+	<Spacer />
+	<Spacer />
+	<Spacer />
+	<Spacer />
+	<Spacer />
 	<Spacer />
 
 	<div class="flex flex-row items-center">

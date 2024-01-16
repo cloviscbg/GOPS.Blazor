@@ -16,10 +16,10 @@
 					<div class="flex flex-row w-full h-full justify-between rounded-r-2xl">
 						@{
 							var currentDate = Scheduler!.CurrentDate;
-							var note = Scheduler?.Notes?.SingleOrDefault(x => x.Date.IsDateEqual(currentDate));
+							var note = Scheduler?.Notes?.SingleOrDefault(x => x.Date.IsDateEqual(currentDate!.Value));
 
-							<CustomButton @ref="buttons[currentDate.Date.Day]"
-										  OnClick="@(() => OpenPopup(currentDate.Date.Day))"
+							<CustomButton @ref="buttons[currentDate!.Value.Date.Day]"
+										  OnClick="@(() => OpenPopup(currentDate!.Value.Date.Day))"
 										  Rounded="true"
 										  Class="h-full w-full group hover:bg-hover hover:dark:bg-hover-dark">
 								<div class="w-full h-full flex ml-4 pb-1 items-start justify-start text-xs text-foreground dark:text-foreground-dark @(note is null || string.IsNullOrEmpty(note.Text) ? "" : "before:content-['*'] before:absolute before:top-[0.4rem] before:left-[0.5rem] before:font-semibold before:text-[0.9rem]")">
@@ -34,8 +34,8 @@
 														  Placeholder="Add new note..."
 														  Class="!mt-3 !pl-2 [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_textarea]:!m-0 [&_textarea]:!p-0 [&_textarea]:!text-xs [&_textarea]:!italic [&_textarea]:!font-medium [&_.mud-input-outlined-border]:!border-transparent" />
 								</div>
-								<MudPopover @ref="popovers[currentDate.Date.Day]"
-											Open="@(PopupOpenState(currentDate.Date.Day) ? true : false)"
+								<MudPopover @ref="popovers[currentDate!.Value.Date.Day]"
+											Open="@(PopupOpenState(currentDate!.Value.Date.Day) ? true : false)"
 											Elevation="0"
 											RelativeWidth="true"
 											AnchorOrigin="Origin.CenterLeft"
@@ -50,13 +50,13 @@
 														  AutoSize="false"
 														  DebounceInterval="600"
 														  Value="@note?.Text"
-														  OnBlur="@(() => ClosePopup(currentDate!.Date.Day))"
-														  ValueChanged="@((args) => HandleOnNoteChange(args, note, currentDate.Date))"
-														  OnClearButtonClick="@(() => HandleOnNoteChange("", note, currentDate.Date))"
+														  OnBlur="@(() => ClosePopup(currentDate!.Value.Date.Day))"
+														  ValueChanged="@((args) => HandleOnNoteChange(args, note, currentDate!.Value.Date))"
+														  OnClearButtonClick="@(() => HandleOnNoteChange("", note, currentDate!.Value.Date))"
 														  Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl" />
 								</MudPopover>
-								<MudPopover @ref="popovers[currentDate.Date.Day]"
-											Open="@(PopupOpenState(currentDate.Date.Day) ? true : false)"
+								<MudPopover @ref="popovers[currentDate!.Value.Date.Day]"
+											Open="@(PopupOpenState(currentDate!.Value.Date.Day) ? true : false)"
 											Elevation="0"
 											RelativeWidth="false"
 											AnchorOrigin="Origin.CenterLeft"
@@ -72,8 +72,8 @@
 														  DebounceInterval="600"
 														  Value="@note?.Text"
 														  OnBlur="@(() => ClosePopup(note!.Date.Day))"
-														  ValueChanged="@((args) => HandleOnNoteChange(args, note, currentDate.Date))"
-														  OnClearButtonClick="@(() => HandleOnNoteChange("", note, currentDate.Date))"
+														  ValueChanged="@((args) => HandleOnNoteChange(args, note, currentDate!.Value.Date))"
+														  OnClearButtonClick="@(() => HandleOnNoteChange("", note, currentDate!.Value.Date))"
 														  Class="id2 !mt-0 rounded-2xl !bg-background dark:!bg-background-dark [&_.mud-input]:text-foreground [&_.mud-input]:dark:text-foreground-dark [&_.mud-icon-size-small]:text-[1rem] [&_.mud-icon-size-small]:text-foreground [&_.mud-icon-size-small]:dark:text-foreground-dark [&_textarea]:!whitespace-pre [&_textarea]:!m-1 [&_textarea]:!p-2 [&_textarea]:!text-sm [&_.mud-input-outlined-border]:focus-within:!border-primary [&_.mud-input-outlined-border]:dark:focus-within:!border-secondary [&_.mud-input-outlined-border]:!rounded-2xl" />
 								</MudPopover>
 							</CustomButton>

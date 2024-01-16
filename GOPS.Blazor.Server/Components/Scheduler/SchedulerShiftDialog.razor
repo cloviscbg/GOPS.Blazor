@@ -1,6 +1,11 @@
 ﻿<MudDialog DisableSidePadding="true" Class="add-shift-dialog">
 	<TitleContent>
 		<div class="flex flex-row items-center">
+			<MudMenu>
+				<ActivatorContent>
+
+				</ActivatorContent>
+			</MudMenu>
 			<span class="select-none font-black text-2xl text-foreground-accent dark:text-foreground-accentdark">
 				@Title
 			</span>
@@ -19,7 +24,6 @@
 				</svg>
 			</MudIconButton>
 		</div>
-
 	</TitleContent>
 	<DialogContent>
 		<div class="px-6 flex flex-col gap-y-6">
@@ -195,6 +199,7 @@
 	List<TimeSpan> listTimes = [];
 	List<int>? colors;
 	int selectedColor;
+	bool showTimeOff;
 
 	[CascadingParameter]
 	MudDialogInstance? MudDialog { get; set; }
