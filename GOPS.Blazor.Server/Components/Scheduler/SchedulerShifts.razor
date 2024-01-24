@@ -1,4 +1,69 @@
-﻿<div class="flex flex-col pt-3 gap-y-6 bg-surface dark:bg-surface-dark">
+﻿
+@* 	<SortableWrapper OnDataChanged="@(() => InvokeAsync(StateHasChanged))">
+		<Sortable TItem="People"
+				  Items="Peoples"
+				  Options="@options"
+				  Class="flex flex-col pt-3 gap-y-6 bg-surface dark:bg-surface-dark">
+			<Template Context="people">
+				@{
+					var totalHours = Scheduler?.GetTotalHoursPerPeople(people.Id);
+
+					<div @key="people.Id"
+						 class="flex flex-row min-h-24 shadow-lg ring-1 ring-inset dark:ring-0 ring-border rounded-2xl bg-surface dark:bg-container-dark">
+						<div class="grid w-full"
+							 style="@GridTemplateStyle">
+							<div class="z-50 w-[5rem] md:w-[10rem] cursor-pointer rounded-r-2xl bg-surface dark:bg-surface-dark"
+								 style="@FixedStyle">
+								<div class="flex rounded-2xl w-full h-full items-center py-4 pl-4 md:!pl-3 pr-3 border-r border-border dark:border-border-dark bg-surface dark:bg-container-dark">
+
+									<User Title="@people.ToString()"
+										  Description=@($"{totalHours} Hrs")
+										  Image="@people.ImageProfile"
+										  TooltipPlacement="Placement.Right"
+										  Class="overflow-hidden"
+										  AvatarClass="hidden md:flex !h-12 !w-12 bg-container dark:bg-surface-dark"
+										  ImageClass="inline-block h-12 w-12"
+										  FallBackClass="text-base font-black leading-none text-primary-400 dark:text-primary-400"
+										  TitleClass="text-ellipsis whitespace-break-spaces overflow-hidden font-black text-xs text-foreground dark:text-foreground-dark"
+										  DescriptionClass="text-xs font-medium text-foreground- dark:text-foreground-dark" />
+								</div>
+							</div>
+
+							@if (Scheduler?.CurrentView is ViewType.DayView)
+							{
+								var currentDate = Scheduler!.CurrentDate;
+								var shifts = GetShift(currentDate!.Value, people.Id);
+								var isPast = currentDate!.Value.IsPastDate();
+
+								<SchedulerTimeCell Shifts="@shifts"
+												   ColumnCount="@Scheduler!.ColumnCount"
+												   Disabled="@isPast"
+												   DisableRipple="@isPast" />
+							}
+							else
+							{
+								@foreach (var dayCell in Scheduler?.DayCells ?? new())
+								{
+									var shifts = GetShift(dayCell.Date, people.Id);
+									var isPast = dayCell.Date.IsPastDate();
+
+									<SchedulerDayCell Shifts="@shifts"
+													  Disabled="@isPast"
+													  DisableRipple="@isPast"
+													  OnDoubleClick="@((shift) => OpenDialog(shift, people, dayCell.Date))" />
+								}
+
+								<div class="rounded-r-2xl"></div>
+							}
+						</div>
+					</div>
+				}
+
+			</Template>
+		</Sortable>
+	</SortableWrapper> *@
+
+<div class="flex flex-col pt-3 gap-y-6 bg-surface dark:bg-surface-dark">
 	@foreach (var people in Peoples ?? [])
 	{
 		var totalHours = Scheduler?.GetTotalHoursPerPeople(people.Id);
@@ -6,9 +71,9 @@
 		<div @key="people.Id"
 			 class="flex flex-row min-h-24 shadow-lg ring-1 ring-inset dark:ring-0 ring-border rounded-2xl bg-surface dark:bg-container-dark">
 			<div class="grid w-full"
-				 style="@GridTemplateStyle">
+				 style="@Scheduler!.GridTemplateStyle">
 				<div class="z-50 w-[5rem] md:w-[10rem] cursor-pointer rounded-r-2xl bg-surface dark:bg-surface-dark"
-					 style="@FixedStyle">
+					 style="@Scheduler!.FixedStyle">
 					<div class="flex rounded-2xl w-full h-full items-center py-4 pl-4 md:!pl-3 pr-3 border-r border-border dark:border-border-dark bg-surface dark:bg-container-dark">
 
 						<User Title="@people.ToString()"
@@ -58,6 +123,13 @@
 @namespace GOPS.Blazor.Server.Components.Internal
 
 @code {
+	readonly object options = new
+	{
+		animation = 100,
+		ghostClass = "sortable-ghost",
+		touchStartThreshold = 0.5,
+		fallbackTolerance = 3
+	};
 
 	[CascadingParameter]
 	Scheduler? Scheduler { get; set; }
@@ -67,9 +139,6 @@
 
 	[Parameter]
 	public string? FixedStyle { get; set; }
-
-	[Parameter]
-	public string? GridTemplateStyle { get; set; }
 
 	List<Shift> GetShift(DateTime? date, Guid peopleId)
 	{

@@ -20,6 +20,14 @@ body {
   border-radius: 6px !important;
 }
 
+.sortable-ghost {
+  @apply border-2 border-primary-400 dark:border-teal-400 !important;
+}
+
+.sortable-handle {
+  @apply cursor-grab;
+}
+
 /* MudBlazor Overrides */
 .mud-main-content {
   @apply h-screen md:h-content sm:pt-[calc(var(--mud-appbar-height)_-_var(--mud-appbar-height)/8)] md:pt-0 md:rounded-2xl drop-shadow-xl md:border md:border-divider md:dark:border-divider-dark bg-surface dark:bg-surface-dark !important;
@@ -225,4 +233,4 @@ body {
   @apply dark:bg-surface-dark !important;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///D:/Sauce/GOPS/client/blazor/src/GOPS.Blazor.Server/Styles/styles.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;AACA;AACA;AAEA;EACC;;;AAGD;EACC;;;AAGD;EACC;;AAEA;EACC;;;AAIF;EACC;;;AAGD;AAEA;EACC;;;AAGD;EACC;;AAEA;EACC;;;AAIF;EACC;;AAEA;EACC;;;AAKF;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAID;EACC;EACA;EACA;EACA;;;AAGD;EACC;;AAEA;EACC;;AAEA;EACC;;AAGD;EACC;;AAIF;EACC;;;AAKD;EACC;;AAEA;EACC;;AAKC;EACC;;AAIF;EACC;;AAIF;EACC;;AAIF;EACC;;AAGD;EACC;;;AAKD;EACC;;;AAKD;EACC;;AAIA;EACC;;AAEA;EACC;;AAEA;EACC;;AAIF;EACC;;AAKD;EACC;;AAIF;EAEC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAKH;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAKD;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;;AAMJ;EACC;;;AAKC;EACC;;AAGD;EACC;;AAGD;EACC;;AAGD;EACC;;AAGD;EACC;;;AAMF;EACC;EAEA;;AAEA;EACC;;AAGD;EACC;;AAIF;EACC;;AAEA;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAEA;EACC;;AAMF;EACC;;AAGD;EACC;;AAIF;EACC%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///D:/Sauce/GOPS/client/blazor/src/GOPS.Blazor.Server/Styles/styles.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAA;AACA;AACA;AAEA;EACC;;;AAGD;EACC;;;AAGD;EACC;;AAEA;EACC;;;AAIF;EACC;;;AAID;EACC;;;AAGD;EACC;;;AAGD;AAEA;EACC;;;AAGD;EACC;;AAEA;EACC;;;AAIF;EACC;;AAEA;EACC;;;AAKF;EACC;;;AAGD;EACC;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;;AAID;EACC;EACA;EACA;EACA;;;AAGD;EACC;;AAEA;EACC;;AAEA;EACC;;AAGD;EACC;;AAIF;EACC;;;AAKD;EACC;;AAEA;EACC;;AAKC;EACC;;AAIF;EACC;;AAIF;EACC;;AAIF;EACC;;AAGD;EACC;;;AAKD;EACC;;;AAKD;EACC;;AAIA;EACC;;AAEA;EACC;;AAEA;EACC;;AAIF;EACC;;AAKD;EACC;;AAIF;EAEC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAKH;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;AAKD;EACC;;AAEA;EACC;;AAGD;EACC;;AAGD;EACC;;;AAMJ;EACC;;;AAKC;EACC;;AAGD;EACC;;AAGD;EACC;;AAGD;EACC;;AAGD;EACC;;;AAMF;EACC;EAEA;;AAEA;EACC;;AAGD;EACC;;AAIF;EACC;;AAEA;EACC;;AAGD;EACC;;AAEA;EACC;;AAIF;EACC;;AAEA;EACC;;AAMF;EACC;;AAGD;EACC;;AAIF;EACC%22%7D */

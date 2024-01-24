@@ -4,7 +4,7 @@
 
 	<div id="scheduler_section"
 		 class="scheduler-scrollbar flex flex-col overflow-auto h-[calc(100vh-280px)] md:h-[calc(100vh-276px)] rounded-2xl">
-		<div class="flex z-60 min-w-fit pb-1 rounded-b-2xl bg-surface dark:bg-surface-dark"
+		<div class="flex flex-col z-60 min-w-fit pb-1 rounded-b-2xl bg-surface dark:bg-surface-dark"
 			 style="@FixedStyle">
 			<div class="grid w-full gap-y-1"
 				 style="@GridTemplateStyle">
@@ -18,37 +18,81 @@
 
 		@if (ViewByPeople)
 		{
-			@if (ShowGroups)
+			@if (showGroups)
 			{
-				<SchedulerGroup @ref="@schedulerGroup"
-								T="Group"
-								Groups="Groups">
-					<TitleContent Context="groupHeader">
-						<SchedulerGroupTitle GroupName="@groupHeader.Name"
-											 PeopleCount="@groupHeader.Peoples.Count"
-											 TotalGroupHours="GetTotalHoursPerGroup(groupHeader.Id)" />
-					</TitleContent>
+				<SortableWrapper OnDataChanged="@(() => StateChange())">
+					<Sortable TItem="Group"
+							  Items="Groups"
+							  Options="@options"
+							  Class="min-w-fit mt-2 flex flex-col gap-y-4">
+						<Template Context="group">
+							<MudExpansionPanels MultiExpansion="true"
+												Elevation="0"
+												Class="scheduler-groups"
+												Style="-webkit-tap-highlight-color: transparent">
+								<MudExpansionPanel @key="group"
+												   HideIcon="true"
+												   Class="">
+									<TitleContent>
+										<SchedulerGroupTitle GroupName="@group.Name"
+															 PeopleCount="@group.Peoples.Count"
+															 TotalGroupHours="GetTotalHoursPerGroup(group.Id)" />
+									</TitleContent>
 
-					<ShiftContent Context="group">
-						<SchedulerShifts Peoples="group.Peoples"
-										 FixedStyle="@FixedStyle"
-										 GridTemplateStyle="@GridTemplateStyle" />
-					</ShiftContent>
-				</SchedulerGroup>
+									<ChildContent>
+										<SchedulerShifts Peoples="group.Peoples" />
+									</ChildContent>
+								</MudExpansionPanel>
+							</MudExpansionPanels>
+						</Template>
+					</Sortable>
+				</SortableWrapper>
 			}
 			else
 			{
 				<div class="min-w-fit">
-					<SchedulerShifts Peoples="Peoples"
-									 FixedStyle="@FixedStyle"
-									 GridTemplateStyle="@GridTemplateStyle" />
+					<SchedulerShifts Peoples="Peoples" />
 				</div>
 			}
 		}
 		else
 		{
-			
+
 		}
+
+		@* 		@if (ViewByPeople)
+		{
+		@if (ShowGroups)
+		{
+		<SchedulerGroup @ref="@schedulerGroup"
+		T="Group"
+		Groups="Groups">
+		<TitleContent Context="groupHeader">
+		<SchedulerGroupTitle GroupName="@groupHeader.Name"
+		PeopleCount="@groupHeader.Peoples.Count"
+		TotalGroupHours="GetTotalHoursPerGroup(groupHeader.Id)" />
+		</TitleContent>
+
+		<ShiftContent Context="group">
+		<SchedulerShifts Peoples="group.Peoples"
+		FixedStyle="@FixedStyle"
+		GridTemplateStyle="@GridTemplateStyle" />
+		</ShiftContent>
+		</SchedulerGroup>
+		}
+		else
+		{
+		<div class="min-w-fit">
+		<SchedulerShifts Peoples="Peoples"
+		FixedStyle="@FixedStyle"
+		GridTemplateStyle="@GridTemplateStyle" />
+		</div>
+		}
+		}
+		else
+		{
+
+		} *@
 
 
 		<MudScrollToTop TopOffset="100"

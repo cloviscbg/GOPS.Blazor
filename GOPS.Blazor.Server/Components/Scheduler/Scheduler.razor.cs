@@ -6,7 +6,6 @@ using GOPS.Client.Shared.Utils;
 using GOPS.Client.Shared.Extensions;
 using GOPS.Client.Shared.Services;
 using GOPS.Blazor.Server.Components.Internal;
-using ZXing;
 
 namespace GOPS.Blazor.Server.Components;
 public partial class Scheduler
@@ -23,13 +22,23 @@ public partial class Scheduler
 	bool showNotes;
 	SchedulerGroup<Group>? schedulerGroup;
 
-	string GridTemplateStyle => new CssBuilder()
+	readonly object options = new
+	{
+		animation = 700,
+		easing = "cubic-bezier(.17,.67,.83,.67)",
+		handle = ".sortable-handle",
+		ghostClass = "sortable-ghost",
+		touchStartThreshold = 0.5,
+		fallbackTolerance = 3
+	};
+
+	public string GridTemplateStyle => new CssBuilder()
 		.AddClass($"grid-template-columns: auto repeat({columnCount}, minmax(1.5rem, 1fr)) 2rem;", CurrentView is ViewType.DayView)
 		.AddClass($"grid-template-columns: auto repeat({columnCount}, minmax(9rem, 1fr)) 1rem;", CurrentView is ViewType.WeekView)
 		.AddClass($"grid-template-columns: auto repeat({columnCount},minmax(4rem, 1fr)) 1rem;", CurrentView is ViewType.MonthView)
 		.Build();
 
-	string FixedStyle => new CssBuilder()
+	public string FixedStyle => new CssBuilder()
 		.AddClass("position: sticky!important;top: 0;", FixedHeader)
 		.AddClass("position: sticky!important;left: 0;", FixedMember)
 		.Build();
@@ -78,9 +87,6 @@ public partial class Scheduler
 				UpdateView();
 				return;
 			}
-
-			//if (value!.Value.IsDateEqual(currentDate!.Value))
-			//	return;
 
 			if (CheckDate(value))
 				return;
@@ -251,14 +257,15 @@ public partial class Scheduler
 			case ViewType.DayView:
 				//Get the total minutes of 24h and then divide for the desired DefaultMinutesInterval to get the total column count of the grid;
 				columnCount = 1440 / DefaultMinutesInterval;
-				CurrentDateFormat = "ddd, dd MMM yy";
-				CurrentDateText = CurrentDate?.ToString("ddd, dd MMM yy").Capitalize()!;
+				CurrentDateFormat = "ddd, dd MMMM yyyy";
+				CurrentDateText = CurrentDate?.ToString("ddd, dd MMMM yyyy").Capitalize()!;
 				break;
 			case ViewType.WeekView:
 				columnCount = 7;
 				DayCells = CurrentDate?.FromFirstDayOfWeek().CreateDayCells(columnCount).ToList();
-				CurrentDateFormat = "dd MMM yyyy";
-				CurrentDateText = CurrentDate?.ToString("dd MMM yyyy").Capitalize()!;
+				var week = CurrentDate!.Value.GetWeekNumber();
+				CurrentDateFormat = $"Week {week} - dd MMMM yyyy";
+				CurrentDateText = CurrentDate?.ToString("dd MMMM yyyy").Capitalize()!;
 				break;
 			case ViewType.MonthView:
 				columnCount = CurrentDate!.Value.EndOfMonth().Day;

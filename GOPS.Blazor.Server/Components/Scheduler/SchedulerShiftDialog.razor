@@ -92,7 +92,7 @@
 							   IconSize="Size.Small"
 							   Class="add-shift-input" />
 
-				@if (EndDate!.Value.Date > StartDate!.Value.Date)
+				@if (EndDate?.Date > StartDate?.Date)
 				{
 					<svg class="h-5 w-5 mt-2 text-foreground dark:text-foreground-dark"
 						 viewBox="0 0 24 24"
@@ -158,7 +158,7 @@
 					</ItemTemplate>
 				</MudSelectExtended>
 
-				<span class="mt-2 text-base font-black text-teal-400">
+				<span class="mt-2 text-base font-black text-primary-400 dark:text-teal-400">
 					@totalHoursText
 				</span>
 			</div>
@@ -260,24 +260,18 @@
 
 		if (SelectedShift is null)
 		{
-			StartTime = TimeSpan.FromHours(DateTime.Now.Hour);
-			EndTime = startTime + TimeSpan.FromHours(6);
+			startTime = TimeSpan.FromHours(DateTime.Now.Hour);
+			endTime = startTime + TimeSpan.FromHours(6);
+			StartDate = StartDate + startTime;
+			EndDate = StartDate + endTime;
 			selectedColor = RandomExtension.PickRandom(ShiftColor.List)!.Value;
-
-			SelectedShift = new()
-				{
-					StartDate = this.StartDate!.Value,
-					EndDate = this.StartDate!.Value,
-					Color = selectedColor
-				};
-
 			base.OnInitialized();
 			return;
 		}
 
 		isReadOnly = true;
-		StartTime = SelectedShift.StartDate.TimeOfDay;
-		EndTime = SelectedShift.EndDate.TimeOfDay;
+		startTime = SelectedShift.StartDate.TimeOfDay;
+		endTime = SelectedShift.EndDate.TimeOfDay;
 		selectedColor = SelectedShift.Color;
 		base.OnInitialized();
 	}

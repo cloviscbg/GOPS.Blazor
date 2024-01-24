@@ -4,8 +4,9 @@
 				   Variant="Variant.Outlined"
 				   ShowWeekNumbers="true"
 				   DateFormat="@Scheduler!.CurrentDateFormat"
+				   Culture="@culture"
 				   DisableToolbar="true"
-				   
+				   StartMonth="@Scheduler!.CurrentDate"
 				   Adornment="Adornment.None"
 				   AnchorOrigin="Origin.BottomLeft"
 				   TransformOrigin="Origin.TopLeft"
@@ -113,7 +114,7 @@
 				</MudMenuItem>
 				<Divider Class="md:hidden w-[95%] my-1" />
 				<MudMenuItem Class="md:hidden px-4 py-3 rounded-2xl hover:bg-hover hover:dark:bg-container-dark"
-							 OnClick=@(() => OffsetDate(0))>
+							 OnAction="@(() => OffsetDate(0))">
 					<span class="text-sm text-foreground dark:text-foreground-dark">
 						Go to today
 					</span>
@@ -380,10 +381,12 @@
 </div>
 
 @namespace GOPS.Blazor.Server.Components.Internal
+@using System.Globalization
 
 @code {
 	bool showFlights;
 	bool showShiftConflicts;
+	CultureInfo culture;
 
 	string menuItemClass => new CssBuilder("text-sm text-foreground dark:text-foreground-dark")
 		.AddClass("!text-disabled dark:!text-disabled-dark", !Scheduler!.ShowGroups)
@@ -400,6 +403,13 @@
 
 	[Parameter]
 	public EventCallback<bool> OnOptionsChange { get; set; }
+
+	protected override void OnInitialized()
+	{
+		culture = new CultureInfo("EN-en");
+		base.OnInitialized();
+	}
+
 
 	async Task OffsetDate(int offset)
 	{

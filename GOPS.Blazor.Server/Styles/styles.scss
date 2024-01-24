@@ -22,6 +22,15 @@ body {
 	border-radius: 6px !important;
 }
 
+
+.sortable-ghost {
+	@apply border-2 border-primary-400 dark:border-teal-400 #{!important};
+}
+
+.sortable-handle {
+	@apply cursor-grab;
+}
+
 /* MudBlazor Overrides */
 
 .mud-main-content {
