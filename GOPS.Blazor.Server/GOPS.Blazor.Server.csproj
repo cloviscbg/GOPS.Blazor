@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\shared\GOPS.Client.Shared\GOPS.Client.Shared.csproj" />
     <ProjectReference Include="..\GOPS.Blazor.Wasm\GOPS.Blazor.Wasm.csproj" />
   </ItemGroup>
 

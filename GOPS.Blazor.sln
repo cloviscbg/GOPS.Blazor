@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GOPS.Blazor.Server", "GOPS.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GOPS.Blazor.Wasm", "GOPS.Blazor.Wasm\GOPS.Blazor.Wasm.csproj", "{9429655E-AADE-412E-A3EF-31597280B4A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GOPS.Client.Shared", "..\..\..\shared\GOPS.Client.Shared\GOPS.Client.Shared.csproj", "{56181D16-869B-4CEE-9335-1E488CEAA270}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GOPS.Client.Shared", "GOPS.Client.Shared\GOPS.Client.Shared.csproj", "{69563374-6E6E-47CB-BA4D-0F02EF9E14F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{9429655E-AADE-412E-A3EF-31597280B4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9429655E-AADE-412E-A3EF-31597280B4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9429655E-AADE-412E-A3EF-31597280B4A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56181D16-869B-4CEE-9335-1E488CEAA270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56181D16-869B-4CEE-9335-1E488CEAA270}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56181D16-869B-4CEE-9335-1E488CEAA270}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56181D16-869B-4CEE-9335-1E488CEAA270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69563374-6E6E-47CB-BA4D-0F02EF9E14F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69563374-6E6E-47CB-BA4D-0F02EF9E14F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69563374-6E6E-47CB-BA4D-0F02EF9E14F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69563374-6E6E-47CB-BA4D-0F02EF9E14F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
