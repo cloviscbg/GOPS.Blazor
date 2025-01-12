@@ -6,6 +6,8 @@ using GOPS.Client.Shared.Utils;
 using GOPS.Client.Shared.Extensions;
 using GOPS.Client.Shared.Services;
 using GOPS.Blazor.Server.Components.Internal;
+using MudBlazor;
+using static MudBlazor.CategoryTypes;
 
 namespace GOPS.Blazor.Server.Components;
 public partial class Scheduler
@@ -21,10 +23,11 @@ public partial class Scheduler
 	bool showPeopleSchedule;
 	bool showNotes;
 	SchedulerGroup<Group>? schedulerGroup;
+	MudExpansionPanels? expansionPanels;
 
 	readonly object options = new
 	{
-		animation = 700,
+		animation = 200,
 		easing = "cubic-bezier(.17,.67,.83,.67)",
 		handle = ".sortable-handle",
 		ghostClass = "sortable-ghost",
@@ -111,6 +114,15 @@ public partial class Scheduler
 		{
 			groupsExpanded = value;
 			schedulerGroup?.ExpandGroups(groupsExpanded);
+
+			if (groupsExpanded)
+			{
+				expansionPanels?.ExpandAll();
+				StateHasChanged();
+				return;
+			}
+
+			expansionPanels?.CollapseAll();
 			StateHasChanged();
 		}
 	}

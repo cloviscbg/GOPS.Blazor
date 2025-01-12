@@ -6,6 +6,11 @@ body {
 	font-family: Inter;
 }
 
+::-webkit-scrollbar {
+	height: 16px;
+	width: 16px;
+}
+
 ::-webkit-scrollbar-corner {
 	background-color: transparent;
 }
@@ -30,6 +35,9 @@ body {
 .sortable-handle {
 	@apply cursor-grab;
 }
+
+
+
 
 /* MudBlazor Overrides */
 
@@ -76,7 +84,7 @@ body {
 .mud-overlay .mud-overlay-scrim {
 	opacity: 1;
 	background-color: rgba(0, 0, 0, 0.1) !important;
-	backdrop-filter: saturate(180%) blur(20px);
+	backdrop-filter: saturate(180%) blur(4px);
 	transition: backdrop-filter .8s ease;
 }
 
@@ -230,7 +238,7 @@ body {
 }
 
 .mud-scroll-to-top.visible {
-	@apply absolute mb-4 p-4 rounded-full border border-border text-foreground-accentdark dark:text-foreground dark:border-border-dark bg-primary dark:bg-foreground-dark hover:bg-primary/90 hover:dark:bg-foreground-dark/90;
+	@apply absolute mb-4 mr-4 p-4 rounded-full border border-border text-foreground-accentdark dark:text-foreground dark:border-border-dark bg-primary dark:bg-foreground-dark hover:bg-primary/90 hover:dark:bg-foreground-dark/90;
 }
 
 .shift {

@@ -20,16 +20,18 @@
 		{
 			@if (showGroups)
 			{
-				<SortableWrapper OnDataChanged="@(() => StateChange())">
-					<Sortable TItem="Group"
-							  Items="Groups"
-							  Options="@options"
-							  Class="min-w-fit mt-2 flex flex-col gap-y-4">
-						<Template Context="group">
-							<MudExpansionPanels MultiExpansion="true"
-												Elevation="0"
-												Class="scheduler-groups"
-												Style="-webkit-tap-highlight-color: transparent">
+				<MudExpansionPanels @ref="@expansionPanels"
+									MultiExpansion="true"
+									Elevation="0"
+									Class="scheduler-groups"
+									Style="-webkit-tap-highlight-color: transparent">
+					<SortableWrapper OnDataChanged="@(() => StateChange())">
+						<Sortable TItem="Group"
+								  Items="Groups"
+								  Options="@options"
+								  Class="min-w-fit mt-2 flex flex-col gap-y-4">
+							<Template Context="group">
+
 								<MudExpansionPanel @key="group"
 												   HideIcon="true"
 												   Class="">
@@ -43,10 +45,11 @@
 										<SchedulerShifts Peoples="group.Peoples" />
 									</ChildContent>
 								</MudExpansionPanel>
-							</MudExpansionPanels>
-						</Template>
-					</Sortable>
-				</SortableWrapper>
+
+							</Template>
+						</Sortable>
+					</SortableWrapper>
+				</MudExpansionPanels>
 			}
 			else
 			{
@@ -75,8 +78,7 @@
 
 		<ShiftContent Context="group">
 		<SchedulerShifts Peoples="group.Peoples"
-		FixedStyle="@FixedStyle"
-		GridTemplateStyle="@GridTemplateStyle" />
+		FixedStyle="@FixedStyle" />
 		</ShiftContent>
 		</SchedulerGroup>
 		}
@@ -84,8 +86,7 @@
 		{
 		<div class="min-w-fit">
 		<SchedulerShifts Peoples="Peoples"
-		FixedStyle="@FixedStyle"
-		GridTemplateStyle="@GridTemplateStyle" />
+		FixedStyle="@FixedStyle" />
 		</div>
 		}
 		}
@@ -111,10 +112,10 @@
 			</svg>
 		</MudScrollToTop>
 
-		<MudScrollbar Selector=".scheduler-scrollbar"
-					  Hide="false"
-					  Style="width: 0px !important;"
-					  BorderRadius="6" />
+		@* 		<MudScrollbar Selector=".scheduler-scrollbar"
+		Hide="false"
+		Style="width: 0px !important;"
+		BorderRadius="0" /> *@
 
 	</div>
 </CascadingValue>

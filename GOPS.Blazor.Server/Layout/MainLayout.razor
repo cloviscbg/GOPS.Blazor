@@ -2,18 +2,16 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-<MudLayout Class="md:p-2 bg-background dark:bg-background-dark">
+<MudLayout Class="bg-background dark:bg-background-dark md:p-2">
 	<MudDrawer @bind-Open="@_drawerOpen"
 			   Elevation="0"
 			   Width="270px">
 		<MudDrawerHeader>
-			<img class="h-[4rem] w-[4rem] saturate-[4]"
-				 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-				 alt="Your Company">
-				<span>
-					GOPS
-				</span>
-			<div class="select-none px-3 py-1 rounded-2xl text-xs font-black text-foreground-accentdark bg-primary saturate-[4]">
+			<AppIcon />
+			<span>
+				GOPS
+			</span>
+			<div class="font-black text-foreground-accentdark bg-primary saturate-[4] select-none rounded-2xl px-3 py-1 text-xs">
 				v1.0.0
 			</div>
 		</MudDrawerHeader>
@@ -27,7 +25,7 @@
 			<CustomTooltip Text="@(_drawerOpen ? "Close drawer" : "Open drawer")"
 						   Placement="Placement.Right">
 				<MudIconButton OnClick="@DrawerToggle"
-							   Class="text-foreground dark:text-foreground-dark hover:bg-hover hover:dark:bg-hover-dark">
+							   Class="text-foreground hover:bg-hover dark:text-foreground-dark hover:dark:bg-hover-dark">
 					<svg width="24px"
 						 height="24px"
 						 viewBox="0 0 24 24"
@@ -43,20 +41,20 @@
 
 			<MudSpacer />
 
-			<ToggleButton Class="mr-2 !p-[12px] rounded-full hover:bg-hover hover:dark:bg-hover-dark">
+			<ToggleButton Class="mr-2 rounded-full !p-[12px] hover:bg-hover hover:dark:bg-hover-dark">
 				<ToggleOnContent>
-					<span class="text-base font-bold text-secondary">EN</span>
+					<span class="text-secondary text-base font-bold">EN</span>
 				</ToggleOnContent>
 				<ToggleOffContent>
-					<span class="text-base font-bold text-secondary">PT</span>
+					<span class="text-secondary text-base font-bold">PT</span>
 				</ToggleOffContent>
 			</ToggleButton>
 
 			<ThemeSwitch DarkChanged="@ChangeTheme"
-						 Class="text-foreground dark:text-foreground-dark hover:bg-hover hover:dark:bg-hover-dark" />
+						 Class="text-foreground hover:bg-hover dark:text-foreground-dark hover:dark:bg-hover-dark" />
 		</MudAppBar>
 
-		<div class="px-2 md:!px-4 pt-6">
+		<div class="px-2 pt-6 md:!px-4">
 			@Body
 		</div>
 	</MudMainContent>

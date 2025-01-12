@@ -1,1 +1,26 @@
-{"ConfigurationFile":"tailwind.config.js","InputCssFile":"Styles\\app.css","OutputCssFile":"wwwroot\\css\\gops.css"}
+{
+  "$schema": "https://raw.githubusercontent.com/theron-wang/VS2022-Editor-Support-for-Tailwind-CSS/refs/heads/main/tailwind.extension.schema.json",
+  "ConfigurationFile": "tailwind.config.js",
+  "BuildFiles": [
+    {
+      "Input": "Styles\\app.css",
+      "Output": "wwwroot\\css\\gops.css"
+    }
+  ],
+  "PackageConfigurationFile": "",
+  "CustomRegexes": {
+    "Razor": {
+      "Override": false,
+      "Values": []
+    },
+    "HTML": {
+      "Override": false,
+      "Values": []
+    },
+    "JavaScript": {
+      "Override": false,
+      "Values": []
+    }
+  },
+  "UseCli": false
+}
